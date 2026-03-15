@@ -9,7 +9,7 @@ from synthetizer import build_azure_synthesizer, piece_to_ssml_inner
 load_dotenv()
 
 UNIFIED_DEFAULT_FILENAME = "01_unified.wav"
-UNIFIED_SEPARATOR_SSML = '<break time="250ms"/>'
+UNIFIED_SEPARATOR_SSML = '<break time="150ms"/>'
 
 
 def parse_args() -> argparse.Namespace:

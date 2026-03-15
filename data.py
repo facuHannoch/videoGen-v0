@@ -73,7 +73,21 @@ class PhonemeNode:
         return self.text
 
 
-SsmlNodes = Union[TextNode, BreakNode, ProsodyNode, PhonemeNode]
+@dataclass(frozen=True)
+class EmphasisNode:
+    value: str
+    level: str | None = None
+
+    def to_ssml(self) -> str:
+        if self.level:
+            return f'<emphasis level="{self.level}">{self.value}</emphasis>'
+        return f"<emphasis>{self.value}</emphasis>"
+
+    def to_plain_text(self) -> str:
+        return self.value
+
+
+SsmlNodes = Union[TextNode, BreakNode, ProsodyNode, PhonemeNode, EmphasisNode]
 
 
 @dataclass(frozen=True)

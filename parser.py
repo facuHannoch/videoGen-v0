@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 
 from data import (
     BreakNode,
+    EmphasisNode,
     PhonemeNode,
     ProsodyNode,
     RawText,
@@ -47,6 +48,13 @@ def _parse_ssml_text_node(ssml_elem: ET.Element) -> SsmlText:
                     text=(child.text or ""),
                     ph=ph,
                     alphabet=child.get("alphabet", "ipa"),
+                )
+            )
+        elif child.tag == "emphasis":
+            nodes.append(
+                EmphasisNode(
+                    value=(child.text or ""),
+                    level=child.get("level"),
                 )
             )
         elif child.tag == "text":
