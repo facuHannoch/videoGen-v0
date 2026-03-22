@@ -13,9 +13,9 @@ export interface SoundMetadata {
 }
 
 const DEFAULT_SOUND_SOURCES = [
-  "sounds/bell-98033.mp3",
-  "sounds/chutter-click-494024.mp3",
-  "sounds/mouse-click-sfx-478755.mp3",
+  // "sounds/bell-98033.mp3",
+  // "sounds/chutter-click-494024.mp3",
+  // "sounds/mouse-click-sfx-478755.mp3",
 ];
 
 class SoundStore {

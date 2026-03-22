@@ -91,7 +91,6 @@ export const OneWordCaption = ({ wordTimings }: OneWordCaptionProps) => {
                 textTransform: "none",
                 opacity,
                 transform: `scale(${scale})`,
-                transition: "opacity 0.05s ease-out, transform 0.05s ease-out",
             }}
         >
             {currentWord}

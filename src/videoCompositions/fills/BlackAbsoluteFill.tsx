@@ -9,7 +9,7 @@ export const BlackAbsoluteFill = ({ children }: BlackAbsoluteFillProps) => {
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: "black",
+        backgroundColor: "transparent",
         justifyContent: "center",
         alignItems: "center",
       }}
