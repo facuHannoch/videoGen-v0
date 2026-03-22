@@ -2,7 +2,8 @@ node_modules
 dist
 .DS_Store
 .env
-public/*
+public/audios/*
+public/sounds/*/
 
 # Ignore the output video from Git but not videos you import into src/.
 out
