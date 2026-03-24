@@ -1,0 +1,14 @@
+<tts_project
+  language="en-US"
+  voice="en-US-Ava:DragonHDLatestNeural"
+  output_dir="audioGen-output">
+  
+  <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">
+    <voice name="en-US-Ava:DragonHDLatestNeural">
+      Good morning!
+    </voice>
+    <voice name="en-US-Andrew:DragonHDLatestNeural">
+      Good morning to you too Ava!
+    </voice>
+  </speak>
+</tts_project>

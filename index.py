@@ -3,6 +3,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from data import SpeakDocument
 from parser import parse_project
 from synthetizer import build_azure_synthesizer, piece_to_ssml_inner
 
@@ -50,6 +51,13 @@ def _build_unified_inner_ssml(project_pieces) -> str:
     return "".join(chunks)
 
 
+def _get_project_speak_piece(project):
+    for piece in project.pieces:
+        if isinstance(piece.content, SpeakDocument):
+            return piece
+    return None
+
+
 def _ensure_wav_extension(path: Path) -> Path:
     if path.suffix:
         return path
@@ -68,6 +76,7 @@ def run(
     synthesizer = build_azure_synthesizer(voice=effective_voice, language=project.language)
 
     output_dir = output_dir_override if output_dir_override else Path(project.output_dir)
+    speak_piece = _get_project_speak_piece(project)
 
     if unify:
         if output_file_override is not None:
@@ -77,12 +86,22 @@ def run(
             output_file = output_dir / UNIFIED_DEFAULT_FILENAME
 
         output_file.parent.mkdir(parents=True, exist_ok=True)
-        unified_inner_ssml = _build_unified_inner_ssml(project.pieces)
-        synthesizer.synthesize_ssml_inner(
-            inner_ssml=unified_inner_ssml,
-            output_path=output_file,
-            label="unified",
-        )
+        if speak_piece is not None:
+            synthesizer.synthesize_ssml_document(
+                ssml_document=speak_piece.content.to_ssml(
+                    default_language=project.language,
+                    default_voice=effective_voice,
+                ),
+                output_path=output_file,
+                label="unified",
+            )
+        else:
+            unified_inner_ssml = _build_unified_inner_ssml(project.pieces)
+            synthesizer.synthesize_ssml_inner(
+                inner_ssml=unified_inner_ssml,
+                output_path=output_file,
+                label="unified",
+            )
         return
 
     output_dir.mkdir(parents=True, exist_ok=True)

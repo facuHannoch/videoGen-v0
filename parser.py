@@ -7,6 +7,7 @@ from data import (
     PhonemeNode,
     ProsodyNode,
     RawText,
+    SpeakDocument,
     SsmlNodes,
     SsmlText,
     TextNode,
@@ -16,6 +17,12 @@ from data import (
 )
 
 DEFAULT_VOICE = "en-US-Ava:DragonHDLatestNeural"
+
+
+def _local_name(tag: str) -> str:
+    if "}" in tag:
+        return tag.split("}", 1)[1]
+    return tag
 
 
 def _parse_ssml_text_node(ssml_elem: ET.Element) -> SsmlText:
@@ -79,8 +86,31 @@ def parse_project(xml_path: Path) -> TtsProject:
     voice = root.get("voice", DEFAULT_VOICE)
     output_dir = root.get("output_dir", "audio")
 
+    speak_elems = [child for child in list(root) if _local_name(child.tag) == "speak"]
+    piece_elems = root.findall("piece")
+
+    if piece_elems and speak_elems:
+        raise ValueError("Use either project-level <speak> or <piece> elements, not both.")
+    if len(speak_elems) > 1:
+        raise ValueError("Only one project-level <speak> element is supported.")
+
     pieces: list[TextPiece] = []
-    for index, piece_elem in enumerate(root.findall("piece"), start=1):
+    if speak_elems:
+        pieces.append(
+            TextPiece(
+                index=1,
+                content=SpeakDocument(root=speak_elems[0]),
+            )
+        )
+        apply_piece_defaults(pieces)
+        return TtsProject(
+            language=language,
+            voice=voice,
+            output_dir=output_dir,
+            pieces=pieces,
+        )
+
+    for index, piece_elem in enumerate(piece_elems, start=1):
         raw_elem = piece_elem.find("raw_text")
         ssml_elem = piece_elem.find("ssml_text")
 
@@ -102,6 +132,9 @@ def parse_project(xml_path: Path) -> TtsProject:
                 content=content,
             )
         )
+
+    if not pieces:
+        raise ValueError("Project must define at least one <piece> or one project-level <speak>.")
 
     apply_piece_defaults(pieces)
 
