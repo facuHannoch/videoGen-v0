@@ -1,5 +1,5 @@
 import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
-import type { WordTiming } from "../../../storage/videoStore";
+import type { WordTiming } from "../../../state/videoStore";
 
 interface OneWordCaptionProps {
     wordTimings: WordTiming[];

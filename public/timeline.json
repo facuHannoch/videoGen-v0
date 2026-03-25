@@ -1,0 +1,45 @@
+{
+    "fps": 30,
+    "items": [
+        {
+            "type": "audio",
+            "audioId": "01_cómo_pronuncias_esta_palabra.wav"
+        },
+        {
+            "id": "clock",
+            "type": "gap",
+            "durationSeconds": 1.5
+        },
+        {
+            "type": "audio",
+            "audioId": "02_se_pronuncia.wav"
+        },
+        {
+            "type": "audio",
+            "audioId": "03_thought.wav"
+        },
+        {
+            "type": "audio",
+            "audioId": "04_veamos_cada_sonido.wav"
+        },
+        {
+            "type": "audio",
+            "audioId": "05_thin-_think-_bath.wav"
+        },
+        {
+            "type": "audio",
+            "audioId": "06_law-_saw-_caught.wav"
+        },
+        {
+            "type": "audio",
+            "audioId": "07_tap-_ten-_cat.wav"
+        },
+        {
+            "id": "clock",
+            "type": "sfx",
+            "soundId": "mouse-click-double-soft.mp3",
+            "durationSeconds": 1,
+            "volume": 0.6
+        }
+    ]
+}
