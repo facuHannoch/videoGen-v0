@@ -1,11 +1,7 @@
 import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from "remotion";
 import {useEffect, useRef} from "react";
 
-const variant: Variants = 'trTbl-reveal'
-
-
-type Variants = 'blTtr-cover' | 'trTbl-reveal'
-const front = variant == 'blTtr-cover' ? '-0.18 + time * 2.45' : '2.18 - time * 2.45'
+export const WAVE_COVER_FILL = "#0d1219";
 
 const VERTEX_SHADER = `
 attribute vec2 position;
@@ -22,6 +18,8 @@ precision mediump float;
 uniform float time;
 uniform vec2 resolution;
 uniform float strength;
+uniform float frontStart;
+uniform float frontEnd;
 
 float hash(vec2 p) {
   return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
@@ -45,7 +43,7 @@ void main() {
   float ripple = sin(uv.y * 19.0 - time * 8.0) * 0.018;
   float drift = noise(vec2(uv.y * 4.0, time * 1.6)) * 0.07 - 0.035;
   float diagonal = uv.x + uv.y + swell + ripple + drift;
-  float front = ${front};
+  float front = mix(frontStart, frontEnd, time);
 
   float cover = 1.0 - smoothstep(front - 0.03, front + 0.035, diagonal);
   float edge = 1.0 - smoothstep(0.0, 0.11, abs(diagonal - front));
@@ -74,9 +72,21 @@ type GlState = {
   timeLoc: WebGLUniformLocation;
   resLoc: WebGLUniformLocation;
   strengthLoc: WebGLUniformLocation;
+  frontStartLoc: WebGLUniformLocation;
+  frontEndLoc: WebGLUniformLocation;
 };
 
-export const ScreenSweepShader = () => {
+type WaveMode = "reveal" | "cover";
+
+interface ScreenSweepShaderProps {
+  velocity?: number;
+  mode?: WaveMode;
+}
+
+export const ScreenSweepShader = ({
+  velocity = 1,
+  mode = "reveal",
+}: ScreenSweepShaderProps) => {
   const frame = useCurrentFrame();
   const {fps, width, height} = useVideoConfig();
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -135,6 +145,8 @@ export const ScreenSweepShader = () => {
       timeLoc: gl.getUniformLocation(program, "time")!,
       resLoc: gl.getUniformLocation(program, "resolution")!,
       strengthLoc: gl.getUniformLocation(program, "strength")!,
+      frontStartLoc: gl.getUniformLocation(program, "frontStart")!,
+      frontEndLoc: gl.getUniformLocation(program, "frontEnd")!,
     };
   }, []);
 
@@ -144,9 +156,11 @@ export const ScreenSweepShader = () => {
       return;
     }
 
-    const {gl, timeLoc, resLoc, strengthLoc} = ctx;
+    const {gl, timeLoc, resLoc, strengthLoc, frontStartLoc, frontEndLoc} = ctx;
     const introStart = 0;
-    const introEnd = 34;
+    const baseDuration = 34;
+    const clampedVelocity = Math.max(velocity, 0.05);
+    const introEnd = introStart + baseDuration / clampedVelocity;
     const localTime = interpolate(frame, [introStart, introEnd], [0, 1], {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -156,14 +170,18 @@ export const ScreenSweepShader = () => {
       extrapolateRight: "clamp",
     });
     const strength = rampDown;
+    const frontStart = mode === "reveal" ? 2.18 : -0.18;
+    const frontEnd = mode === "reveal" ? -0.18 : 2.18;
 
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.uniform1f(timeLoc, localTime);
     gl.uniform2f(resLoc, gl.canvas.width, gl.canvas.height);
     gl.uniform1f(strengthLoc, strength);
+    gl.uniform1f(frontStartLoc, frontStart);
+    gl.uniform1f(frontEndLoc, frontEnd);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-  }, [frame, fps]);
+  }, [frame, fps, mode, velocity]);
 
   return (
     <AbsoluteFill style={{pointerEvents: "none", zIndex: 12}}>

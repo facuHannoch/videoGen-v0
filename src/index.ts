@@ -1,7 +1,7 @@
 import { registerRoot } from "remotion";
 import { RemotionRoot } from "./Root";
-import { videoStore } from "./storage/videoStore";
-import { soundStore } from "./storage/soundStore";
+import { videoStore } from "./state/videoStore";
+import { soundStore } from "./state/soundStore";
 
 const bootstrap = async () => {
 	try {

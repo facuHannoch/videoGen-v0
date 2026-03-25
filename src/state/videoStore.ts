@@ -158,6 +158,29 @@ class VideoStore {
   }
 
   /**
+   * Get the frame where the audio at the given zero-based index starts.
+   * Example: index 0 => 0, index 1 => duration of audio 0.
+   */
+  getFrameForAudioIndex(index: number): number {
+    if (index <= 0) {
+      return 0;
+    }
+
+    const audios = this.getAllAudios();
+    return audios
+      .slice(0, index)
+      .reduce((total, audio) => total + audio.durationInFrames, 0);
+  }
+
+  /**
+   * Get the frame where the nth audio starts, using 1-based numbering.
+   * Example: nth=1 => 0, nth=7 => start frame of the 7th audio.
+   */
+  framesToAudio(nth: number): number {
+    return this.getFrameForAudioIndex(Math.max(nth - 1, 0));
+  }
+
+  /**
    * Get total video duration in frames (sum of all audios)
    */
   getTotalDurationFrames(): number {

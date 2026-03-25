@@ -10,7 +10,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { videoStore } from "./storage/videoStore";
+import { videoStore } from "./state/videoStore";
 import { OneWordCaption } from "./videoCompositions/text/subtitles/OneWordCaption";
 
 const PHONEME = "p";
