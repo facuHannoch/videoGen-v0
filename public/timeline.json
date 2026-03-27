@@ -12,27 +12,43 @@
         },
         {
             "type": "audio",
-            "audioId": "02_se_pronuncia.wav"
+            "audioId": "03_bed.wav"
         },
         {
             "type": "audio",
-            "audioId": "03_thought.wav"
+            "audioId": "04_veamos_cada_fonema.wav"
         },
         {
             "type": "audio",
-            "audioId": "04_veamos_cada_sonido.wav"
+            "audioId": "05_junta_ambos_labios-_mantén_tu_garganta_vibrando-_luego_abre_los_labios_con_una_pequeña_y_suav.wav"
         },
         {
             "type": "audio",
-            "audioId": "05_thin-_think-_bath.wav"
+            "audioId": "06_ball-_bat-_back.wav"
         },
         {
             "type": "audio",
-            "audioId": "06_law-_saw-_caught.wav"
+            "audioId": "07_abre_tu_boca-_relaja_tu_mandíbula-_y_deja_que_tu_lengua_se_siente_en_la_parte_media_de_tu_boc.wav"
         },
         {
             "type": "audio",
-            "audioId": "07_tap-_ten-_cat.wav"
+            "audioId": "08_red-_pet-_leg.wav"
+        },
+        {
+            "type": "audio",
+            "audioId": "09_levanta_la_punta_de_tu_lengua_hacia_la_cresta_justo_detrás_de_tus_dientes_superiores-_detén_e.wav"
+        },
+        {
+            "type": "audio",
+            "audioId": "10_dog-_day-_red.wav"
+        },
+        {
+            "type": "audio",
+            "audioId": "11_bed.wav"
+        },
+        {
+            "type": "audio",
+            "audioId": "12_bed.wav"
         },
         {
             "id": "clock",

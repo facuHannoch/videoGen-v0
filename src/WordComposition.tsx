@@ -25,17 +25,17 @@ import { CSSProperties } from "react";
 
 export const WordPronunciationVideoComposition = () => {
   const timelineClips = videoStore.getTimelineClips();
-
+  console.log(videoStore)
   if (timelineClips.length === 0) {
     return <StandardText text="NO AUDIOS LOADED" />
   }
 
   const wordBreakdown = {
-    word: "bad",
-    ipa: "/bæd/",
+    word: "bed",
+    ipa: "/bɛd/",
     breakdown: [
       { b: ["ball", "bat", "back"] },
-      { æ: ["cat", "bad", "apple"] },
+      { ɛ: ["red", "pet", "leg"] },
       { d: ["dog", "day", "red"] },
     ],
   };
@@ -54,18 +54,42 @@ export const WordPronunciationVideoComposition = () => {
   const word = wordBreakdown.word;
   const wordIPA = wordBreakdown.ipa;
 
-  const phonemeBreakdownScenes = wordBreakdown.breakdown.map((entry, index) => {
-    const [highlightedCharacter] = Object.entries(entry)[0] ?? [""];
-    return (
-      <IPAPhonemeScene
-        key={`phoneme-${index}`}
-        word={word}
-        wordIPA={wordIPA}
-        highlightedCharacter={highlightedCharacter}
-        audioSceneIndex={index}
-      />
-    );
-  });
+  // Generate phoneme scenes dynamically from wordBreakdown
+  const generatePhonemeScenes = () => {
+    return wordBreakdown.breakdown.flatMap((entry, index) => {
+      const [phoneme] = Object.entries(entry)[0] ?? [""];
+
+      return [
+        [
+          // phoneme explanation
+          <>
+            <TopPrompt text={`Fonema / ${phoneme} /`} />
+            <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={0.8} />
+            <Img
+              src={staticFile(`images/phonemes/diagram-${phoneme}.jpeg`)}
+              style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", position: 'absolute', top: 500 }}
+            />
+            <IPAPhonemeScene
+              key={`phoneme-explanation-${phoneme}`}
+              wordIPA={wordIPA}
+              highlightedCharacter={phoneme}
+              containerStyle={{ position: 'absolute', top: 280 }}
+              sound={false}
+            />
+          </>
+        ],
+        [
+          // phoneme words
+          <IPAPhonemeScene
+            key={`phoneme-words-${phoneme}`}
+            word={word}
+            wordIPA={wordIPA}
+            highlightedCharacter={phoneme}
+          />
+        ]
+      ];
+    });
+  };
 
   const scenes = [
     [
@@ -83,25 +107,17 @@ export const WordPronunciationVideoComposition = () => {
     ],
     [
       // gap
-
+      <BlackAbsoluteFill>
+        <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
+      </BlackAbsoluteFill>
     ],
-    // [
-    //   // it is said...
-    //   <>
-    //     <BlackAbsoluteFill>
-    //       <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
-    //     </BlackAbsoluteFill>
-    //   </>
-    // ],
     [
-      // (word revelation)
+      // word revelation
       <>
-        <StandardText text={wordIPA} style={{ fontSize: 72, padding: "24px 30px" }} />
-
-        {/* <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "center" }}>
-          <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
+        <BlackAbsoluteFill>
           <StandardText text={wordIPA} style={{ fontSize: 72, padding: "24px 30px" }} />
-        </div> */}
+        </BlackAbsoluteFill>
+
       </>
     ],
     [
@@ -118,82 +134,7 @@ export const WordPronunciationVideoComposition = () => {
         </Sequence>
       </>
     ],
-    [
-      // phoneme explanation  
-      <>
-        <TopPrompt text={`Fonema / b /`} />
-        <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={0.8} />
-
-        <Img src={staticFile("images/phonemes/diagram-b.jpeg")} style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", position: 'absolute', top: 500 }} />
-        <IPAPhonemeScene
-          key={`phoneme-b`}
-          wordIPA={wordIPA}
-          highlightedCharacter={'b'}
-          containerStyle={{ position: 'absolute', top: 280 }}
-          sound={false}
-        />
-      </>
-    ],
-    [
-      // words
-      <IPAPhonemeScene
-        key={`phoneme-b`}
-        word={word}
-        wordIPA={wordIPA}
-        highlightedCharacter={'b'}
-      />
-    ],
-    [
-      // phoneme explanation  
-      <>
-        <TopPrompt text={`Fonema / æ /`} />
-        <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={1} />
-
-        <Img src={staticFile("images/phonemes/diagram-æ.jpeg")} style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", position: 'absolute', top: 500 }} />
-        <IPAPhonemeScene
-          key={`phoneme-æ`}
-          wordIPA={wordIPA}
-          highlightedCharacter={'æ'}
-          containerStyle={{ position: 'absolute', top: 280 }}
-          sound={false}
-        />
-      </>
-    ],
-    [
-      // words
-      <IPAPhonemeScene
-        key={`phoneme-æ`}
-        word={word}
-        wordIPA={wordIPA}
-        highlightedCharacter={'æ'}
-      />
-    ],
-    [
-      // phoneme explanation  
-      <>
-        <TopPrompt text={`Fonema / d /`} />
-        <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={1} />
-
-        <Img src={staticFile("images/phonemes/diagram-d.jpeg")} style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", position: 'absolute', top: 500 }} />
-        <IPAPhonemeScene
-          key={`phoneme-d`}
-          wordIPA={wordIPA}
-          highlightedCharacter={'d'}
-          containerStyle={{ position: 'absolute', top: 280 }}
-          sound={false}
-        />
-      </>
-    ],
-    [
-      // words
-      <IPAPhonemeScene
-        key={`phoneme-d`}
-        word={word}
-        wordIPA={wordIPA}
-        highlightedCharacter={'d'}
-      />
-    ],
-    // ...phonemeBreakdownScenes,// .flatMap(item => [ item, item ] // Array(2).fill(item)),
+    ...generatePhonemeScenes(),
     [
       <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
     ],

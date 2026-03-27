@@ -141,7 +141,7 @@ class VideoStore {
     this.isLoading = true;
     this.loadPromise = (async () => {
       try {
-        await Promise.all(
+        const results = await Promise.allSettled(
           normalizedEntries.map(async ({ src, subtitle, wordTimings }) => {
             const existing = this.audioMetadata.get(src);
             if (existing) {
@@ -155,7 +155,7 @@ class VideoStore {
                   wordTimings,
                 });
               }
-              return; // Already loaded
+              return;
             }
 
             const metadata = await getMediaMetadata(src);
@@ -174,6 +174,13 @@ class VideoStore {
             });
           })
         );
+
+        results.forEach((result, index) => {
+          if (result.status === "rejected") {
+            const failedSrc = normalizedEntries[index]?.src ?? "unknown";
+            console.error(`Failed to load audio metadata for ${failedSrc}:`, result.reason);
+          }
+        });
       } finally {
         this.isLoading = false;
         this.loadPromise = null;
