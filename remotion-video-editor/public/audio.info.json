@@ -1,0 +1,1111 @@
+{
+  "audios": [
+    {
+      "id": "01_cómo_pronuncias_esta_palabra.wav",
+      "subtitle": "¿Cómo pronuncias esta palabra?",
+      "wordTimings": [
+        {
+          "tokenIndex": 0,
+          "word": "¿",
+          "startMs": 20.812,
+          "endMs": 31.25,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 1,
+          "word": "Cómo",
+          "startMs": 31.25,
+          "endMs": 239.562,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 2,
+          "word": "pronuncias",
+          "startMs": 239.562,
+          "endMs": 822.937,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 3,
+          "word": "esta",
+          "startMs": 822.937,
+          "endMs": 1062.5,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 4,
+          "word": "palabra",
+          "startMs": 1062.5,
+          "endMs": 1562.5,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 5,
+          "word": "?",
+          "startMs": 1562.5,
+          "endMs": 1682.5,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        }
+      ]
+    },
+    {
+      "id": "02_se_pronuncia.wav",
+      "subtitle": "Se pronuncia...",
+      "wordTimings": [
+        {
+          "tokenIndex": 0,
+          "word": "Se",
+          "startMs": 52.062,
+          "endMs": 270.812,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 1,
+          "word": "pronuncia",
+          "startMs": 270.812,
+          "endMs": 989.562,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 2,
+          "word": "...",
+          "startMs": 989.562,
+          "endMs": 1109.562,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        }
+      ]
+    },
+    {
+      "id": "03_bed.wav",
+      "subtitle": "bed.",
+      "wordTimings": [
+        {
+          "tokenIndex": 0,
+          "word": "bed",
+          "startMs": 97.0,
+          "endMs": 737.125,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 1,
+          "word": ".",
+          "startMs": 737.125,
+          "endMs": 857.125,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        }
+      ]
+    },
+    {
+      "id": "04_veamos_cada_fonema.wav",
+      "subtitle": "Veamos cada fonema",
+      "wordTimings": [
+        {
+          "tokenIndex": 0,
+          "word": "Veamos",
+          "startMs": 41.687,
+          "endMs": 510.437,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 1,
+          "word": "cada",
+          "startMs": 510.437,
+          "endMs": 770.812,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 2,
+          "word": "fonema",
+          "startMs": 770.812,
+          "endMs": 890.812,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        }
+      ]
+    },
+    {
+      "id": "05_junta_ambos_labios-_mantén_tu_garganta_vibrando-_luego_abre_los_labios_con_una_pequeña_y_suav.wav",
+      "subtitle": "Junta ambos labios, mantén tu garganta vibrando, luego abre los labios con una pequeña y suave liberación, no un gran soplo de aire.",
+      "wordTimings": [
+        {
+          "tokenIndex": 0,
+          "word": "Junta",
+          "startMs": 41.687,
+          "endMs": 385.437,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 1,
+          "word": "ambos",
+          "startMs": 385.437,
+          "endMs": 645.812,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 2,
+          "word": "labios",
+          "startMs": 645.812,
+          "endMs": 1135.437,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 3,
+          "word": ",",
+          "startMs": 1135.437,
+          "endMs": 1229.187,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 4,
+          "word": "mantén",
+          "startMs": 1229.187,
+          "endMs": 1562.5,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 5,
+          "word": "tu",
+          "startMs": 1562.5,
+          "endMs": 1635.437,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 6,
+          "word": "garganta",
+          "startMs": 1635.437,
+          "endMs": 2031.25,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 7,
+          "word": "vibrando",
+          "startMs": 2031.25,
+          "endMs": 2552.062,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 8,
+          "word": ",",
+          "startMs": 2552.062,
+          "endMs": 2708.312,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 9,
+          "word": "luego",
+          "startMs": 2708.312,
+          "endMs": 3010.437,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 10,
+          "word": "abre",
+          "startMs": 3010.437,
+          "endMs": 3208.312,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 11,
+          "word": "los",
+          "startMs": 3208.312,
+          "endMs": 3364.562,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 12,
+          "word": "labios",
+          "startMs": 3364.562,
+          "endMs": 4125.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 13,
+          "word": "con",
+          "startMs": 4125.0,
+          "endMs": 4229.187,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 14,
+          "word": "una",
+          "startMs": 4229.187,
+          "endMs": 4375.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 15,
+          "word": "pequeña",
+          "startMs": 4375.0,
+          "endMs": 4781.25,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 16,
+          "word": "y",
+          "startMs": 4781.25,
+          "endMs": 4843.75,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 17,
+          "word": "suave",
+          "startMs": 4843.75,
+          "endMs": 5125.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 18,
+          "word": "liberación",
+          "startMs": 5125.0,
+          "endMs": 5718.75,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 19,
+          "word": ",",
+          "startMs": 5718.75,
+          "endMs": 5885.437,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 20,
+          "word": "no",
+          "startMs": 5885.437,
+          "endMs": 6010.437,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 21,
+          "word": "un",
+          "startMs": 6010.437,
+          "endMs": 6156.25,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 22,
+          "word": "gran",
+          "startMs": 6156.25,
+          "endMs": 6375.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 23,
+          "word": "soplo",
+          "startMs": 6375.0,
+          "endMs": 6677.062,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 24,
+          "word": "de",
+          "startMs": 6677.062,
+          "endMs": 6770.812,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 25,
+          "word": "aire",
+          "startMs": 6770.812,
+          "endMs": 7104.187,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 26,
+          "word": ".",
+          "startMs": 7104.187,
+          "endMs": 7224.187,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        }
+      ]
+    },
+    {
+      "id": "06_ball-_bat-_back.wav",
+      "subtitle": "ball, bat, back",
+      "wordTimings": [
+        {
+          "tokenIndex": 0,
+          "word": "ball",
+          "startMs": 63.812,
+          "endMs": 859.125,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 1,
+          "word": ",",
+          "startMs": 859.125,
+          "endMs": 917.312,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 2,
+          "word": "bat",
+          "startMs": 917.312,
+          "endMs": 1615.625,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 3,
+          "word": ",",
+          "startMs": 1615.625,
+          "endMs": 1735.625,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 4,
+          "word": "back",
+          "startMs": 1735.625,
+          "endMs": 1855.625,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        }
+      ]
+    },
+    {
+      "id": "07_abre_tu_boca-_relaja_tu_mandíbula-_y_deja_que_tu_lengua_se_siente_en_la_parte_media_de_tu_boc.wav",
+      "subtitle": "Abre tu boca, relaja tu mandíbula, y deja que tu lengua se siente en la parte media de tu boca.",
+      "wordTimings": [
+        {
+          "tokenIndex": 0,
+          "word": "Abre",
+          "startMs": 62.5,
+          "endMs": 270.812,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 1,
+          "word": "tu",
+          "startMs": 270.812,
+          "endMs": 354.187,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 2,
+          "word": "boca",
+          "startMs": 354.187,
+          "endMs": 697.937,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 3,
+          "word": ",",
+          "startMs": 697.937,
+          "endMs": 854.187,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 4,
+          "word": "relaja",
+          "startMs": 854.187,
+          "endMs": 1197.937,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 5,
+          "word": "tu",
+          "startMs": 1197.937,
+          "endMs": 1281.25,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 6,
+          "word": "mandíbula",
+          "startMs": 1281.25,
+          "endMs": 1822.937,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 7,
+          "word": ",",
+          "startMs": 1822.937,
+          "endMs": 1989.562,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 8,
+          "word": "y",
+          "startMs": 1989.562,
+          "endMs": 2052.062,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 9,
+          "word": "deja",
+          "startMs": 2052.062,
+          "endMs": 2270.812,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 10,
+          "word": "que",
+          "startMs": 2270.812,
+          "endMs": 2385.437,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 11,
+          "word": "tu",
+          "startMs": 2385.437,
+          "endMs": 2458.312,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 12,
+          "word": "lengua",
+          "startMs": 2458.312,
+          "endMs": 2729.187,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 13,
+          "word": "se",
+          "startMs": 2729.187,
+          "endMs": 2843.75,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 14,
+          "word": "siente",
+          "startMs": 2843.75,
+          "endMs": 3187.5,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 15,
+          "word": "en",
+          "startMs": 3187.5,
+          "endMs": 3260.437,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 16,
+          "word": "la",
+          "startMs": 3260.437,
+          "endMs": 3343.75,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 17,
+          "word": "parte",
+          "startMs": 3343.75,
+          "endMs": 3614.562,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 18,
+          "word": "media",
+          "startMs": 3614.562,
+          "endMs": 3906.25,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 19,
+          "word": "de",
+          "startMs": 3906.25,
+          "endMs": 4010.437,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 20,
+          "word": "tu",
+          "startMs": 4010.437,
+          "endMs": 4083.312,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 21,
+          "word": "boca",
+          "startMs": 4083.312,
+          "endMs": 4427.062,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 22,
+          "word": ".",
+          "startMs": 4427.062,
+          "endMs": 4547.062,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        }
+      ]
+    },
+    {
+      "id": "08_red-_pet-_leg.wav",
+      "subtitle": "red, pet, leg",
+      "wordTimings": [
+        {
+          "tokenIndex": 0,
+          "word": "red",
+          "startMs": 50.0,
+          "endMs": 884.125,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 1,
+          "word": ",",
+          "startMs": 884.125,
+          "endMs": 903.5,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 2,
+          "word": "pet",
+          "startMs": 903.5,
+          "endMs": 1737.625,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 3,
+          "word": ",",
+          "startMs": 1737.625,
+          "endMs": 1912.187,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 4,
+          "word": "leg",
+          "startMs": 1912.187,
+          "endMs": 2032.187,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        }
+      ]
+    },
+    {
+      "id": "09_levanta_la_punta_de_tu_lengua_hacia_la_cresta_justo_detrás_de_tus_dientes_superiores-_detén_e.wav",
+      "subtitle": "Levanta la punta de tu lengua hacia la cresta justo detrás de tus dientes superiores, detén el aire por un momento, mantén tu garganta vibrando, luego libera rápidamente.",
+      "wordTimings": [
+        {
+          "tokenIndex": 0,
+          "word": "Levanta",
+          "startMs": 52.062,
+          "endMs": 395.812,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 1,
+          "word": "la",
+          "startMs": 395.812,
+          "endMs": 479.187,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 2,
+          "word": "punta",
+          "startMs": 479.187,
+          "endMs": 708.312,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 3,
+          "word": "de",
+          "startMs": 708.312,
+          "endMs": 802.062,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 4,
+          "word": "tu",
+          "startMs": 802.062,
+          "endMs": 875.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 5,
+          "word": "lengua",
+          "startMs": 875.0,
+          "endMs": 1166.687,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 6,
+          "word": "hacia",
+          "startMs": 1166.687,
+          "endMs": 1343.75,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 7,
+          "word": "la",
+          "startMs": 1343.75,
+          "endMs": 1416.687,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 8,
+          "word": "cresta",
+          "startMs": 1416.687,
+          "endMs": 1687.5,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 9,
+          "word": "justo",
+          "startMs": 1687.5,
+          "endMs": 2000.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 10,
+          "word": "detrás",
+          "startMs": 2000.0,
+          "endMs": 2312.5,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 11,
+          "word": "de",
+          "startMs": 2312.5,
+          "endMs": 2385.437,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 12,
+          "word": "tus",
+          "startMs": 2385.437,
+          "endMs": 2541.687,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 13,
+          "word": "dientes",
+          "startMs": 2541.687,
+          "endMs": 2791.687,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 14,
+          "word": "superiores",
+          "startMs": 2791.687,
+          "endMs": 3385.437,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 15,
+          "word": ",",
+          "startMs": 3385.437,
+          "endMs": 3531.25,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 16,
+          "word": "detén",
+          "startMs": 3531.25,
+          "endMs": 3760.437,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 17,
+          "word": "el",
+          "startMs": 3760.437,
+          "endMs": 3864.562,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 18,
+          "word": "aire",
+          "startMs": 3864.562,
+          "endMs": 4072.937,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 19,
+          "word": "por",
+          "startMs": 4072.937,
+          "endMs": 4208.312,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 20,
+          "word": "un",
+          "startMs": 4208.312,
+          "endMs": 4281.25,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 21,
+          "word": "momento",
+          "startMs": 4281.25,
+          "endMs": 4750.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 22,
+          "word": ",",
+          "startMs": 4750.0,
+          "endMs": 4906.25,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 23,
+          "word": "mantén",
+          "startMs": 4906.25,
+          "endMs": 5218.75,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 24,
+          "word": "tu",
+          "startMs": 5218.75,
+          "endMs": 5291.687,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 25,
+          "word": "garganta",
+          "startMs": 5291.687,
+          "endMs": 5666.687,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 26,
+          "word": "vibrando",
+          "startMs": 5666.687,
+          "endMs": 6156.25,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 27,
+          "word": ",",
+          "startMs": 6156.25,
+          "endMs": 6302.062,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 28,
+          "word": "luego",
+          "startMs": 6302.062,
+          "endMs": 6500.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 29,
+          "word": "libera",
+          "startMs": 6500.0,
+          "endMs": 6812.5,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 30,
+          "word": "rápidamente",
+          "startMs": 6812.5,
+          "endMs": 7541.687,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 31,
+          "word": ".",
+          "startMs": 7541.687,
+          "endMs": 7661.687,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        }
+      ]
+    },
+    {
+      "id": "10_dog-_day-_red.wav",
+      "subtitle": "dog, day, red",
+      "wordTimings": [
+        {
+          "tokenIndex": 0,
+          "word": "dog",
+          "startMs": 135.812,
+          "endMs": 969.875,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 1,
+          "word": ",",
+          "startMs": 969.875,
+          "endMs": 1260.875,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 2,
+          "word": "day",
+          "startMs": 1260.875,
+          "endMs": 1959.187,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 3,
+          "word": ",",
+          "startMs": 1959.187,
+          "endMs": 2269.562,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 4,
+          "word": "red",
+          "startMs": 2269.562,
+          "endMs": 2389.562,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        }
+      ]
+    },
+    {
+      "id": "11_bed.wav",
+      "subtitle": "bed.",
+      "wordTimings": [
+        {
+          "tokenIndex": 0,
+          "word": "bed",
+          "startMs": 97.0,
+          "endMs": 737.125,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 1,
+          "word": ".",
+          "startMs": 737.125,
+          "endMs": 857.125,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        }
+      ]
+    },
+    {
+      "id": "12_bed.wav",
+      "subtitle": "bed.",
+      "wordTimings": [
+        {
+          "tokenIndex": 0,
+          "word": "bed",
+          "startMs": 97.0,
+          "endMs": 737.125,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 1,
+          "word": ".",
+          "startMs": 737.125,
+          "endMs": 857.125,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        }
+      ]
+    }
+  ]
+}
