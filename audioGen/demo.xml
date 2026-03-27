@@ -1,0 +1,28 @@
+<tts_project
+  language="en-US"
+  voice="en-US-Ava:DragonHDLatestNeural"
+  output_dir="audioGen-output">
+  <piece>
+    <raw_text>I want to build a robot.</raw_text>
+  </piece>
+
+  <piece>
+    <ssml_text>
+      The problem is
+      <break time="250ms"/>
+      <prosody rate="90%">there is no place to do so.</prosody>
+    </ssml_text>
+  </piece>
+
+  <piece id="custom_intro" filename="my-custom-file.wav">
+    <ssml_text>
+      <phoneme alphabet="ipa" ph="iː">iː</phoneme>
+      <break time="200ms"/>
+      <text>Well... I just found a place.</text>
+    </ssml_text>
+  </piece>
+
+  <piece>
+  <raw_text>follow for more!</raw_text>
+  </piece>
+</tts_project>

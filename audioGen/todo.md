@@ -1,0 +1,4 @@
+- [ ] Make id not have spaces
+- [ ] Add an not override rule, so it only regenerates the files that differ. Maybe do a hash to compare ? And use that hash as the id of each individual piece
+- [ ] Stripe \n within each \<piece\> object
+- [ ] When --unify is not set, --output could determine the name of the directory in which the audios are created -> not, for that is output-dir ?
