@@ -1,0 +1,56 @@
+<tts_project
+    language="en-US"
+    voice="en-US-Ava:DragonHDLatestNeural"
+    output_dir="audioGen-output">
+
+    <piece>
+        <ssml_text>
+            <prosody rate="+20%">I'll improve your English pronunciation</prosody>
+        </ssml_text>
+    </piece>
+
+    <piece>
+        <ssml_text>
+            <prosody rate="+10%">This is the sound</prosody>
+            <break time="50ms" />
+            <phoneme alphabet="ipa" ph="g">.</phoneme>
+        </ssml_text>
+    </piece>
+
+    <piece>
+        <raw_text>You can hear it in words like</raw_text>
+    </piece>
+
+    <piece>
+        <ssml_text>
+            <prosody rate="slow">go.</prosody>
+            <break time="150ms" />
+        </ssml_text>
+    </piece>
+
+    <piece>
+        <ssml_text>
+            <prosody rate="slow">get.</prosody>
+            <break time="150ms" />
+        </ssml_text>
+    </piece>
+
+    <piece>
+        <ssml_text>
+            <prosody rate="slow">bag.</prosody>
+            <break time="150ms" />
+        </ssml_text>
+    </piece>
+
+    <piece>
+        <raw_text>To make this sound,</raw_text>
+    </piece>
+
+    <piece>
+        <raw_text>keep your lips relaxed and slightly apart. Lift the back of your tongue up to touch the soft part at the back of the roof of your mouth. Stop the air for a moment, then release it gently while turning your voice on. Your vocal cords should vibrate, because /g/ is a voiced sound.</raw_text>
+    </piece>
+
+    <piece>
+        <raw_text>Want to sound like a native? see the video in the description</raw_text>
+    </piece>
+</tts_project>

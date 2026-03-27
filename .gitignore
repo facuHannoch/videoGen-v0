@@ -1,0 +1,6 @@
+*.env
+*.wav
+*.json
+*/local
+public/
+__pycache__

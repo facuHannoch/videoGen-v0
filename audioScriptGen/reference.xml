@@ -1,0 +1,57 @@
+<tts_project
+    language="en-US"
+    voice="en-US-Ava:DragonHDLatestNeural"
+    output_dir="audioGen-output">
+
+    <piece>
+        <ssml_text>
+            <prosody rate="+20%">I'll improve your English pronunciation</prosody>
+        </ssml_text>
+    </piece>
+
+    <piece>
+        <ssml_text>
+            <prosody rate="+10%">This is the sound</prosody>
+            <break time="50ms" />
+            <phoneme alphabet="ipa" ph="b">.</phoneme>
+        </ssml_text>
+    </piece>
+
+    <piece>
+        <raw_text>You can hear it in words like</raw_text>
+    </piece>
+
+    <piece>
+        <ssml_text>
+            <prosody rate="slow">bat.</prosody>
+            <break time="150ms" />
+        </ssml_text>
+    </piece>
+
+    <piece>
+        <ssml_text>
+            <prosody rate="slow">bed.</prosody>
+            <break time="150ms" />
+        </ssml_text>
+    </piece>
+
+    <piece>
+        <ssml_text>
+            <prosody rate="slow">big.</prosody>
+            <break time="150ms" />
+        </ssml_text>
+    </piece>
+
+    <piece>
+        <raw_text>To make this sound,</raw_text>
+    </piece>
+
+    <piece>
+        <raw_text>press both lips together firmly, keep your tongue relaxed inside your mouth, then release the lips quickly while letting your voice vibrate.</raw_text>
+    </piece>
+
+    <!-- Leave this as-is, don't change it -->
+    <piece>
+        <raw_text>Want to sound like a native? see the video in the description</raw_text>
+    </piece>
+</tts_project>
