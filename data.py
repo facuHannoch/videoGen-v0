@@ -155,6 +155,41 @@ def _apply_default_voice(speak_elem: ET.Element, default_voice: str) -> None:
     speak_elem.append(voice_elem)
 
 
+def _apply_voice_language_hints(speak_elem: ET.Element) -> None:
+    xml_lang_attr = f"{{{XML_NAMESPACE}}}lang"
+
+    for voice_elem in speak_elem.iter():
+        if _local_name(voice_elem.tag) != "voice":
+            continue
+
+        requested_language = voice_elem.get("lang")
+        if not requested_language:
+            continue
+
+        if any(_local_name(child.tag) == "lang" for child in list(voice_elem)):
+            voice_elem.attrib.pop("lang", None)
+            continue
+
+        lang_elem = ET.Element(f"{{{SSML_NAMESPACE}}}lang")
+        lang_elem.set(xml_lang_attr, requested_language)
+        lang_elem.text = voice_elem.text
+        voice_elem.text = None
+
+        existing_children = list(voice_elem)
+        for child in existing_children:
+            voice_elem.remove(child)
+            lang_elem.append(child)
+
+        voice_elem.append(lang_elem)
+        voice_elem.attrib.pop("lang", None)
+
+
+def _strip_non_ssml_wrapper_tags(ssml: str) -> str:
+    for tag_name in ("ssml_text", "text"):
+        ssml = re.sub(rf"</?{tag_name}\b[^>]*>", "", ssml)
+    return ssml
+
+
 @dataclass(frozen=True)
 class SpeakDocument:
     root: ET.Element
@@ -182,7 +217,31 @@ class SpeakDocument:
             speak_elem.set(lang_attr, default_language)
 
         _apply_default_voice(speak_elem, default_voice)
-        return ET.tostring(speak_elem, encoding="unicode")
+        _apply_voice_language_hints(speak_elem)
+        return _strip_non_ssml_wrapper_tags(ET.tostring(speak_elem, encoding="unicode"))
+
+    def to_inner_ssml(
+        self,
+        default_language: str,
+        default_voice: str,
+        default_version: str = DEFAULT_SPEAK_VERSION,
+    ) -> str:
+        speak_elem = ET.fromstring(
+            self.to_ssml(
+                default_language=default_language,
+                default_voice=default_voice,
+                default_version=default_version,
+            )
+        )
+
+        chunks: list[str] = []
+        if speak_elem.text:
+            chunks.append(speak_elem.text)
+
+        for child in speak_elem:
+            chunks.append(ET.tostring(child, encoding="unicode"))
+
+        return "".join(chunks)
 
 
 @dataclass

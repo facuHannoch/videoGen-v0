@@ -1,3 +1,4 @@
+from copy import deepcopy
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
@@ -75,6 +76,40 @@ def _parse_ssml_text_node(ssml_elem: ET.Element) -> SsmlText:
     return SsmlText(nodes=nodes)
 
 
+def _split_compound_speak(speak_elem: ET.Element) -> list[ET.Element]:
+    if not any(_local_name(child.tag) == "speak" for child in list(speak_elem)):
+        return [speak_elem]
+
+    speak_parts: list[ET.Element] = []
+    pending_children: list[ET.Element] = []
+    leading_text = speak_elem.text if speak_elem.text and speak_elem.text.strip() else None
+
+    def _flush_pending() -> None:
+        nonlocal pending_children, leading_text
+        if not pending_children:
+            return
+
+        part = ET.Element(speak_elem.tag, dict(speak_elem.attrib))
+        if leading_text:
+            part.text = leading_text
+            leading_text = None
+
+        for child in pending_children:
+            part.append(deepcopy(child))
+
+        speak_parts.append(part)
+        pending_children = []
+
+    for child in list(speak_elem):
+        if _local_name(child.tag) == "speak":
+            _flush_pending()
+            continue
+        pending_children.append(child)
+
+    _flush_pending()
+    return speak_parts or [speak_elem]
+
+
 def parse_project(xml_path: Path) -> TtsProject:
     tree = ET.parse(xml_path)
     root = tree.getroot()
@@ -86,22 +121,26 @@ def parse_project(xml_path: Path) -> TtsProject:
     voice = root.get("voice", DEFAULT_VOICE)
     output_dir = root.get("output_dir", "audio")
 
-    speak_elems = [child for child in list(root) if _local_name(child.tag) == "speak"]
-    piece_elems = root.findall("piece")
+    project_children = list(root)
+    speak_elems = [child for child in project_children if _local_name(child.tag) == "speak"]
+    piece_elems = [child for child in project_children if _local_name(child.tag) == "piece"]
 
     if piece_elems and speak_elems:
-        raise ValueError("Use either project-level <speak> or <piece> elements, not both.")
-    if len(speak_elems) > 1:
-        raise ValueError("Only one project-level <speak> element is supported.")
+        raise ValueError("Use either project-level <speak> elements or <piece> elements, not both.")
 
     pieces: list[TextPiece] = []
     if speak_elems:
-        pieces.append(
-            TextPiece(
-                index=1,
-                content=SpeakDocument(root=speak_elems[0]),
+        expanded_speak_elems: list[ET.Element] = []
+        for speak_elem in speak_elems:
+            expanded_speak_elems.extend(_split_compound_speak(speak_elem))
+
+        for index, speak_elem in enumerate(expanded_speak_elems, start=1):
+            pieces.append(
+                TextPiece(
+                    index=index,
+                    content=SpeakDocument(root=speak_elem),
+                )
             )
-        )
         apply_piece_defaults(pieces)
         return TtsProject(
             language=language,
