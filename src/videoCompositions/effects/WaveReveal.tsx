@@ -78,15 +78,15 @@ type GlState = {
 
 type WaveMode = "reveal" | "cover";
 
-interface ScreenSweepShaderProps {
+interface WaveShaderProps {
   velocity?: number;
   mode?: WaveMode;
 }
 
-export const ScreenSweepShader = ({
+export const Wave = ({
   velocity = 1,
   mode = "reveal",
-}: ScreenSweepShaderProps) => {
+}: WaveShaderProps) => {
   const frame = useCurrentFrame();
   const {fps, width, height} = useVideoConfig();
   const canvasRef = useRef<HTMLCanvasElement>(null);

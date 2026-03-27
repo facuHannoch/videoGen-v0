@@ -62,7 +62,7 @@ type GlState = {
   strengthLoc: WebGLUniformLocation;
 };
 
-export const ScreenSweepShader = () => {
+export const TwoStains = () => {
   const frame = useCurrentFrame();
   const {fps, width, height} = useVideoConfig();
   const canvasRef = useRef<HTMLCanvasElement>(null);

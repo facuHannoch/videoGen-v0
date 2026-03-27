@@ -2,7 +2,7 @@ import { AbsoluteFill, Img, interpolate, Sequence, Series, staticFile, useCurren
 import { Audio } from "@remotion/media";
 import { videoStore } from "./state/videoStore";
 import { StandardText } from "./videoCompositions/text/StandardText";
-import { ScreenSweepShader } from "./videoCompositions/effects/WaveReveal";
+import { Wave } from "./videoCompositions/effects/WaveReveal";
 import { BlackAbsoluteFill } from "./videoCompositions/fills/BlackAbsoluteFill";
 import { OneWordCaption } from "./videoCompositions/text/subtitles/OneWordCaption";
 import { IntroNoise } from "./videoCompositions/fills/IntroNoise";
@@ -52,7 +52,7 @@ export const IPAPhonemeVideoComposition = () => {
     // audios[1]: "Este es el sonido /ʃ/." (es-MX) - Phoneme reveal
     [
       <>
-        <ScreenSweepShader velocity={3} mode="reveal" />
+        <Wave velocity={3} mode="reveal" />
         <Audio src={staticFile("sounds/mouse-click-double-hard.mp3")} volume={0.5} />
         <StandardText text={`/${phoneme}/`} style={{ fontSize: 108, padding: "24px 30px", }} />
       </>
@@ -104,7 +104,7 @@ export const IPAPhonemeVideoComposition = () => {
       <>
         {/* Cover shader to transition away from diagram */}
         <Sequence from={0} durationInFrames={fps}>
-            <ScreenSweepShader velocity={2} mode="cover" />
+            <Wave velocity={2} mode="cover" />
         </Sequence>
         <StandardText text="¿Quieres sonar como un nativo?" style={{ fontSize: 60, padding: "24px 30px" }} />
         <StandardText text="Mira el video en la descripción" style={{ fontSize: 48, padding: "24px 30px", marginTop: 20 }} />

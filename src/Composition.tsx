@@ -5,7 +5,7 @@ import { videoStore } from "./storage/videoStore";
 import { StandardText } from "./videoCompositions/text/StandardText";
 import { ZIndexTitle } from "./videoCompositions/text/IntroTitle";
 import { TopPrompt } from "./videoCompositions/text/TopPrompt";
-import { ScreenSweepShader } from "./videoCompositions/effects/WaveReveal";
+import { Wave } from "./videoCompositions/effects/WaveReveal";
 import { BlackAbsoluteFill } from "./videoCompositions/fills/BlackAbsoluteFill";
 import { OneWordCaption } from "./videoCompositions/text/subtitles/OneWordCaption";
 import { WaveCoverFill } from "./videoCompositions/fills/WaveCoverFill";
@@ -118,7 +118,7 @@ export const VideoComposition = () => {
   const scenes = [
     [
       <>
-        <ScreenSweepShader velocity={3} mode="reveal" />
+        <Wave velocity={3} mode="reveal" />
         <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
           <TopPrompt
             text="Activate the sound to hear"
@@ -201,7 +201,7 @@ export const VideoComposition = () => {
         <Sequence from={-5}>
           <Audio src={staticFile("sounds/swoosh-not-end.mp3")} />
         </Sequence>
-        <ScreenSweepShader velocity={2} mode="cover" />
+        <Wave velocity={2} mode="cover" />
         <Sequence from={Math.ceil(34 / 2) - 4}>
           <WaveCoverFill>
             <StandardText text="IPA Coach" style={{ fontSize: 108, padding: "24px 30px", }} />

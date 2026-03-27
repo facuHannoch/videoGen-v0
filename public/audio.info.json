@@ -61,14 +61,47 @@
       ]
     },
     {
-      "id": "02_thought.wav",
+      "id": "02_se_pronuncia.wav",
+      "subtitle": "Se pronuncia...",
+      "wordTimings": [
+        {
+          "tokenIndex": 0,
+          "word": "Se",
+          "startMs": 52.062,
+          "endMs": 270.812,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 1,
+          "word": "pronuncia",
+          "startMs": 270.812,
+          "endMs": 989.562,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 2,
+          "word": "...",
+          "startMs": 989.562,
+          "endMs": 1109.562,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        }
+      ]
+    },
+    {
+      "id": "03_thought.wav",
       "subtitle": "thought.",
       "wordTimings": [
         {
           "tokenIndex": 0,
           "word": "thought",
-          "startMs": 50.0,
-          "endMs": 637.5,
+          "startMs": 63.812,
+          "endMs": 975.5,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -76,8 +109,8 @@
         {
           "tokenIndex": 1,
           "word": ".",
-          "startMs": 637.5,
-          "endMs": 757.5,
+          "startMs": 975.5,
+          "endMs": 1095.5,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true
@@ -85,110 +118,83 @@
       ]
     },
     {
-      "id": "03_03..wav",
-      "subtitle": ".",
+      "id": "04_veamos_cada_sonido.wav",
+      "subtitle": "Veamos cada sonido",
       "wordTimings": [
         {
           "tokenIndex": 0,
-          "word": ".",
-          "startMs": 50.0,
-          "endMs": 170.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": true
-        }
-      ]
-    },
-    {
-      "id": "04_like_you_can_hear_in_thin-_think-_bath.wav",
-      "subtitle": "like you can hear in thin, think, bath",
-      "wordTimings": [
-        {
-          "tokenIndex": 0,
-          "word": "like",
-          "startMs": 48.875,
-          "endMs": 276.125,
+          "word": "Veamos",
+          "startMs": 41.687,
+          "endMs": 531.25,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 1,
-          "word": "you",
-          "startMs": 276.125,
-          "endMs": 412.5,
+          "word": "cada",
+          "startMs": 531.25,
+          "endMs": 781.25,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 2,
-          "word": "can",
-          "startMs": 412.5,
-          "endMs": 571.562,
+          "word": "sonido",
+          "startMs": 781.25,
+          "endMs": 901.25,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "05_thin-_think-_bath.wav",
+      "subtitle": "thin, think, bath",
+      "wordTimings": [
         {
-          "tokenIndex": 3,
-          "word": "hear",
-          "startMs": 571.562,
-          "endMs": 923.875,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 4,
-          "word": "in",
-          "startMs": 923.875,
-          "endMs": 1151.125,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 5,
+          "tokenIndex": 0,
           "word": "thin",
-          "startMs": 1151.125,
-          "endMs": 1685.25,
+          "startMs": 50.0,
+          "endMs": 961.687,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
-          "tokenIndex": 6,
+          "tokenIndex": 1,
           "word": ",",
-          "startMs": 1685.25,
-          "endMs": 1730.687,
+          "startMs": 961.687,
+          "endMs": 1097.5,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true
         },
         {
-          "tokenIndex": 7,
+          "tokenIndex": 2,
           "word": "think",
-          "startMs": 1730.687,
-          "endMs": 2219.312,
+          "startMs": 1097.5,
+          "endMs": 1970.437,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
-          "tokenIndex": 8,
+          "tokenIndex": 3,
           "word": ",",
-          "startMs": 2219.312,
-          "endMs": 2339.312,
+          "startMs": 1970.437,
+          "endMs": 2090.437,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true
         },
         {
-          "tokenIndex": 9,
+          "tokenIndex": 4,
           "word": "bath",
-          "startMs": 2339.312,
-          "endMs": 2459.312,
+          "startMs": 2090.437,
+          "endMs": 2210.437,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -196,131 +202,32 @@
       ]
     },
     {
-      "id": "05_05..wav",
-      "subtitle": ".",
+      "id": "06_law-_saw-_caught.wav",
+      "subtitle": "law, saw, caught",
       "wordTimings": [
         {
           "tokenIndex": 0,
-          "word": ".",
-          "startMs": 50.0,
-          "endMs": 170.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": true
-        }
-      ]
-    },
-    {
-      "id": "06_as_in_law-_saw-_caught.wav",
-      "subtitle": "as in law, saw, caught",
-      "wordTimings": [
-        {
-          "tokenIndex": 0,
-          "word": "as",
-          "startMs": 48.875,
-          "endMs": 242.062,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 1,
-          "word": "in",
-          "startMs": 242.062,
-          "endMs": 423.875,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 2,
           "word": "law",
-          "startMs": 423.875,
-          "endMs": 832.937,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 3,
-          "word": ",",
-          "startMs": 832.937,
-          "endMs": 867.062,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": true
-        },
-        {
-          "tokenIndex": 4,
-          "word": "saw",
-          "startMs": 867.062,
-          "endMs": 1310.25,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 5,
-          "word": ",",
-          "startMs": 1310.25,
-          "endMs": 1430.25,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": true
-        },
-        {
-          "tokenIndex": 6,
-          "word": "caught",
-          "startMs": 1430.25,
-          "endMs": 1550.25,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        }
-      ]
-    },
-    {
-      "id": "07_07..wav",
-      "subtitle": ".",
-      "wordTimings": [
-        {
-          "tokenIndex": 0,
-          "word": ".",
-          "startMs": 112.5,
-          "endMs": 232.5,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": true
-        }
-      ]
-    },
-    {
-      "id": "08_as_in_tap-_ten-_cat.wav",
-      "subtitle": "as in tap, ten, cat",
-      "wordTimings": [
-        {
-          "tokenIndex": 0,
-          "word": "as",
           "startMs": 50.0,
-          "endMs": 277.25,
+          "endMs": 864.75,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 1,
-          "word": "in",
-          "startMs": 277.25,
-          "endMs": 459.062,
+          "word": ",",
+          "startMs": 864.75,
+          "endMs": 961.687,
           "charStart": null,
           "charEnd": null,
-          "isPunctuation": false
+          "isPunctuation": true
         },
         {
           "tokenIndex": 2,
-          "word": "tap",
-          "startMs": 459.062,
-          "endMs": 902.25,
+          "word": "saw",
+          "startMs": 961.687,
+          "endMs": 1854.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -328,35 +235,68 @@
         {
           "tokenIndex": 3,
           "word": ",",
-          "startMs": 902.25,
-          "endMs": 1022.25,
+          "startMs": 1854.0,
+          "endMs": 1912.187,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true
         },
         {
           "tokenIndex": 4,
-          "word": "ten",
-          "startMs": 1022.25,
-          "endMs": 1300.0,
+          "word": "caught",
+          "startMs": 1912.187,
+          "endMs": 2032.187,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        }
+      ]
+    },
+    {
+      "id": "07_tap-_ten-_cat.wav",
+      "subtitle": "tap, ten, cat",
+      "wordTimings": [
+        {
+          "tokenIndex": 0,
+          "word": "tap",
+          "startMs": 56.875,
+          "endMs": 929.812,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
-          "tokenIndex": 5,
+          "tokenIndex": 1,
           "word": ",",
-          "startMs": 1300.0,
-          "endMs": 1420.0,
+          "startMs": 929.812,
+          "endMs": 1046.187,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true
         },
         {
-          "tokenIndex": 6,
+          "tokenIndex": 2,
+          "word": "ten",
+          "startMs": 1046.187,
+          "endMs": 1880.312,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 3,
+          "word": ",",
+          "startMs": 1880.312,
+          "endMs": 1996.687,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 4,
           "word": "cat",
-          "startMs": 1420.0,
-          "endMs": 1540.0,
+          "startMs": 1996.687,
+          "endMs": 2116.687,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false

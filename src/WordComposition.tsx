@@ -1,4 +1,4 @@
-import { Sequence, staticFile } from "remotion";
+import { Img, Sequence, staticFile } from "remotion";
 import { Audio } from "@remotion/media";
 import { videoStore } from "./state/videoStore";
 import { StandardText } from "./videoCompositions/text/StandardText";
@@ -12,7 +12,16 @@ import { WaveCoverFill } from "./videoCompositions/fills/WaveCoverFill";
 import { SpeakerOnIcon } from "./videoCompositions/vectors/SpeakerOnIcon";
 import { TickingClock } from "./videoCompositions/effects/TickingClock";
 import { ScreenSweepShader } from "./videoCompositions/effects/ScreenSweepShader";
+import { CSSProperties } from "react";
 
+// Define word, ipa transcription
+// Edit script.xml
+// Edit timeline.json <-- or make it created with a) audioGen; b) videoStore
+
+
+// Add music
+// The video has like 0.5 seconds of silence. Make the bell sound as soon as the video starts, not half a second after
+// It is very plain and dull
 
 export const WordPronunciationVideoComposition = () => {
   const timelineClips = videoStore.getTimelineClips();
@@ -22,44 +31,39 @@ export const WordPronunciationVideoComposition = () => {
   }
 
   const wordBreakdown = {
-    word: "thought",
-    ipa: "/θɔt/",
+    word: "bad",
+    ipa: "/bæd/",
     breakdown: [
-      { θ: ["thin", "think", "bath"] },
-      { ɔ: ["law", "saw", "caught"] },
-      { t: ["tap", "ten", "cat"] },
+      { b: ["ball", "bat", "back"] },
+      { æ: ["cat", "bad", "apple"] },
+      { d: ["dog", "day", "red"] },
     ],
   };
+  // const wordBreakdown = {
+  //   word: "airbag",
+  //   ipa: "/ˈɛrbæg/",
+  //   breakdown: [
+  //     { ɛ: ["bed", "red", "wet"] },
+  //     { r: ["run", "rabbit", "rain"] },
+  //     { b: ["ball", "bat", "back"] },
+  //     { æ: ["cat", "bad", "apple"] },
+  //     { g: ["go", "get", "good"] },
+  //   ],
+  // };
 
   const word = wordBreakdown.word;
   const wordIPA = wordBreakdown.ipa;
 
-  const phonemeBreakdownScenes = wordBreakdown.breakdown.map((entry) => {
+  const phonemeBreakdownScenes = wordBreakdown.breakdown.map((entry, index) => {
     const [highlightedCharacter] = Object.entries(entry)[0] ?? [""];
-
     return (
-      <>
-        {/* <TwoStains /> */}
-        <Audio src={staticFile("sounds/subtle-chime.mp3")} />
-
-        <TopPrompt text={`Sound / ${highlightedCharacter} /`} />
-        {/* <div> */}
-
-        {/* <Audio src={staticFile("sounds/mouse-click-double-hard.mp3")} volume={0.5} /> */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "center" }}>
-          <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
-          <StandardTextLetterHighlighted
-            text={wordIPA}
-            style={{ fontSize: 72, padding: "24px 30px" }}
-            highlightedCharacter={highlightedCharacter}
-          />
-          <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "flex-start" }}>
-            {/* <StandardText text={relatedWords[0]} style={{ fontSize: 60, padding: "18px 26px" }} />
-            <StandardText text={relatedWords[1]} style={{ fontSize: 60, padding: "18px 26px" }} />
-            <StandardText text={relatedWords[2]} style={{ fontSize: 60, padding: "18px 26px" }} /> */}
-          </div>
-        </div>
-      </>
+      <IPAPhonemeScene
+        key={`phoneme-${index}`}
+        word={word}
+        wordIPA={wordIPA}
+        highlightedCharacter={highlightedCharacter}
+        audioSceneIndex={index}
+      />
     );
   });
 
@@ -72,22 +76,23 @@ export const WordPronunciationVideoComposition = () => {
         <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
         <Wave velocity={3} mode="reveal" />
         <TopPrompt
-          text="Activate the sound to hear"
+          text="Activa el sonido para escuchar"
           icon={<SpeakerOnIcon size={30} />}
         />
       </>
     ],
     [
-      // tick space
-      <>
-        {/* <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} /> */}
-      </>
+      // gap
+
     ],
-    [
-      // it is said...
-      <>
-      </>
-    ],
+    // [
+    //   // it is said...
+    //   <>
+    //     <BlackAbsoluteFill>
+    //       <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
+    //     </BlackAbsoluteFill>
+    //   </>
+    // ],
     [
       // (word revelation)
       <>
@@ -100,7 +105,7 @@ export const WordPronunciationVideoComposition = () => {
       </>
     ],
     [
-      // I will show you each
+      // Let's see each phoneme
       <>
         <StandardText text={"Veamos cada sonido..."} style={{ fontSize: 72, padding: "24px 30px" }} />
         <Audio src={staticFile("sounds/mouse-click-double-hard.mp3")} volume={0.5} />
@@ -113,11 +118,93 @@ export const WordPronunciationVideoComposition = () => {
         </Sequence>
       </>
     ],
-    ...phonemeBreakdownScenes,// .flatMap(item => [ item, item ] // Array(2).fill(item)),
     [
-      <> <Sequence from={-5}>
-        <Audio src={staticFile("sounds/swoosh-not-end.mp3")} />
-      </Sequence>
+      // phoneme explanation  
+      <>
+        <TopPrompt text={`Fonema / b /`} />
+        <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={0.8} />
+
+        <Img src={staticFile("images/phonemes/diagram-b.jpeg")} style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", position: 'absolute', top: 500 }} />
+        <IPAPhonemeScene
+          key={`phoneme-b`}
+          wordIPA={wordIPA}
+          highlightedCharacter={'b'}
+          containerStyle={{ position: 'absolute', top: 280 }}
+          sound={false}
+        />
+      </>
+    ],
+    [
+      // words
+      <IPAPhonemeScene
+        key={`phoneme-b`}
+        word={word}
+        wordIPA={wordIPA}
+        highlightedCharacter={'b'}
+      />
+    ],
+    [
+      // phoneme explanation  
+      <>
+        <TopPrompt text={`Fonema / æ /`} />
+        <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={1} />
+
+        <Img src={staticFile("images/phonemes/diagram-æ.jpeg")} style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", position: 'absolute', top: 500 }} />
+        <IPAPhonemeScene
+          key={`phoneme-æ`}
+          wordIPA={wordIPA}
+          highlightedCharacter={'æ'}
+          containerStyle={{ position: 'absolute', top: 280 }}
+          sound={false}
+        />
+      </>
+    ],
+    [
+      // words
+      <IPAPhonemeScene
+        key={`phoneme-æ`}
+        word={word}
+        wordIPA={wordIPA}
+        highlightedCharacter={'æ'}
+      />
+    ],
+    [
+      // phoneme explanation  
+      <>
+        <TopPrompt text={`Fonema / d /`} />
+        <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={1} />
+
+        <Img src={staticFile("images/phonemes/diagram-d.jpeg")} style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", position: 'absolute', top: 500 }} />
+        <IPAPhonemeScene
+          key={`phoneme-d`}
+          wordIPA={wordIPA}
+          highlightedCharacter={'d'}
+          containerStyle={{ position: 'absolute', top: 280 }}
+          sound={false}
+        />
+      </>
+    ],
+    [
+      // words
+      <IPAPhonemeScene
+        key={`phoneme-d`}
+        word={word}
+        wordIPA={wordIPA}
+        highlightedCharacter={'d'}
+      />
+    ],
+    // ...phonemeBreakdownScenes,// .flatMap(item => [ item, item ] // Array(2).fill(item)),
+    [
+      <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
+    ],
+    [
+      <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
+    ],
+    [
+      <>
+        <Sequence from={-5}>
+          <Audio src={staticFile("sounds/swoosh-not-end.mp3")} />
+        </Sequence>
         <Wave velocity={2} mode="cover" />
         <Sequence from={Math.ceil(34 / 2) - 4}>
           <WaveCoverFill>
@@ -132,7 +219,7 @@ export const WordPronunciationVideoComposition = () => {
   return (
     <>
       <IntroNoise />
-      <Sequence from={videoStore.getFrameForSeconds(1)} durationInFrames={videoStore.framesToAudio(2) + videoStore.getFrameForSeconds(1.5)}>
+      <Sequence from={videoStore.getFrameForSeconds(1)} durationInFrames={videoStore.framesToAudio(1) + videoStore.getFrameForSeconds(2.5)}>
         {/* Note that this has the following logic: we want to start 1 second after the second 0, and we want the scene to last until the 2nd audio (audio[1]). videoStore.framesToAudio does not account for non-audio, so we have to manually add the duration of the sound scene in between (1.5 seconds) */}
         <Audio src={staticFile("sounds/clock-ticking/double-medium-medium_soft.mp3")} volume={0.4} />
         <div style={{ position: "absolute", bottom: 500, left: "50%", transform: "translateX(-50%)", zIndex: 3 }}>
@@ -211,6 +298,51 @@ export const WordPronunciationVideoComposition = () => {
           </Sequence>
         );
       })}
+    </>
+  );
+};
+
+interface IPAPhonemeSceneProps {
+  word?: string;
+  wordIPA: string;
+  highlightedCharacter: string;
+  audioSceneIndex?: number;
+  containerStyle?: CSSProperties;
+  sound?: boolean;
+}
+
+const IPAPhonemeScene = ({
+  word,
+  wordIPA,
+  highlightedCharacter,
+  audioSceneIndex = 0,
+  containerStyle,
+  sound = true
+}: IPAPhonemeSceneProps) => {
+  return (
+    <>
+      <div style={containerStyle}>
+
+        {sound &&
+          <Sequence durationInFrames={videoStore.getFrameForSeconds(0.5)}>
+            <Audio src={staticFile("sounds/subtle-chime.mp3")} />
+          </Sequence>
+        }
+
+        {/* <TopPrompt text={`Sound / ${highlightedCharacter} /`} /> */}
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "center" }}>
+          {word && <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />}
+          <StandardTextLetterHighlighted
+            text={wordIPA}
+            style={{ fontSize: 72, padding: "24px 35px" }}
+            highlightedCharacter={highlightedCharacter}
+          />
+          <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "flex-start" }}>
+            {/* Example words to be rendered here */}
+          </div>
+        </div>
+      </div>
     </>
   );
 };
