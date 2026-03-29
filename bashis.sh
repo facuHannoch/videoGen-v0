@@ -1,8 +1,17 @@
+# Load variables from .env file
+if [ -f .env ]; then
+    export $(cat .env | grep -v '^#' | xargs)
+fi
+
 category=ipa_coach-word_pronunciation
-content=bed
+content=dog
+ipaTranscription=/dɔɡ/
 lang=en
+# between
+# thought
 
 projectPath=_projects/$category/$content/$lang
+videoEditorSrcDir=remotion-video-editor/src
 videoEditorAssetsDir=remotion-video-editor/public
 
 
@@ -18,9 +27,9 @@ xmlReferencePath=_projects/$category/_common/reference-$lang.xml
 videoEditionContext=_projects/$category/_common/videoMakingContext.md
 
 
-# python3 -m venv .venv
-# source .venv/bin/activate
-# pip install -r requirements.txt
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 
 
 echo " \t ----- $category, $content, $lang ----- "
@@ -30,7 +39,7 @@ echo " \t ----- $category, $content, $lang ----- "
 ######## Step 1
 echo "--- \n Step 1 - Raw content creation \n---"
 
-python3 scriptGen/index.py -o $projectPath/1-raw-content/content.json --template $promptPath --map PHONEME_HERE=$content --map TARGET_LANGUAGE=$lang --map WORD=$content
+python3 scriptGen/index.py -o $projectPath/1-raw-content/content.json --template $promptPath --map PHONEME_HERE=$content --map TARGET_LANGUAGE=$lang --map WORD=$content  --map IPA_TRANSCRIPTION=$ipaTranscription
 
 
 
@@ -39,7 +48,7 @@ python3 scriptGen/index.py -o $projectPath/1-raw-content/content.json --template
 echo "\n--- \n Step 2 - Resources creation \n---"
 
 python3 resourcesGen/index.py --input $projectPath/1-raw-content/content.json --assets-dir $projectPath/2-resources/assets/ --output $projectPath/2-resources/generated.resources.json --image-aspect-ratio 1:1 --context $resourcesGenerationContext
-exit
+
 
 ######## Step 3
 echo "\n--- \n Step 3 - Audio Script creationg\n---"
@@ -92,6 +101,8 @@ cp -r $projectPath/2-resources/images $videoEditorAssetsDir/
 # 2-resources/generated.resources.json
 # 2-resources/...
 # 3-script/script.xml
+
+cp $projectPath/1-raw-content/content.json $videoEditorSrcDir/
 
 python3 videoEditorWorker/index.py \
   --audio-info $projectPath/4-audios/audio.info.json \

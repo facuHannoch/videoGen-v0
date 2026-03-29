@@ -1,4 +1,4 @@
-Word: WORD
+Word: WORD, Ipa Transcription: IPA_TRANSCRIPTION
 Target language: TARGET_LANGUAGE
 Accent: GENERAL AMERICAN ENGLISH.
 
@@ -67,3 +67,7 @@ Text to put in the description in the video. It should be something that genuine
 COPY - MK
 
 Copy to put in the video description. This will be at the bottom, so you can be more pushy and marketing-ish and use hashtags (up to 5, use relevant ones). Add keywords and words that would help the video get more reach. Be brief.
+
+
+--------
+Keep the titles as they are defined here (Like "COPY - VALUE", "COPY - MK").

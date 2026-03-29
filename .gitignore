@@ -2,14 +2,21 @@
 *.wav
 *.json
 */local
+public/
 
 __pycache__
 .venv/
 
-projects/*/*/en/1-raw-content/
-projects/*/*/en/2-resources/
-projects/*/*/en/3-script/
-projects/*/*/en/4-audios/
-projects/*/*/en/5-videos/
+_projects/*/*/en/1-raw-content/
+_projects/*/*/en/2-resources/
+_projects/*/*/en/3-script/
+_projects/*/*/en/4-audios/
+_projects/*/*/en/5-videos/
+
+_projects/*/*/es/1-raw-content/
+_projects/*/*/es/2-resources/
+_projects/*/*/es/3-script/
+_projects/*/*/es/4-audios/
+_projects/*/*/es/5-videos/
 
 */public/images/

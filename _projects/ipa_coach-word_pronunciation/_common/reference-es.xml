@@ -13,13 +13,14 @@
     </voice>
   </speak>
 
-  <speak>
+  <!-- Keep this commented -->
+  <!-- <speak>
     <voice lang="es-MX">
       <ssml_text>
         <prosody rate="+20%">Se pronuncia...</prosody>
       </ssml_text>
     </voice>
-  </speak>
+  </speak> -->
 
   <speak>
     <voice lang="en-US">
@@ -112,7 +113,9 @@
       </ssml_text>
     </voice>
   </speak>
-
+  
+  <!-- Note: ADD AS MANY SETS OF EXPLANATION->PHONEMES ARE NECESSARY TO COVER THE ENTIRE WORD. So if there are 5 phonemes, add more xml tags. -->
+  
   <speak>
     <voice lang="en-US">
       <prosody rate="slow">bad.</prosody>

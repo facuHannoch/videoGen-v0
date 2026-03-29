@@ -1,1 +1,0 @@
-Take all that has COPY in the title, and use it to write a single txt file that I can put in the video description for TikTok

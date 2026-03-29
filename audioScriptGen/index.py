@@ -147,7 +147,7 @@ def build_generation_prompt(input_json: Dict[str, Any], reference_xml: str) -> s
         - Strict Structure: Keep the reference.xml structure exactly as it is (tags, order, and number of <piece> elements). Do not delete or add any XML tags.
         - Constraint: If an input_json field does not explicitly map to one of the sections in the reference.xml, ignore it. Do not attempt to add extra <piece> blocks to accommodate remaining JSON data."
 
-		There will also be comments sometimes, read them as they could provide valuable information, but don't put them in the final script.
+		There will also be comments sometimes, read them as they could provide valuable information, but don't put them in the final script. These notes override what is being said here.
 
         {additional_instructions}
 
