@@ -214,8 +214,8 @@ def extract_typescript_code(text: str) -> str:
 	if fence_match:
 		cleaned = fence_match.group(1).strip()
 
-	if "export const VideoComposition" not in cleaned and "function VideoComposition" not in cleaned:
-		raise ValueError("AI output does not look like a full Composition.tsx file")
+	if not re.search(r"export\s+(const|function|default)", cleaned):
+		raise ValueError("AI output does not look like a TypeScript/TSX file (no export found)")
 	return cleaned
 
 

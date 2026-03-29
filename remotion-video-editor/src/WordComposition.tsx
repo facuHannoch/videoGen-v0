@@ -160,7 +160,7 @@ export const WordPronunciationVideoComposition = () => {
   return (
     <>
       <IntroNoise />
-      <Sequence from={videoStore.getFrameForSeconds(1)} durationInFrames={videoStore.framesToAudio(1) + videoStore.getFrameForSeconds(2.5)}>
+      <Sequence from={videoStore.getFrameForSeconds(1)} durationInFrames={videoStore.framesToAudio(1) + videoStore.getFrameForSeconds(1.5)}>
         {/* Note that this has the following logic: we want to start 1 second after the second 0, and we want the scene to last until the 2nd audio (audio[1]). videoStore.framesToAudio does not account for non-audio, so we have to manually add the duration of the sound scene in between (1.5 seconds) */}
         <Audio src={staticFile("sounds/clock-ticking/double-medium-medium_soft.mp3")} volume={0.4} />
         <div style={{ position: "absolute", bottom: 500, left: "50%", transform: "translateX(-50%)", zIndex: 3 }}>

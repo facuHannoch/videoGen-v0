@@ -96,7 +96,7 @@ cp -r $projectPath/2-resources/images $videoEditorAssetsDir/
 python3 videoEditorWorker/index.py \
   --audio-info $projectPath/4-audios/audio.info.json \
   --timeline-output $videoEditorAssetsDir/timeline.json \
-  --composition remotion-video-editor/src/Composition.tsx \
+  --composition remotion-video-editor/src/WordComposition.tsx \
   --content-json $projectPath/1-raw-content/content.json \
   --resources-json $projectPath/2-resources/generated.resources.json \
   --script-xml $projectPath/3-script/script.xml \
