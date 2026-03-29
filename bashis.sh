@@ -1,35 +1,51 @@
 category=ipa_coach-word_pronunciation
 content=bed
-lang=es
+lang=en
 
-projectPath=public/$category/$content/$lang
+projectPath=_projects/$category/$content/$lang
 videoEditorAssetsDir=remotion-video-editor/public
 
 
 mkdir -p $projectPath
-mkdir $projectPath/1-raw-content
-mkdir $projectPath/2-resources
-mkdir $projectPath/3-script
-mkdir $projectPath/4-audios
+mkdir -p $projectPath/1-raw-content
+mkdir -p $projectPath/2-resources
+mkdir -p $projectPath/3-script
+mkdir -p $projectPath/4-audios
 
-promptPath=public/$category/_common/prompt-$lang.txt
-xmlReferencePath=public/$category/_common/reference-$lang.xml
-videoEditionContext=public/$category/_common/videoMakingContext.txt
+promptPath=_projects/$category/_common/prompt.txt
+resourcesGenerationContext=_projects/$category/_common/resourcesGenerationContext.md
+xmlReferencePath=_projects/$category/_common/reference-$lang.xml
+videoEditionContext=_projects/$category/_common/videoMakingContext.md
 
 
-echo " ----- $content ----- "
+# python3 -m venv .venv
+# source .venv/bin/activate
+# pip install -r requirements.txt
+
+
+echo " \t ----- $category, $content, $lang ----- "
+
+
+
+######## Step 1
 echo "--- \n Step 1 - Raw content creation \n---"
 
-python3 scriptGen/index.py -o $projectPath/1-raw-content/content.json --template $promptPath --map PHONEME_HERE=$content
+python3 scriptGen/index.py -o $projectPath/1-raw-content/content.json --template $promptPath --map PHONEME_HERE=$content --map TARGET_LANGUAGE=$lang --map WORD=$content
 
+
+
+
+######## Step 2
 echo "\n--- \n Step 2 - Resources creation \n---"
 
-python3 resourcesGen/index.py --input $projectPath/1-raw-content/content.json --assets-dir $projectPath/2-resources/images/ --output $projectPath/2-resources/generated.resources.json --image-aspect-ratio 1:1 
+python3 resourcesGen/index.py --input $projectPath/1-raw-content/content.json --assets-dir $projectPath/2-resources/images/ --output $projectPath/2-resources/generated.resources.json --image-aspect-ratio 1:1 --context $resourcesGenerationContext
 
 
+######## Step 3
 echo "\n--- \n Step 3 - Audio Script creationg\n---"
 
-python3 audioScriptGen/index.py --input $projectPath/1-raw-content/content.json --reference $xmlReferencePath --output $projectPath/3-script/script.xml --google-model gemini-3-flash-preview
+python3 audioScriptGen/index.py --input $projectPath/1-raw-content/content.json --reference $xmlReferencePath --output $projectPath/3-script/script.xml
+
 
 
 ######################################
@@ -45,7 +61,7 @@ rm -r $projectPath/4-audios/audios-prev
 rm $projectPath/4-audios/audio-prev.info.json
 
 mv $projectPath/4-audios/audios $projectPath/4-audios/audios-prev
-mv $projectPath/4-audios/audio.info.json $projectPath/audio-prev.info.json
+mv $projectPath/4-audios/audio.info.json $projectPath/4-audios/audio-prev.info.json
 
 # ---
 # Generate the audios
@@ -77,7 +93,15 @@ cp -r $projectPath/2-resources/images $videoEditorAssetsDir/
 # 2-resources/...
 # 3-script/script.xml
 
-python3 videoEditorWorker/index.py --composition remotion-video-editor/src/Composition.tsx --content-json $projectPath/1-raw-content/content.json --resources-json $projectPath/2-resources/generated.resources.json --script-xml $projectPath/3-script/script.xml --context $videoEditionContext --additional-comments "Don't change the position of the music and sounds"
+python3 videoEditorWorker/index.py \
+  --audio-info $projectPath/4-audios/audio.info.json \
+  --timeline-output $videoEditorAssetsDir/timeline.json \
+  --composition remotion-video-editor/src/Composition.tsx \
+  --content-json $projectPath/1-raw-content/content.json \
+  --resources-json $projectPath/2-resources/generated.resources.json \
+  --script-xml $projectPath/3-script/script.xml \
+  --context $videoEditionContext \
+  --additional-comments "Don't change the position of the music and sounds"
 
 
 # Video editor - render video

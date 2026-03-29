@@ -13,6 +13,8 @@ Flow:
     - Generated resources: `content.json`
 2. Resources are created. 
     - Components involved: `resourcesGen`
+    - Resources used:
+        - resources generation context prompt
     - Generated resources: `generated.resources.json`
 3. Resources are organized and used to build the script
     - Components involved: `audioScriptGen`
@@ -27,12 +29,16 @@ Flow:
 5. Video edition process: We need a way to make use of the generated resources, but also a way to render and edit the video. There are at least 3 steps: 1) bring back resources; 2) make editing; 3) render video (TBI)
     - Components involved: 
         - `videoEditorWorker`: The AI part of this step. Takes the resources and modifies the editor files themselves. Note: Currently this component its just a script that overrides the given file. To make this more inteliggent and allow it to further create / modify, it should trascend this script-state.
+            Generates
+                - `timeline.json`
+                - `compositionXX.tsx`
         - `remotion-video-editor`: library to actually make the video and eventually render it. Uses the `remotion` library.
     - Resources used
         1. content.json
         2. generated.resources.json
         3. script.xml
         4. audios/, audio.info.json
+        ?. timeline.json: 
         - video editing context: a file the videoEditorWorker has as additional context or instructions to provide the videoEditorWorker
     - Generated resources: `video.out`
 
@@ -75,3 +81,14 @@ This means that the library works always on a project, and each
 
 All steps make use of AI to allow for flexible and idea-guided videos, instead of following a strict process.
 This will mean that the process is not 100% deterministic. Specially in step 2, this could imply the need for a HITM approach, where the generation can be easily reviewed and then the user could approve / reject the resources generated.
+
+
+
+
+
+# Usage
+
+1. Define word and category
+2. Create prompt
+
+Define variables and things that should mapped

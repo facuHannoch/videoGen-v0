@@ -43,6 +43,15 @@ def load_dotenv(env_file: Path) -> None:
 			os.environ[key] = value
 
 
+def read_optional_text(path: Optional[Path]) -> str:
+	if not path:
+		return ""
+	if not path.exists():
+		return ""
+	return path.read_text(encoding="utf-8")
+
+
+
 def parse_args() -> argparse.Namespace:
 	parser = argparse.ArgumentParser(
 		description="Generate resources from structured prompt parts JSON using Google AI."
@@ -92,6 +101,11 @@ def parse_args() -> argparse.Namespace:
 		"--image-resolution",
 		default="1K",
 		help="Image resolution for Google image generation: 1K | 2K | 4K (default: 1K).",
+	)
+	parser.add_argument(
+		"--context",
+		default=None,
+		help="Optional path to a resourcesGenerationContext text file included in AI prompts.",
 	)
 	parser.add_argument(
 		"--dry-run",
@@ -259,6 +273,7 @@ def generate_with_google(
 	asset_prefix: str,
 	image_aspect_ratio: Optional[str],
 	image_resolution: Optional[str],
+	context: str,
 ) -> Dict[str, Any]:
 	response = None
 	resolution_applied = False
@@ -277,7 +292,7 @@ def generate_with_google(
 			generation_config = genai_types.GenerateContentConfig(image_config=image_config)
 			response = client.models.generate_content(
 				model=model,
-				contents=prompt,
+				contents=build_prompt_with_context(prompt, context),
 				config=generation_config,
 			)
 			resolution_applied = image_resolution is not None
@@ -291,11 +306,11 @@ def generate_with_google(
 				generation_config = genai_types.GenerateContentConfig(image_config=image_config)
 				response = client.models.generate_content(
 					model=model,
-					contents=prompt,
+					contents=build_prompt_with_context(prompt, context),
 					config=generation_config,
 				)
 			else:
-				response = client.models.generate_content(model=model, contents=prompt)
+				response = client.models.generate_content(model=model, contents=build_prompt_with_context(prompt, context))
 
 			if image_resolution:
 				resolution_fallback_note = (
@@ -303,7 +318,7 @@ def generate_with_google(
 					"generation continued without resolution."
 				)
 	else:
-		response = client.models.generate_content(model=model, contents=prompt)
+		response = client.models.generate_content(model=model, contents=build_prompt_with_context(prompt, context))
 
 	text = extract_response_text(response)
 
@@ -327,6 +342,12 @@ def generate_with_google(
 	return result
 
 
+def build_prompt_with_context(base_prompt: str, context: str) -> str:
+	if not context.strip():
+		return base_prompt
+	return f"{base_prompt}\n\n<resourcesGenerationContext>\n{context}\n</resourcesGenerationContext>"
+
+
 def generate_with_openai(
 	client: Any,
 	model: str,
@@ -334,6 +355,7 @@ def generate_with_openai(
 	prompt_for: str,
 	assets_dir: Path,
 	asset_prefix: str,
+	context: str,
 ) -> Dict[str, Any]:
 	result: Dict[str, Any] = {
 		"model": model,
@@ -368,7 +390,7 @@ def generate_with_openai(
 	try:
 		response = client.responses.create(
 			model=model,
-			input=[{"role": "user", "content": prompt}],
+			input=[{"role": "user", "content": build_prompt_with_context(prompt, context)}],
 			temperature=0.2,
 		)
 		text = getattr(response, "output_text", None)
@@ -377,7 +399,7 @@ def generate_with_openai(
 	except Exception:
 		chat = client.chat.completions.create(
 			model=model,
-			messages=[{"role": "user", "content": prompt}],
+			messages=[{"role": "user", "content": build_prompt_with_context(prompt, context)}],
 			temperature=0.2,
 		)
 		text = chat.choices[0].message.content or ""
@@ -394,6 +416,7 @@ def generate_for_part(
 	assets_dir: Path,
 	image_aspect_ratio: Optional[str],
 	image_resolution: Optional[str],
+	context: str,
 	dry_run: bool,
 ) -> Dict[str, Any]:
 	part_id = str(part.get("id", "part"))
@@ -428,6 +451,7 @@ def generate_for_part(
 			asset_prefix=asset_prefix,
 			image_aspect_ratio=image_aspect_ratio,
 			image_resolution=image_resolution,
+			context=context,
 		)
 	else:
 		gen_result = generate_with_openai(
@@ -437,6 +461,7 @@ def generate_for_part(
 			prompt_for=prompt_for,
 			assets_dir=assets_dir,
 			asset_prefix=asset_prefix,
+			context=context,
 		)
 		if prompt_for == "ai-image" and image_aspect_ratio:
 			gen_result["note"] = "image_aspect_ratio is currently applied only for provider=google"
@@ -461,6 +486,7 @@ def main() -> None:
 		input_path = Path(args.input)
 		output_path = Path(args.output)
 		assets_dir = Path(args.assets_dir)
+		context = read_optional_text(Path(args.context) if args.context else None)
 
 		payload = load_input_json(input_path)
 		parts = payload.get("parts", [])
@@ -513,6 +539,7 @@ def main() -> None:
 					assets_dir=assets_dir,
 					image_aspect_ratio=image_aspect_ratio,
 					image_resolution=image_resolution,
+					context=context,
 					dry_run=args.dry_run,
 				)
 			)
