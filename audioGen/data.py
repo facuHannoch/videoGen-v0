@@ -1,7 +1,7 @@
 import copy
 from dataclasses import dataclass
 import re
-from typing import List, Protocol, Union
+from typing import List, Optional, Protocol, Union
 import xml.etree.ElementTree as ET
 
 DEFAULT_FILENAME_MAX_LENGTH = 100
@@ -46,12 +46,12 @@ class BreakNode:
 @dataclass(frozen=True)
 class ProsodyNode:
     value: str
-    rate: str | None = None
-    pitch: str | None = None
-    volume: str | None = None
+    rate: Optional[str] = None
+    pitch: Optional[str] = None
+    volume: Optional[str] = None
 
     def to_ssml(self) -> str:
-        attrs: list[str] = []
+        attrs: List[str] = []
         if self.rate:
             attrs.append(f'rate="{self.rate}"')
         if self.pitch:
@@ -83,7 +83,7 @@ class PhonemeNode:
 @dataclass(frozen=True)
 class EmphasisNode:
     value: str
-    level: str | None = None
+    level: Optional[str] = None
 
     def to_ssml(self) -> str:
         if self.level:
@@ -234,7 +234,7 @@ class SpeakDocument:
             )
         )
 
-        chunks: list[str] = []
+        chunks: List[str] = []
         if speak_elem.text:
             chunks.append(speak_elem.text)
 
@@ -248,8 +248,8 @@ class SpeakDocument:
 class TextPiece:
     index: int
     content: TextContent
-    id: str | None = None
-    filename: str | None = None
+    id: Optional[str] = None
+    filename: Optional[str] = None
 
     def plain_text(self) -> str:
         if isinstance(self.content, RawText):
@@ -291,7 +291,7 @@ def generate_default_filename(
         base = fallback_id
         return f"{prefix}{base[:max_base_length]}{suffix}"
 
-    chars: list[str] = []
+    chars: List[str] = []
     for char in raw:
         if char == " ":
             chars.append("_")

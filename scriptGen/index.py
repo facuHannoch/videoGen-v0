@@ -34,9 +34,11 @@ Rules:
 - Use UTF-8 characters exactly as in source.
 - Preserve content exactly in each "content" field. Do not rewrite, summarize, normalize, or fix spelling. You can remove things that are just to identify the content. For example, don't put what you identified to be the title within the content.
 - Set "is_prompt" to true only when the part is an instruction/prompt intended to be fed into a model/tool.
-- Set "prompt_for" to one of: "none", "ai-image", "ai-text", "other".
-- If "is_prompt" is false, "prompt_for" must be "none".
+- Set "prompt_for" to one of: "none", "ai-image", "ai-text", "other", "text-file".
+- If "is_prompt" is false, "prompt_for" must be "none" unless it is "text-file".
 - Use "ai-image" specifically for text intended as an image-generation prompt.
+- Use "text-file" for content that should be saved as a plain text file (e.g. captions, copy, descriptions). Set "is_prompt" to false for these.
+- For "text-file" parts, you may add an optional "file_group" string field. Parts sharing the same "file_group" will be combined into a single file.
 
 <content>
 __RAW_RESPONSE__
@@ -131,16 +133,20 @@ def validate_second_pass_output(payload: Dict[str, Any]) -> Dict[str, Any]:
 		if "prompt_for" not in part or not isinstance(part["prompt_for"], str):
 			raise ValueError(f"parts[{i}].prompt_for must be a string")
 
-		allowed_prompt_for = {"none", "ai-image", "ai-text", "other"}
+		allowed_prompt_for = {"none", "ai-image", "ai-text", "other", "text-file"}
 		if part["prompt_for"] not in allowed_prompt_for:
 			raise ValueError(
 				f"parts[{i}].prompt_for must be one of {sorted(allowed_prompt_for)}"
 			)
 
-		if not part["is_prompt"] and part["prompt_for"] != "none":
+		if not part["is_prompt"] and part["prompt_for"] not in {"none", "text-file"}:
 			raise ValueError(
-				f"parts[{i}] has is_prompt=false, so prompt_for must be 'none'"
+				f"parts[{i}] has is_prompt=false, so prompt_for must be 'none' or 'text-file'"
 			)
+
+		file_group = part.get("file_group")
+		if file_group is not None and not isinstance(file_group, str):
+			raise ValueError(f"parts[{i}].file_group must be a string if present")
 
 	return payload
 

@@ -408,6 +408,47 @@ def generate_with_openai(
 	return result
 
 
+def write_text_file_part(
+	part: Dict[str, Any],
+	assets_dir: Path,
+	group_tracker: Dict[str, Path],
+	dry_run: bool,
+) -> Dict[str, Any]:
+	part_id = str(part.get("id", "part"))
+	title = str(part.get("title", "untitled"))
+	content = str(part.get("content", ""))
+	file_group = part.get("file_group")
+
+	if file_group:
+		filename = clean_filename(str(file_group)) + ".txt"
+	else:
+		filename = clean_filename(f"{part_id}-{title}") + ".txt"
+
+	file_path = assets_dir / filename
+
+	result: Dict[str, Any] = {
+		"status": "dry-run" if dry_run else "written",
+		"id": part_id,
+		"title": title,
+		"prompt_for": "text-file",
+		"file": str(file_path),
+	}
+	if file_group:
+		result["file_group"] = file_group
+
+	if not dry_run:
+		assets_dir.mkdir(parents=True, exist_ok=True)
+		if file_group and file_group in group_tracker:
+			with file_path.open("a", encoding="utf-8") as f:
+				f.write("\n\n" + content)
+		else:
+			file_path.write_text(content, encoding="utf-8")
+			if file_group:
+				group_tracker[file_group] = file_path
+
+	return result
+
+
 def generate_for_part(
 	part: Dict[str, Any],
 	client: Any,
@@ -513,11 +554,25 @@ def main() -> None:
 				client = get_openai_client(api_key)
 
 		results: List[Dict[str, Any]] = []
+		text_file_group_tracker: Dict[str, Path] = {}
 		for part in parts:
 			if not isinstance(part, dict):
 				continue
 
 			is_prompt = bool(part.get("is_prompt", False))
+			prompt_for = str(part.get("prompt_for", "none"))
+
+			if prompt_for == "text-file":
+				results.append(
+					write_text_file_part(
+						part=part,
+						assets_dir=assets_dir,
+						group_tracker=text_file_group_tracker,
+						dry_run=args.dry_run,
+					)
+				)
+				continue
+
 			if not is_prompt:
 				results.append(
 					{

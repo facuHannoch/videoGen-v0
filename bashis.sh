@@ -38,8 +38,8 @@ python3 scriptGen/index.py -o $projectPath/1-raw-content/content.json --template
 ######## Step 2
 echo "\n--- \n Step 2 - Resources creation \n---"
 
-python3 resourcesGen/index.py --input $projectPath/1-raw-content/content.json --assets-dir $projectPath/2-resources/images/ --output $projectPath/2-resources/generated.resources.json --image-aspect-ratio 1:1 --context $resourcesGenerationContext
-
+python3 resourcesGen/index.py --input $projectPath/1-raw-content/content.json --assets-dir $projectPath/2-resources/assets/ --output $projectPath/2-resources/generated.resources.json --image-aspect-ratio 1:1 --context $resourcesGenerationContext
+exit
 
 ######## Step 3
 echo "\n--- \n Step 3 - Audio Script creationg\n---"

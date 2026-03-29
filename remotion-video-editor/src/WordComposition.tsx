@@ -34,39 +34,29 @@ export const WordPronunciationVideoComposition = () => {
     word: "bed",
     ipa: "/bɛd/",
     breakdown: [
-      { b: ["ball", "bat", "back"] },
-      { ɛ: ["red", "pet", "leg"] },
-      { d: ["dog", "day", "red"] },
+      { b: ["bat", "boy", "cab"] },
+      { ɛ: ["bet", "pen", "head"] },
+      { d: ["day", "dog", "mad"] },
     ],
   };
-  // const wordBreakdown = {
-  //   word: "airbag",
-  //   ipa: "/ˈɛrbæg/",
-  //   breakdown: [
-  //     { ɛ: ["bed", "red", "wet"] },
-  //     { r: ["run", "rabbit", "rain"] },
-  //     { b: ["ball", "bat", "back"] },
-  //     { æ: ["cat", "bad", "apple"] },
-  //     { g: ["go", "get", "good"] },
-  //   ],
-  // };
 
   const word = wordBreakdown.word;
   const wordIPA = wordBreakdown.ipa;
+  const language = "en"; // Target language from part-2 of content_json
 
   // Generate phoneme scenes dynamically from wordBreakdown
   const generatePhonemeScenes = () => {
     return wordBreakdown.breakdown.flatMap((entry, index) => {
-      const [phoneme] = Object.entries(entry)[0] ?? [""];
+      const [phoneme, words] = Object.entries(entry)[0];
 
       return [
         [
           // phoneme explanation
           <>
-            <TopPrompt text={`Fonema / ${phoneme} /`} />
+            <TopPrompt text={`Sound / ${phoneme} /`} />
             <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={0.8} />
             <Img
-              src={staticFile(`images/phonemes/diagram-${phoneme}.jpeg`)}
+              src={staticFile(`images/phonemes-illustrative-images/${language}/diagram-${phoneme}.png`)}
               style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", position: 'absolute', top: 500 }}
             />
             <IPAPhonemeScene
@@ -85,6 +75,7 @@ export const WordPronunciationVideoComposition = () => {
             word={word}
             wordIPA={wordIPA}
             highlightedCharacter={phoneme}
+            exampleWords={words}
           />
         ]
       ];
@@ -100,7 +91,7 @@ export const WordPronunciationVideoComposition = () => {
         <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
         <Wave velocity={3} mode="reveal" />
         <TopPrompt
-          text="Activa el sonido para escuchar"
+          text="Turn sound on"
           icon={<SpeakerOnIcon size={30} />}
         />
       </>
@@ -123,7 +114,7 @@ export const WordPronunciationVideoComposition = () => {
     [
       // Let's see each phoneme
       <>
-        <StandardText text={"Veamos cada sonido..."} style={{ fontSize: 72, padding: "24px 30px" }} />
+        <StandardText text={"Let's look at each phoneme"} style={{ fontSize: 72, padding: "24px 30px" }} />
         <Audio src={staticFile("sounds/mouse-click-double-hard.mp3")} volume={0.5} />
         <Sequence from={timelineClips[4].durationFrames - videoStore.getFrameForSeconds(0.5)} >
           <ScreenSweepShader />
@@ -250,6 +241,7 @@ interface IPAPhonemeSceneProps {
   audioSceneIndex?: number;
   containerStyle?: CSSProperties;
   sound?: boolean;
+  exampleWords?: string[];
 }
 
 const IPAPhonemeScene = ({
@@ -258,7 +250,8 @@ const IPAPhonemeScene = ({
   highlightedCharacter,
   audioSceneIndex = 0,
   containerStyle,
-  sound = true
+  sound = true,
+  exampleWords = []
 }: IPAPhonemeSceneProps) => {
   return (
     <>
@@ -279,8 +272,10 @@ const IPAPhonemeScene = ({
             style={{ fontSize: 72, padding: "24px 35px" }}
             highlightedCharacter={highlightedCharacter}
           />
-          <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "flex-start" }}>
-            {/* Example words to be rendered here */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "center" }}>
+            {exampleWords.map((exWord) => (
+              <StandardText key={exWord} text={exWord} style={{ fontSize: 48, padding: "10px 20px" }} />
+            ))}
           </div>
         </div>
       </div>

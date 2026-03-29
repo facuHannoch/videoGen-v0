@@ -9,6 +9,7 @@ import { Wave } from "./videoCompositions/effects/WaveReveal";
 import { BlackAbsoluteFill } from "./videoCompositions/fills/BlackAbsoluteFill";
 import { OneWordCaption } from "./videoCompositions/text/subtitles/OneWordCaption";
 import { WaveCoverFill } from "./videoCompositions/fills/WaveCoverFill";
+import content from "./content.json";
 
 const IntroNoise = () => {
   const frame = useCurrentFrame();
@@ -101,18 +102,8 @@ export const VideoComposition = () => {
   //   soundStore.getSoundDurationFrames("sounds/chutter-click-494024.mp3") ??
   //   videoStore.getFrameForSeconds(1);
 
-  const phoneme = "g"
-  // const words = ["pen", "pie", "cap"]
-  const words = [{
-    "word": "go",
-    "ipa": "/ɡoʊ/"
-  }, {
-    "word": "get",
-    "ipa": "/ɡɛt/"
-  }, {
-    "word": "bag",
-    "ipa": "/bæɡ/"
-  }]
+  const parsedContent = JSON.parse(content.wordData.content)
+  const breakdown = parsedContent.breakdown
 
 
   const scenes = [
@@ -156,44 +147,127 @@ export const VideoComposition = () => {
       <>
         <Audio src={staticFile("sounds/mouse-click-double-hard.mp3")} volume={0.5} />
         {/* <Sequence from={Math.max(audios[0].durationInFrames - chutterClickFrames, 0)}> */}
-        <StandardText text={phoneme} style={{ fontSize: 108, padding: "24px 30px", }} />
-        <Sequence from={audios[0].durationInFrames}>
+        <AbsoluteFill style={{ display: "flex", flexDirection: "column", gap: 30, justifyContent: "center", alignItems: "center" }}>
+          <StandardText text={parsedContent.word} className="mb-4" style={{ fontSize: 120, padding: "20px 34px" }} />
+          <StandardText text={parsedContent.ipa} style={{ fontSize: 108, padding: "24px 30px", }} />
+        </AbsoluteFill>
+        <Sequence from={audios[1].durationInFrames}>
           <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={0.4} />
         </Sequence>
       </>
     ],
     [
       <>
-        <StandardText text={phoneme} style={{ fontSize: 108, padding: "24px 30px", }} />
-      </>
-    ],
-    ...words.map(word => <>
-      <StandardText text={word.word} className="mb-4" style={{ fontSize: 120, padding: "20px 34px" }} />
-      <StandardText text={word.ipa} style={{ fontSize: 108, padding: "24px 30px", }} />
-    </>),
-    // [
-    //   <>
-    //     <StandardText text={words[0].word} />
-    //     <StandardText text={words[0].ipa} />
-    //   </>
-    // ],
-    // [
-    //   <>
-    //   </>
-    // ],
-    // [
-    //   <>
-    //   </>
-    // ],
-    [
-      <>
-        <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={0.4} />
-        <Img src={staticFile("images/diagram.jpg")} style={{ marginBottom: 240 }} />
+        <AbsoluteFill style={{ display: "flex", flexDirection: "column", gap: 30, justifyContent: "center", alignItems: "center" }}>
+          <StandardText text={parsedContent.word} className="mb-4" style={{ fontSize: 120, padding: "20px 34px" }} />
+          <StandardText text={parsedContent.ipa} style={{ fontSize: 108, padding: "24px 30px", }} />
+        </AbsoluteFill>
       </>
     ],
     [
       <>
-        <Img src={staticFile("images/diagram.jpg")} style={{ marginBottom: 240 }} />
+        <Wave velocity={3} mode="reveal" />
+        <StandardText text="Phonemes Breakdown" style={{ fontSize: 108, padding: "24px 30px", }} />
+      </>
+    ],
+    [
+      <>
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+          <TopPrompt text={`Explanation for sound /${breakdown[0].phoneme}/`} />
+          <WaveCoverFill mode="full-screen">
+            <StandardText text={`/${breakdown[0].phoneme}/`} style={{ fontSize: 216, border: "6px solid", padding: "40px 60px", background: "none" }} />
+          </WaveCoverFill>
+        </AbsoluteFill>
+      </>
+    ],
+    [
+      <>
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+          <TopPrompt text={`Examples for sound /${breakdown[0].phoneme}/`} />
+          <Wave velocity={3} mode="reveal" />
+          <div style={{ display: "flex", flexDirection: "column", gap: 30, }}>
+            {breakdown[0].words.map((item, i) => (
+              <Sequence key={i} from={fps * (i * 1)}>
+                <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                  <StandardText text={item.word} className="mb-4" style={{ fontSize: 120, padding: "20px 34px" }} />
+                  <StandardText text={item.ipa} style={{ fontSize: 108, padding: "24px 30px", }} />
+                </div>
+              </Sequence>
+            ))}
+          </div>
+        </AbsoluteFill>
+      </>
+    ],
+    [
+      <>
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+          <TopPrompt text={`Explanation for sound /${breakdown[1].phoneme}/`} />
+          <WaveCoverFill mode="full-screen">
+            <StandardText text={`/${breakdown[1].phoneme}/`} style={{ fontSize: 216, border: "6px solid", padding: "40px 60px", background: "none" }} />
+          </WaveCoverFill>
+        </AbsoluteFill>
+      </>
+    ],
+    [
+      <>
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+          <TopPrompt text={`Examples for sound /${breakdown[1].phoneme}/`} />
+          <Wave velocity={3} mode="reveal" />
+          <div style={{ display: "flex", flexDirection: "column", gap: 30, }}>
+            {breakdown[1].words.map((item, i) => (
+              <Sequence key={i} from={fps * (i * 1)}>
+                <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                  <StandardText text={item.word} className="mb-4" style={{ fontSize: 120, padding: "20px 34px" }} />
+                  <StandardText text={item.ipa} style={{ fontSize: 108, padding: "24px 30px", }} />
+                </div>
+              </Sequence>
+            ))}
+          </div>
+        </AbsoluteFill>
+      </>
+    ],
+    [
+      <>
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+          <TopPrompt text={`Explanation for sound /${breakdown[2].phoneme}/`} />
+          <WaveCoverFill mode="full-screen">
+            <StandardText text={`/${breakdown[2].phoneme}/`} style={{ fontSize: 216, border: "6px solid", padding: "40px 60px", background: "none" }} />
+          </WaveCoverFill>
+        </AbsoluteFill>
+      </>
+    ],
+    [
+      <>
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+          <TopPrompt text={`Examples for sound /${breakdown[2].phoneme}/`} />
+          <Wave velocity={3} mode="reveal" />
+          <div style={{ display: "flex", flexDirection: "column", gap: 30, }}>
+            {breakdown[2].words.map((item, i) => (
+              <Sequence key={i} from={fps * (i * 1)}>
+                <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                  <StandardText text={item.word} className="mb-4" style={{ fontSize: 120, padding: "20px 34px" }} />
+                  <StandardText text={item.ipa} style={{ fontSize: 108, padding: "24px 30px", }} />
+                </div>
+              </Sequence>
+            ))}
+          </div>
+        </AbsoluteFill>
+      </>
+    ],
+    [
+      <>
+        <AbsoluteFill style={{ display: "flex", flexDirection: "column", gap: 30, justifyContent: "center", alignItems: "center" }}>
+          <StandardText text={parsedContent.word} className="mb-4" style={{ fontSize: 120, padding: "20px 34px" }} />
+          <StandardText text={parsedContent.ipa} style={{ fontSize: 108, padding: "24px 30px", }} />
+        </AbsoluteFill>
+      </>
+    ],
+    [
+      <>
+        <AbsoluteFill style={{ display: "flex", flexDirection: "column", gap: 30, justifyContent: "center", alignItems: "center" }}>
+          <StandardText text={parsedContent.word} className="mb-4" style={{ fontSize: 120, padding: "20px 34px" }} />
+          <StandardText text={parsedContent.ipa} style={{ fontSize: 108, padding: "24px 30px", }} />
+        </AbsoluteFill>
       </>
     ],
     [
@@ -230,19 +304,25 @@ export const VideoComposition = () => {
 
       <Series>
         {audios.map((audio, i) => {
-          return (
-            <Series.Sequence name={audio.src.split("/")[1]} key={audio.src} durationInFrames={audio.durationInFrames}>
-              <BlackAbsoluteFill>
-                {/* <StandardText text={`Scene ${i}`} /> */}
-                <Audio src={staticFile(audio.src)} volume={1} />
-                {scenes[i]}
+          let gapSeconds = 0;
+          if (i === 1) gapSeconds = 1.5
 
-                <OneWordCaption wordTimings={audio.wordTimings} />
-              </BlackAbsoluteFill>
+          return (
+            <Series.Sequence name={audio.src.split("/")[1]} key={audio.src} durationInFrames={gapSeconds * fps + audio.durationInFrames}>
+              <Sequence from={gapSeconds * fps} durationInFrames={audio.durationInFrames}>
+                <BlackAbsoluteFill>
+                  {/* <StandardText text={`Scene ${i}`} /> */}
+                  <Audio src={staticFile(audio.src)} volume={1} />
+                  {scenes[i]}
+
+                  <OneWordCaption wordTimings={audio.wordTimings} />
+                </BlackAbsoluteFill>
+              </Sequence>
             </Series.Sequence>
           );
         })}
       </Series>
+      <Audio src={staticFile("sounds/mouse-click-double-soft.mp3")} volume={0.5} startFrom={videoStore.getAllAudiosDurationFrames()} />
 
 
       {/* <IntroScene /> */}
