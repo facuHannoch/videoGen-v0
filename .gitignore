@@ -4,9 +4,12 @@
 */local
 
 __pycache__
+.venv/
 
 projects/*/*/en/1-raw-content/
 projects/*/*/en/2-resources/
 projects/*/*/en/3-script/
 projects/*/*/en/4-audios/
 projects/*/*/en/5-videos/
+
+*/public/images/

@@ -1,0 +1,127 @@
+<tts_project
+  language="en-US"
+  voice="en-US-AVA:DragonHDLatestNeural"
+  output_dir="audioGen-output">
+
+  <!-- IMPORTANT: Read the content file to understand the target language. If the target language is English, everything should be in English. Otherwise, follow this reference file on what should be still in english, and what should be said in the target language. -->
+
+  <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <prosody rate="+20%">How do you pronounce this word?</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <prosody rate="+20%">It is pronounced...</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="en-US">
+      <prosody rate="slow">bad.</prosody>  <!-- /bæd/ -->
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <prosody rate="+20%">Let's look at each phoneme</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <!-- b -->
+  <!-- <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <phoneme alphabet="ipa" ph="b">.</phoneme>
+      </ssml_text>
+    </voice>
+  </speak> -->
+
+  <speak>
+    <voice lang="en-US">
+      <!-- <ssml_text>
+        <prosody rate="+20%">To pronounce this phoneme,</prosody>
+      </ssml_text> -->
+      <ssml_text>
+        <prosody rate="+20%">Press both lips together, build up air briefly, then release it with your voice on.</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <prosody rate="slow">ball, bat, back</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <!-- æ -->
+  <!-- <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <phoneme alphabet="ipa" ph="æ">.</phoneme>
+      </ssml_text>
+    </voice>
+  </speak> -->
+  <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <prosody rate="+20%">Open your mouth wide, keep your lips relaxed, and push your tongue
+          forward and down.</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <prosody rate="slow">cat, bad, apple</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <!-- d -->
+  <!-- <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <phoneme alphabet="ipa" ph="d">.</phoneme>
+      </ssml_text>
+    </voice>
+  </speak> -->
+  <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <prosody rate="+20%">Place the tip of your tongue on the ridge just behind your upper teeth, then release while using your voice.</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <prosody rate="slow">dog, day, red</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="en-US">
+      <prosody rate="slow">bad.</prosody>
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="en-US">
+      <prosody rate="slow">bad.</prosody>
+    </voice>
+  </speak>
+
+</tts_project>

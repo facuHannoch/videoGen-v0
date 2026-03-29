@@ -1,0 +1,4 @@
+openai
+dotenv
+google-genai
+azure-cognitiveservices-speech

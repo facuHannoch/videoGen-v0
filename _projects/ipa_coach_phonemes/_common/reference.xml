@@ -1,0 +1,56 @@
+<tts_project
+    language="en-US"
+    voice="en-US-Ava:DragonHDLatestNeural"
+    output_dir="audioGen-output">
+
+    <piece>
+        <ssml_text>
+            <prosody rate="+20%">I'll improve your English pronunciation</prosody>
+        </ssml_text>
+    </piece>
+
+    <piece>
+        <ssml_text>
+            <prosody rate="+10%">This is the sound</prosody>
+            <break time="50ms" />
+            <phoneme alphabet="ipa" ph="t">.</phoneme>
+        </ssml_text>
+    </piece>
+
+    <piece>
+        <raw_text>You can hear it in words like</raw_text>
+    </piece>
+
+    <piece>
+        <ssml_text>
+            <prosody rate="slow">van.</prosody>
+            <break time="150ms" />
+        </ssml_text>
+    </piece>
+
+    <piece>
+        <ssml_text>
+            <prosody rate="slow">vet.</prosody>
+            <break time="150ms" />
+        </ssml_text>
+    </piece>
+
+    <piece>
+        <ssml_text>
+            <prosody rate="slow">save.</prosody>
+            <break time="150ms" />
+        </ssml_text>
+    </piece>
+
+    <piece>
+        <raw_text>To make this sound,</raw_text>
+    </piece>
+
+    <piece>
+        <raw_text>place the tip of your tongue lightly against the ridge just behind your upper teeth, keep your lips relaxed, briefly stop the air, then release it quickly without using your voice.</raw_text>
+    </piece>
+
+    <piece>
+        <raw_text>Want to sound like a native? see the video in the description</raw_text>
+    </piece>
+</tts_project>

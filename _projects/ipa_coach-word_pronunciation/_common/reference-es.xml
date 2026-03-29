@@ -1,0 +1,128 @@
+<tts_project
+  language="en-US"
+  voice="es-MX-JorgeMultilingualNeural"
+  output_dir="audioGen-output">
+
+  <!-- IMPORTANT: Read the content file to understand the target language. If the target language is English, everything should be in English. Otherwise, follow this reference file on what should be still in english, and what should be said in the target language. -->
+
+  <speak>
+    <voice lang="es-MX">
+      <ssml_text>
+        <prosody rate="+20%">¿Cómo pronuncias esta palabra?</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="es-MX">
+      <ssml_text>
+        <prosody rate="+20%">Se pronuncia...</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="en-US">
+      <prosody rate="slow">bad.</prosody>  <!-- /bæd/ -->
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="es-MX">
+      <ssml_text>
+        <prosody rate="+20%">Veamos cada fonema</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <!-- b -->
+  <!-- <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <phoneme alphabet="ipa" ph="b">.</phoneme>
+      </ssml_text>
+    </voice>
+  </speak> -->
+
+  <speak>
+    <voice lang="es-MX">
+      <!-- <ssml_text>
+        <prosody rate="+20%">Para pronunciar este fonema,</prosody>
+      </ssml_text> -->
+      <ssml_text>
+        <prosody rate="+20%">Junta ambos labios, mantén tu garganta vibrando, luego abre los labios
+          con una pequeña y suave liberación, no un gran soplo de aire.</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <prosody rate="slow">ball, bat, back</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <!-- æ -->
+  <!-- <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <phoneme alphabet="ipa" ph="æ">.</phoneme>
+      </ssml_text>
+    </voice>
+  </speak> -->
+  <speak>
+    <voice lang="es-MX">
+      <ssml_text>
+        <prosody rate="+20%">Abre tu boca bien, mantén tus labios relajados, y empuja tu lengua
+          hacia adelante y hacia abajo.</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <prosody rate="slow">cat, bad, apple</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <!-- d -->
+  <!-- <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <phoneme alphabet="ipa" ph="d">.</phoneme>
+      </ssml_text>
+    </voice>
+  </speak> -->
+  <speak>
+    <voice lang="es-MX">
+      <ssml_text>
+        <prosody rate="+20%">Levanta la punta de tu lengua hacia la cresta justo detrás de tus dientes superiores, detén el aire por un momento, mantén tu garganta vibrando, luego libera rápidamente.</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="en-US">
+      <ssml_text>
+        <prosody rate="slow">dog, day, red</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="en-US">
+      <prosody rate="slow">bad.</prosody>
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="en-US">
+      <prosody rate="slow">bad.</prosody>
+    </voice>
+  </speak>
+
+</tts_project>

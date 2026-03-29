@@ -1,0 +1,162 @@
+MAKE THE ANSWERS IN SPANISH, EXCEPT FOR THE PROMPT. MAKE THE PROMPT IN ENGLISH, BUT MAKE THE IMAGES GENERATED USE SPANISH LANGUAGE.
+
+---
+
+phoneme: /PHONEME_HERE/
+Research, for the given phoneme, how it is said, how the mouth position whould be, etc. Then provide these three things
+
+------
+ONE
+   
+Three example words that use this phoneme. Give me short words. Look for words that are common across 
+
+------
+TWO
+
+
+A short description as if you were explaning someone how to position make the sound, including how to position the tongue, the mouth, etc. Use clear and simple lenguaje, like this or better:
+<piece>
+	<raw_text>spread your lips slightly, keep your tongue high and forward, and hold the vowel a little longer.</raw_text>
+</piece>
+
+------
+DIAGRAM
+
+Generate ONE high-quality image-generation prompt for a visual diagram of a single English phoneme.
+
+Goal of the image:
+- educational
+- clear in less than 1 second
+- suitable for short-form video (TikTok / Reels / Shorts)
+- consistent with a language learning app aesthetic
+- modern, minimal, flat vector infographic style
+
+The image should usually combine:
+1. a larger front view of the mouth / lower half of the face
+2. a smaller side-view cross-section showing tongue position
+unless the phoneme does not need both views
+
+The generated prompt must be highly specific and deterministic.
+It must define:
+- layout
+- composition
+- what anatomical elements are visible
+- title text
+- labels
+- style
+- what must NOT appear
+
+The output prompt should be designed for a generic image generation model.
+
+Important:
+- Avoid vague wording
+- Avoid artistic flourish
+- Avoid photorealism
+- Avoid full-face portrait unless needed
+- Prioritize educational clarity over beauty
+- The result must look like a pronunciation infographic used in a modern language learning app
+
+Use this phoneme data:
+
+PHONEME: [PUT IPA HERE]
+PHONEME NAME / SIMPLE LABEL: [PUT LABEL HERE]
+EXAMPLE WORDS: [PUT WORDS HERE]
+ARTICULATION SUMMARY:
+- lip position: [PUT HERE]
+- mouth opening: [PUT HERE]
+- tongue position: [PUT HERE]
+- voicing / airflow / extra note if relevant: [PUT HERE]
+
+Output rules:
+- Return only the final image-generation prompt
+- Write it in English
+- Make it long, explicit, structured, and precise
+- If the phoneme is better shown with only a front view or only a side view, adapt the layout accordingly
+- Include exact title text and exact label text
+- Add negative constraints like “no photorealism, no 3D, no extra elements”
+  
+Define as style something like 
+- pastel color palette (soft peach skin tone, muted red lips, light pink tongue, light gray anatomical outlines)
+- clear sans-serif typography
+- high contrast for readability on mobile
+- educational language learning app aesthetic
+- very clean spacing and alignment
+
+
+
+---
+
+Here is an example of a prompt. This prompt was tested and produced the image with the intenteded layout and structure, so take this as a reliable reference and avoid deviating from it
+
+
+Create a minimalist educational pronunciation infographic for the English phoneme /p/.
+PHONEME: /p/
+PHONEME NAME / SIMPLE LABEL: voiceless bilabial stop
+EXAMPLE WORDS: pen • pie • cap
+ARTICULATION SUMMARY:
+lip position: both lips fully closed, touching
+mouth opening: closed at first, then opening quickly
+tongue position: relaxed, resting low in the mouth
+voicing / airflow: voiceless sound with a short burst of air released when the lips open
+IMAGE GENERATION PROMPT:
+A clean flat vector pronunciation diagram designed for a modern language learning app. The infographic explains how to produce the English phoneme /p/.
+Layout:
+vertical canvas, centered composition, optimized for mobile viewing
+top section contains the title
+middle section shows a large front view of the mouth
+lower-right corner contains a smaller side-view cross-section diagram
+bottom section contains three example words
+Title text (exact text at top):
+/p/ — voiceless bilabial stop
+Main diagram (center):
+front view of the lower half of a human face
+neutral expression
+lips fully closed
+lips lightly pressed together
+subtle arrows pointing outward from the lips indicating air burst when released
+small label near lips: “lips closed” 
+Secondary diagram (bottom-right corner):
+side-view cross-section of the mouth
+simplified anatomical shapes
+tongue resting low and relaxed
+lips closed at the front
+small arrow showing air pressure building behind lips
+labels:
+“air pressure”
+“tongue relaxed”
+“lips closed”
+Bottom-left text area:
+three words in medium clean typography:
+pen • pie • cap
+Style requirements:
+flat vector infographic
+pastel color palette (soft peach skin tone, muted red lips, light pink tongue, light gray anatomical outlines). Use this color for both the main and secondary diagrams.
+very clean spacing
+modern language learning app aesthetic
+high contrast for mobile readability
+simple arrows and minimal labels
+crisp sans-serif typography
+thin gray line outlines for anatomical structures
+soft off-white background
+Visual constraints:
+no photorealism
+no 3D rendering
+no shading gradients
+no full-face portrait
+no teeth detail unless absolutely necessary
+no extra icons or decorations
+no clutter
+only the mouth anatomy relevant to pronunciation
+The final image should look like a clear, modern pronunciation infographic that can be understood in under one second in a short-form educational video.
+
+Have 0.5cm of padding for the full image, and have each section have the same soft background, with white lines separating each section.
+
+------
+FOUR
+
+Text to put in the description in the video. It should be something that genuinely provides value to the user, not just a bunch of keywords. However, do try to put keywords in a nantural way.
+
+------
+FIVE
+
+Copy to put in the video description. Make it short, but offer value. Also add keywords and words that would help the video get more reach.

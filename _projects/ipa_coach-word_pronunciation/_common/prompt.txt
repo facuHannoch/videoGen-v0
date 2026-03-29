@@ -1,0 +1,69 @@
+Word: WORD
+Target language: TARGET_LANGUAGE
+Accent: GENERAL AMERICAN ENGLISH.
+
+This is for a video in which I explain how to pronounce a particular word. Its a short video, with a flow like: Do you know how to pronounce this word? then I have a voice pronounce the word, and then I break it down into its IPA transcription.
+
+aims to solve problem 1), and then be their solution for problem 2). Standard format, scalable (could eventually be done automatically, now in less than 5 minutes)
+The target language decides in which language should the copy, images (if there are), etc, should be.
+For the given word, give me the following:
+
+
+------
+ONE
+The ipa transcription for the word. Use General American English.
+For example, for thought, it is /θɔt/
+Provide the data in the following format
+
+```
+{
+    "word": "thought",
+    "ipa": "/θɔt/",
+    "breakdown": [
+        { 
+            "phoneme": "θ",
+            "words": [
+                {"word": "thin", "ipa": "/θɪn/"},
+                {"word": "think", "ipa": "/θɪŋk/"},
+                {"word": "bath", "ipa": "/bæθ/"}
+            ],
+            "explanationToMakeSound": "To pronounce the 'th' sound, place your tongue between your upper and lower teeth and blow air out gently."
+        },
+        { 
+            "phoneme": "ɔ",
+            "words": [
+                {"word": "caught", "ipa": "/kɔt/"},
+                {"word": "dog", "ipa": "/dɔg/"},
+                {"word": "talk", "ipa": "/tɔk/"}
+            ],
+            "explanationToMakeSound": "To pronounce the 'aw' sound, round your lips and lower your jaw slightly"
+        },
+        { 
+            "phoneme": "t",
+            "words": [
+                {"word": "tap", "ipa": "/tæp/"},
+                {"word": "ten", "ipa": "/tɛn/"},
+                {"word": "cat", "ipa": "/kæt/"}
+            ],
+            "explanationToMakeSound": "To pronounce the 't' sound, place the tip of your tongue against your upper teeth and release air."
+        }
+    ]
+}```
+Note: Do not repeat words. Don't use new lines in the json, just give a long line with the json data.
+When making the explanationToMakeSound, avoid saying things such as "make the xx sound as in cat" or referencing another phoneme. Imagine this as if you were telling someone how to pronounce the sound as how to position the jav, the tongue, lips, mouth, etc. At the same time, be brief and use clear, and easy to understand language.
+
+------
+TARGET_LANGUAGE
+
+just print the target language here
+
+
+------
+COPY - VALUE
+
+Text to put in the description in the video. It should be something that genuinely provides value to the user, not just a bunch of keywords. However, do try to put keywords in a natural way.
+
+------
+COPY - MK
+
+Copy to put in the video description. This will be at the bottom, so you can be more pushy and marketing-ish and use hashtags (up to 5, use relevant ones). Add keywords and words that would help the video get more reach. Be brief.
