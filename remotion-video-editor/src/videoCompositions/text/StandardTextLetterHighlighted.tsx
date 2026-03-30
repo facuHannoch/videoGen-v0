@@ -9,6 +9,7 @@ interface StandardTextLetterHighlightedProps {
     className?: string;
     style?: CSSProperties;
     highlightedStyle?: CSSProperties;
+    highlightedFontSize?: number;
 }
 
 const splitGraphemes = (value: string) => {
@@ -35,6 +36,7 @@ export const StandardTextLetterHighlighted = ({
     className,
     style,
     highlightedStyle,
+    highlightedFontSize = 104,
 }: StandardTextLetterHighlightedProps) => {
     const normalizedText = (text ?? "").normalize(normalizeForm);
     const characters = splitGraphemes(normalizedText);
@@ -82,7 +84,7 @@ export const StandardTextLetterHighlighted = ({
                             isHighlighted
                                 ? {
                                     color: "#446cef",
-                                    fontSize: 104,
+                                    fontSize: highlightedFontSize,
                                     ...highlightedStyle,
                                 }
                                 : undefined

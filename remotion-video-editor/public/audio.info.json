@@ -1,125 +1,65 @@
 {
   "audios": [
     {
-      "id": "01_how_do_you_pronounce_this_word.wav",
-      "subtitle": "How do you pronounce this word?",
+      "id": "01_try_to_pronounce_this_word.wav",
+      "subtitle": "Try to pronounce this word",
       "wordTimings": [
         {
           "tokenIndex": 0,
-          "word": "How",
-          "startMs": 58.0,
-          "endMs": 725.0,
+          "word": "Try",
+          "startMs": 53.0,
+          "endMs": 207.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 1,
-          "word": "do",
-          "startMs": 725.0,
-          "endMs": 845.0,
+          "word": "to",
+          "startMs": 207.0,
+          "endMs": 269.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 2,
-          "word": "you",
-          "startMs": 845.0,
-          "endMs": 965.0,
+          "word": "pronounce",
+          "startMs": 269.0,
+          "endMs": 638.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 3,
-          "word": "pronounce",
-          "startMs": 965.0,
-          "endMs": 1085.0,
+          "word": "this",
+          "startMs": 638.0,
+          "endMs": 761.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 4,
-          "word": "this",
-          "startMs": 1085.0,
-          "endMs": 1205.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 5,
           "word": "word",
-          "startMs": 1205.0,
-          "endMs": 1325.0,
+          "startMs": 761.0,
+          "endMs": 881.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
-        },
-        {
-          "tokenIndex": 6,
-          "word": "?",
-          "startMs": 1325.0,
-          "endMs": 1445.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": true
         }
       ]
     },
     {
-      "id": "02_it_is_pronounced.wav",
-      "subtitle": "It is pronounced...",
+      "id": "02_cat.wav",
+      "subtitle": "cat.",
       "wordTimings": [
         {
           "tokenIndex": 0,
-          "word": "It",
-          "startMs": 58.0,
-          "endMs": 124.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 1,
-          "word": "is",
-          "startMs": 124.0,
-          "endMs": 258.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 2,
-          "word": "pronounced",
-          "startMs": 258.0,
-          "endMs": 791.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 3,
-          "word": "...",
-          "startMs": 791.0,
-          "endMs": 911.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": true
-        }
-      ]
-    },
-    {
-      "id": "03_bed.wav",
-      "subtitle": "bed.",
-      "wordTimings": [
-        {
-          "tokenIndex": 0,
-          "word": "bed",
+          "word": "cat",
           "startMs": 108.0,
-          "endMs": 915.0,
+          "endMs": 977.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -127,8 +67,8 @@
         {
           "tokenIndex": 1,
           "word": ".",
-          "startMs": 915.0,
-          "endMs": 1035.0,
+          "startMs": 977.0,
+          "endMs": 1097.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true
@@ -136,7 +76,7 @@
       ]
     },
     {
-      "id": "04_let-s_look_at_each_phoneme.wav",
+      "id": "03_let-s_look_at_each_phoneme.wav",
       "subtitle": "Let's look at each phoneme",
       "wordTimings": [
         {
@@ -170,7 +110,7 @@
           "tokenIndex": 3,
           "word": "each",
           "startMs": 525.0,
-          "endMs": 725.0,
+          "endMs": 758.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -178,8 +118,8 @@
         {
           "tokenIndex": 4,
           "word": "phoneme",
-          "startMs": 725.0,
-          "endMs": 845.0,
+          "startMs": 758.0,
+          "endMs": 878.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -187,167 +127,221 @@
       ]
     },
     {
-      "id": "05_press_both_lips_together-_build_up_air_briefly-_then_release_it_with_your_voice_on.wav",
-      "subtitle": "Press both lips together, build up air briefly, then release it with your voice on.",
+      "id": "04_raise_the_back_of_your_tongue_to_touch_the_soft_roof_of_your_mouth-_stop_the_air_briefly-_the.wav",
+      "subtitle": "Raise the back of your tongue to touch the soft roof of your mouth, stop the air briefly, then release it.",
       "wordTimings": [
         {
           "tokenIndex": 0,
-          "word": "Press",
+          "word": "Raise",
           "startMs": 58.0,
-          "endMs": 291.0,
+          "endMs": 325.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 1,
-          "word": "both",
-          "startMs": 291.0,
-          "endMs": 591.0,
+          "word": "the",
+          "startMs": 325.0,
+          "endMs": 424.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 2,
-          "word": "lips",
-          "startMs": 591.0,
-          "endMs": 791.0,
+          "word": "back",
+          "startMs": 424.0,
+          "endMs": 625.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 3,
-          "word": "together",
-          "startMs": 791.0,
-          "endMs": 1425.0,
+          "word": "of",
+          "startMs": 625.0,
+          "endMs": 691.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 4,
-          "word": ",",
-          "startMs": 1425.0,
-          "endMs": 1458.0,
+          "word": "your",
+          "startMs": 691.0,
+          "endMs": 824.0,
           "charStart": null,
           "charEnd": null,
-          "isPunctuation": true
+          "isPunctuation": false
         },
         {
           "tokenIndex": 5,
-          "word": "build",
-          "startMs": 1458.0,
-          "endMs": 1724.0,
+          "word": "tongue",
+          "startMs": 824.0,
+          "endMs": 1125.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 6,
-          "word": "up",
-          "startMs": 1724.0,
-          "endMs": 1858.0,
+          "word": "to",
+          "startMs": 1125.0,
+          "endMs": 1225.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 7,
-          "word": "air",
-          "startMs": 1858.0,
-          "endMs": 2057.0,
+          "word": "touch",
+          "startMs": 1225.0,
+          "endMs": 1558.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 8,
-          "word": "briefly",
-          "startMs": 2057.0,
-          "endMs": 2757.0,
+          "word": "the",
+          "startMs": 1558.0,
+          "endMs": 1690.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 9,
-          "word": ",",
-          "startMs": 2757.0,
-          "endMs": 2790.0,
+          "word": "soft",
+          "startMs": 1690.0,
+          "endMs": 2125.0,
           "charStart": null,
           "charEnd": null,
-          "isPunctuation": true
+          "isPunctuation": false
         },
         {
           "tokenIndex": 10,
-          "word": "then",
-          "startMs": 2790.0,
-          "endMs": 2991.0,
+          "word": "roof",
+          "startMs": 2125.0,
+          "endMs": 2291.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 11,
-          "word": "release",
-          "startMs": 2991.0,
-          "endMs": 3290.0,
+          "word": "of",
+          "startMs": 2291.0,
+          "endMs": 2390.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 12,
-          "word": "it",
-          "startMs": 3290.0,
-          "endMs": 3358.0,
+          "word": "your",
+          "startMs": 2390.0,
+          "endMs": 2525.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 13,
-          "word": "with",
-          "startMs": 3358.0,
-          "endMs": 3491.0,
+          "word": "mouth",
+          "startMs": 2525.0,
+          "endMs": 3124.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 14,
-          "word": "your",
-          "startMs": 3491.0,
+          "word": ",",
+          "startMs": 3124.0,
+          "endMs": 3257.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 15,
+          "word": "stop",
+          "startMs": 3257.0,
           "endMs": 3624.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
-          "tokenIndex": 15,
-          "word": "voice",
-          "startMs": 3624.0,
-          "endMs": 3858.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
           "tokenIndex": 16,
-          "word": "on",
-          "startMs": 3858.0,
-          "endMs": 4191.0,
+          "word": "the",
+          "startMs": 3624.0,
+          "endMs": 3758.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 17,
+          "word": "air",
+          "startMs": 3758.0,
+          "endMs": 3891.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 18,
+          "word": "briefly",
+          "startMs": 3891.0,
+          "endMs": 4491.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 19,
+          "word": ",",
+          "startMs": 4491.0,
+          "endMs": 4591.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 20,
+          "word": "then",
+          "startMs": 4591.0,
+          "endMs": 4858.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 21,
+          "word": "release",
+          "startMs": 4858.0,
+          "endMs": 5191.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 22,
+          "word": "it",
+          "startMs": 5191.0,
+          "endMs": 5358.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 23,
           "word": ".",
-          "startMs": 4191.0,
-          "endMs": 4311.0,
+          "startMs": 5358.0,
+          "endMs": 5478.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true
@@ -355,14 +349,14 @@
       ]
     },
     {
-      "id": "06_bat-_boy-_cab.wav",
-      "subtitle": "bat, boy, cab",
+      "id": "05_key-_cold-_back.wav",
+      "subtitle": "key, cold, back",
       "wordTimings": [
         {
           "tokenIndex": 0,
-          "word": "bat",
+          "word": "key",
           "startMs": 108.0,
-          "endMs": 915.0,
+          "endMs": 481.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -370,17 +364,17 @@
         {
           "tokenIndex": 1,
           "word": ",",
-          "startMs": 915.0,
-          "endMs": 1163.0,
+          "startMs": 481.0,
+          "endMs": 1288.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true
         },
         {
           "tokenIndex": 2,
-          "word": "boy",
-          "startMs": 1163.0,
-          "endMs": 2219.0,
+          "word": "cold",
+          "startMs": 1288.0,
+          "endMs": 2343.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -388,17 +382,17 @@
         {
           "tokenIndex": 3,
           "word": ",",
-          "startMs": 2219.0,
-          "endMs": 2281.0,
+          "startMs": 2343.0,
+          "endMs": 3026.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true
         },
         {
           "tokenIndex": 4,
-          "word": "cab",
-          "startMs": 2281.0,
-          "endMs": 2401.0,
+          "word": "back",
+          "startMs": 3026.0,
+          "endMs": 3146.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -406,12 +400,12 @@
       ]
     },
     {
-      "id": "07_lower_your_jaw_a_little-_keep_your_lips_relaxed-_and_place_your_tongue_in_the_middle-front_of.wav",
-      "subtitle": "Lower your jaw a little, keep your lips relaxed, and place your tongue in the middle-front of your mouth.",
+      "id": "06_open_your_mouth_wide-_keep_your_tongue_low_and_forward-_and_spread_your_lips_slightly.wav",
+      "subtitle": "Open your mouth wide, keep your tongue low and forward, and spread your lips slightly.",
       "wordTimings": [
         {
           "tokenIndex": 0,
-          "word": "Lower",
+          "word": "Open",
           "startMs": 58.0,
           "endMs": 258.0,
           "charStart": null,
@@ -429,180 +423,144 @@
         },
         {
           "tokenIndex": 2,
-          "word": "jaw",
+          "word": "mouth",
           "startMs": 391.0,
-          "endMs": 591.0,
+          "endMs": 558.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 3,
-          "word": "a",
-          "startMs": 591.0,
-          "endMs": 625.0,
+          "word": "wide",
+          "startMs": 558.0,
+          "endMs": 1058.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 4,
-          "word": "little",
-          "startMs": 625.0,
-          "endMs": 1025.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 5,
           "word": ",",
-          "startMs": 1025.0,
-          "endMs": 1225.0,
+          "startMs": 1058.0,
+          "endMs": 1091.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true
         },
         {
-          "tokenIndex": 6,
+          "tokenIndex": 5,
           "word": "keep",
-          "startMs": 1225.0,
-          "endMs": 1458.0,
+          "startMs": 1091.0,
+          "endMs": 1291.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 6,
+          "word": "your",
+          "startMs": 1291.0,
+          "endMs": 1425.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 7,
-          "word": "your",
-          "startMs": 1458.0,
-          "endMs": 1591.0,
+          "word": "tongue",
+          "startMs": 1425.0,
+          "endMs": 1690.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 8,
-          "word": "lips",
-          "startMs": 1591.0,
-          "endMs": 1791.0,
+          "word": "low",
+          "startMs": 1690.0,
+          "endMs": 1957.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 9,
-          "word": "relaxed",
-          "startMs": 1791.0,
-          "endMs": 2357.0,
+          "word": "and",
+          "startMs": 1957.0,
+          "endMs": 2091.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 10,
-          "word": ",",
-          "startMs": 2357.0,
-          "endMs": 2390.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": true
-        },
-        {
-          "tokenIndex": 11,
-          "word": "and",
-          "startMs": 2390.0,
-          "endMs": 2691.0,
+          "word": "forward",
+          "startMs": 2091.0,
+          "endMs": 2658.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
+          "tokenIndex": 11,
+          "word": ",",
+          "startMs": 2658.0,
+          "endMs": 2778.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
           "tokenIndex": 12,
-          "word": "place",
-          "startMs": 2691.0,
-          "endMs": 2958.0,
+          "word": "and",
+          "startMs": 2778.0,
+          "endMs": 2925.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 13,
-          "word": "your",
-          "startMs": 2958.0,
-          "endMs": 3091.0,
+          "word": "spread",
+          "startMs": 2925.0,
+          "endMs": 3190.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 14,
-          "word": "tongue",
-          "startMs": 3091.0,
-          "endMs": 3458.0,
+          "word": "your",
+          "startMs": 3190.0,
+          "endMs": 3324.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 15,
-          "word": "in",
-          "startMs": 3458.0,
-          "endMs": 3524.0,
+          "word": "lips",
+          "startMs": 3324.0,
+          "endMs": 3491.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 16,
-          "word": "the",
-          "startMs": 3524.0,
-          "endMs": 3624.0,
+          "word": "slightly",
+          "startMs": 3491.0,
+          "endMs": 3991.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 17,
-          "word": "middle-front",
-          "startMs": 3624.0,
-          "endMs": 4125.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 18,
-          "word": "of",
-          "startMs": 4125.0,
-          "endMs": 4191.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 19,
-          "word": "your",
-          "startMs": 4191.0,
-          "endMs": 4325.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 20,
-          "word": "mouth",
-          "startMs": 4325.0,
-          "endMs": 4658.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 21,
           "word": ".",
-          "startMs": 4658.0,
-          "endMs": 4778.0,
+          "startMs": 3991.0,
+          "endMs": 4111.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true
@@ -610,14 +568,14 @@
       ]
     },
     {
-      "id": "08_bet-_pen-_head.wav",
-      "subtitle": "bet, pen, head",
+      "id": "07_apple-_map-_hand.wav",
+      "subtitle": "apple, map, hand",
       "wordTimings": [
         {
           "tokenIndex": 0,
-          "word": "bet",
+          "word": "apple",
           "startMs": 108.0,
-          "endMs": 791.0,
+          "endMs": 1288.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -625,17 +583,17 @@
         {
           "tokenIndex": 1,
           "word": ",",
-          "startMs": 791.0,
-          "endMs": 1039.0,
+          "startMs": 1288.0,
+          "endMs": 1536.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true
         },
         {
           "tokenIndex": 2,
-          "word": "pen",
-          "startMs": 1039.0,
-          "endMs": 1970.0,
+          "word": "map",
+          "startMs": 1536.0,
+          "endMs": 2653.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -643,17 +601,17 @@
         {
           "tokenIndex": 3,
           "word": ",",
-          "startMs": 1970.0,
-          "endMs": 2032.0,
+          "startMs": 2653.0,
+          "endMs": 2715.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true
         },
         {
           "tokenIndex": 4,
-          "word": "head",
-          "startMs": 2032.0,
-          "endMs": 2152.0,
+          "word": "hand",
+          "startMs": 2715.0,
+          "endMs": 2835.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -661,8 +619,8 @@
       ]
     },
     {
-      "id": "09_place_the_tip_of_your_tongue_on_the_ridge_just_behind_your_upper_teeth-_then_release_while_us.wav",
-      "subtitle": "Place the tip of your tongue on the ridge just behind your upper teeth, then release while using your voice.",
+      "id": "08_place_the_tip_of_your_tongue_just_behind_your_upper_front_teeth-_stop_the_air-_then_release_i.wav",
+      "subtitle": "Place the tip of your tongue just behind your upper front teeth, stop the air, then release it quickly.",
       "wordTimings": [
         {
           "tokenIndex": 0,
@@ -695,7 +653,7 @@
           "tokenIndex": 3,
           "word": "of",
           "startMs": 558.0,
-          "endMs": 658.0,
+          "endMs": 625.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -703,8 +661,8 @@
         {
           "tokenIndex": 4,
           "word": "your",
-          "startMs": 658.0,
-          "endMs": 791.0,
+          "startMs": 625.0,
+          "endMs": 758.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -712,7 +670,7 @@
         {
           "tokenIndex": 5,
           "word": "tongue",
-          "startMs": 791.0,
+          "startMs": 758.0,
           "endMs": 1058.0,
           "charStart": null,
           "charEnd": null,
@@ -720,44 +678,44 @@
         },
         {
           "tokenIndex": 6,
-          "word": "on",
+          "word": "just",
           "startMs": 1058.0,
-          "endMs": 1191.0,
+          "endMs": 1358.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 7,
-          "word": "the",
-          "startMs": 1191.0,
-          "endMs": 1291.0,
+          "word": "behind",
+          "startMs": 1358.0,
+          "endMs": 1624.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 8,
-          "word": "ridge",
-          "startMs": 1291.0,
-          "endMs": 1591.0,
+          "word": "your",
+          "startMs": 1624.0,
+          "endMs": 1758.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 9,
-          "word": "just",
-          "startMs": 1591.0,
-          "endMs": 1891.0,
+          "word": "upper",
+          "startMs": 1758.0,
+          "endMs": 1990.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 10,
-          "word": "behind",
-          "startMs": 1891.0,
+          "word": "front",
+          "startMs": 1990.0,
           "endMs": 2191.0,
           "charStart": null,
           "charEnd": null,
@@ -765,62 +723,62 @@
         },
         {
           "tokenIndex": 11,
-          "word": "your",
+          "word": "teeth",
           "startMs": 2191.0,
-          "endMs": 2324.0,
+          "endMs": 2691.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 12,
-          "word": "upper",
-          "startMs": 2324.0,
-          "endMs": 2558.0,
+          "word": ",",
+          "startMs": 2691.0,
+          "endMs": 2725.0,
           "charStart": null,
           "charEnd": null,
-          "isPunctuation": false
+          "isPunctuation": true
         },
         {
           "tokenIndex": 13,
-          "word": "teeth",
-          "startMs": 2558.0,
-          "endMs": 3091.0,
+          "word": "stop",
+          "startMs": 2725.0,
+          "endMs": 3058.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 14,
-          "word": ",",
-          "startMs": 3091.0,
-          "endMs": 3124.0,
+          "word": "the",
+          "startMs": 3058.0,
+          "endMs": 3190.0,
           "charStart": null,
           "charEnd": null,
-          "isPunctuation": true
+          "isPunctuation": false
         },
         {
           "tokenIndex": 15,
-          "word": "then",
-          "startMs": 3124.0,
-          "endMs": 3358.0,
+          "word": "air",
+          "startMs": 3190.0,
+          "endMs": 3658.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
           "tokenIndex": 16,
-          "word": "release",
-          "startMs": 3358.0,
-          "endMs": 3724.0,
+          "word": ",",
+          "startMs": 3658.0,
+          "endMs": 3691.0,
           "charStart": null,
           "charEnd": null,
-          "isPunctuation": false
+          "isPunctuation": true
         },
         {
           "tokenIndex": 17,
-          "word": "while",
-          "startMs": 3724.0,
+          "word": "then",
+          "startMs": 3691.0,
           "endMs": 3924.0,
           "charStart": null,
           "charEnd": null,
@@ -828,27 +786,27 @@
         },
         {
           "tokenIndex": 18,
-          "word": "using",
+          "word": "release",
           "startMs": 3924.0,
-          "endMs": 4158.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 19,
-          "word": "your",
-          "startMs": 4158.0,
           "endMs": 4291.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
         },
         {
-          "tokenIndex": 20,
-          "word": "voice",
+          "tokenIndex": 19,
+          "word": "it",
           "startMs": 4291.0,
-          "endMs": 4791.0,
+          "endMs": 4358.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 20,
+          "word": "quickly",
+          "startMs": 4358.0,
+          "endMs": 4858.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -856,8 +814,8 @@
         {
           "tokenIndex": 21,
           "word": ".",
-          "startMs": 4791.0,
-          "endMs": 4911.0,
+          "startMs": 4858.0,
+          "endMs": 4978.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true
@@ -865,63 +823,12 @@
       ]
     },
     {
-      "id": "10_day-_dog-_mad.wav",
-      "subtitle": "day, dog, mad",
+      "id": "09_top-_ten-_light.wav",
+      "subtitle": "top, ten, light",
       "wordTimings": [
         {
           "tokenIndex": 0,
-          "word": "day",
-          "startMs": 108.0,
-          "endMs": 481.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 1,
-          "word": ",",
-          "startMs": 481.0,
-          "endMs": 601.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": true
-        },
-        {
-          "tokenIndex": 2,
-          "word": "dog",
-          "startMs": 601.0,
-          "endMs": 1288.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        },
-        {
-          "tokenIndex": 3,
-          "word": ",",
-          "startMs": 1288.0,
-          "endMs": 1474.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": true
-        },
-        {
-          "tokenIndex": 4,
-          "word": "mad",
-          "startMs": 1474.0,
-          "endMs": 1594.0,
-          "charStart": null,
-          "charEnd": null,
-          "isPunctuation": false
-        }
-      ]
-    },
-    {
-      "id": "11_bed.wav",
-      "subtitle": "bed.",
-      "wordTimings": [
-        {
-          "tokenIndex": 0,
-          "word": "bed",
+          "word": "top",
           "startMs": 108.0,
           "endMs": 853.0,
           "charStart": null,
@@ -930,24 +837,51 @@
         },
         {
           "tokenIndex": 1,
-          "word": ".",
+          "word": ",",
           "startMs": 853.0,
-          "endMs": 973.0,
+          "endMs": 1288.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true
+        },
+        {
+          "tokenIndex": 2,
+          "word": "ten",
+          "startMs": 1288.0,
+          "endMs": 2343.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 3,
+          "word": ",",
+          "startMs": 2343.0,
+          "endMs": 2653.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        },
+        {
+          "tokenIndex": 4,
+          "word": "light",
+          "startMs": 2653.0,
+          "endMs": 2773.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
         }
       ]
     },
     {
-      "id": "12_bed.wav",
-      "subtitle": "bed.",
+      "id": "10_cat.wav",
+      "subtitle": "cat.",
       "wordTimings": [
         {
           "tokenIndex": 0,
-          "word": "bed",
-          "startMs": 481.0,
-          "endMs": 1163.0,
+          "word": "cat",
+          "startMs": 108.0,
+          "endMs": 791.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": false
@@ -955,8 +889,32 @@
         {
           "tokenIndex": 1,
           "word": ".",
-          "startMs": 1163.0,
-          "endMs": 1283.0,
+          "startMs": 791.0,
+          "endMs": 911.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": true
+        }
+      ]
+    },
+    {
+      "id": "11_cat.wav",
+      "subtitle": "cat.",
+      "wordTimings": [
+        {
+          "tokenIndex": 0,
+          "word": "cat",
+          "startMs": 108.0,
+          "endMs": 915.0,
+          "charStart": null,
+          "charEnd": null,
+          "isPunctuation": false
+        },
+        {
+          "tokenIndex": 1,
+          "word": ".",
+          "startMs": 915.0,
+          "endMs": 1035.0,
           "charStart": null,
           "charEnd": null,
           "isPunctuation": true

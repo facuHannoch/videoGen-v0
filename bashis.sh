@@ -1,14 +1,27 @@
+#!/bin/bash
+
 # Load variables from .env file
 if [ -f .env ]; then
     export $(cat .env | grep -v '^#' | xargs)
 fi
 
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+
 category=ipa_coach-word_pronunciation
-content=dog
-ipaTranscription=/dɔɡ/
+
+word="Wednesday"
+ipaTranscription="/ˈwɛnz.deɪ/"
+
+content=${word// /-}
 lang=en
 # between
 # thought
+
+# content=linkedin
+# ipaTranscription=/ˌlɪŋktˈɪn/
 
 projectPath=_projects/$category/$content/$lang
 videoEditorSrcDir=remotion-video-editor/src
@@ -27,11 +40,6 @@ xmlReferencePath=_projects/$category/_common/reference-$lang.xml
 videoEditionContext=_projects/$category/_common/videoMakingContext.md
 
 
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-
-
 echo " \t ----- $category, $content, $lang ----- "
 
 
@@ -39,7 +47,7 @@ echo " \t ----- $category, $content, $lang ----- "
 ######## Step 1
 echo "--- \n Step 1 - Raw content creation \n---"
 
-python3 scriptGen/index.py -o $projectPath/1-raw-content/content.json --template $promptPath --map PHONEME_HERE=$content --map TARGET_LANGUAGE=$lang --map WORD=$content  --map IPA_TRANSCRIPTION=$ipaTranscription
+python3 scriptGen/index.py -o $projectPath/1-raw-content/content.json --template $promptPath --map PHONEME_HERE=$content --map TARGET_LANGUAGE=$lang --map WORD=$content  --map IPA_TRANSCRIPTION="$ipaTranscription"
 
 
 
@@ -132,3 +140,4 @@ python3 videoEditorWorker/index.py \
 
 # 1. Register video in ??
 # 2. Periodically check it -> write learnings within the specific project directory
+# The system could also allow to enter information manually, like images or screenshots of analytics (like TikTok stats for the video) for a single project

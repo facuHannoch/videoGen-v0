@@ -1,4 +1,4 @@
-import { Img, Sequence, staticFile } from "remotion";
+import { Img, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { Audio } from "@remotion/media";
 import { videoStore } from "./state/videoStore";
 import { StandardText } from "./videoCompositions/text/StandardText";
@@ -15,6 +15,23 @@ import { ScreenSweepShader } from "./videoCompositions/effects/ScreenSweepShader
 import { CSSProperties } from "react";
 import airbagData from "./content.json"; // Assumes content.json is in the same directory and contains the JSON data
 
+type ContentPart = {
+  id: string;
+  content: string;
+};
+
+type ContentData = {
+  parts: ContentPart[];
+};
+
+const CountdownNumber = () => {
+  const frame = useCurrentFrame();
+  const elapsedSeconds = Math.floor(frame / videoStore.getFPS());
+  const remainingSeconds = Math.max(1, 3 - elapsedSeconds);
+
+  return <StandardText text={`${remainingSeconds}`} style={{ fontSize: 104 }} />;
+};
+
 // Composition Component for Word Pronunciation
 export const WordPronunciationVideoComposition = () => {
   const timelineClips = videoStore.getTimelineClips();
@@ -25,26 +42,28 @@ export const WordPronunciationVideoComposition = () => {
   }
 
   // Find the required part from JSON based on content.json structure
-  const wordPart = airbagData.parts.find(part => part.id === "part-1");
+  const contentData = airbagData as ContentData;
+  const wordPart = contentData.parts.find((part: ContentPart) => part.id === "part-2");
   if (!wordPart) {
-      return <StandardText text="Word data not found" />
+    return <StandardText text="Word data not found" />
   }
   const wordData = JSON.parse(wordPart.content);
-  
+
   const word = wordData.word;
   const wordIPA = wordData.ipa;
-  // UPDATED: Language code from JSON part-2
-  const languageCodePart = airbagData.parts.find(part => part.id === "part-2");
+  // UPDATED: Language code from JSON part-3
+  const languageCodePart = contentData.parts.find((part: ContentPart) => part.id === "part-3");
   const targetLanguage = languageCodePart ? languageCodePart.content : "en"; // Use "en" as fallback
 
   // Generate phoneme scenes dynamically from wordData.breakdown
   const generatePhonemeScenes = () => {
     return wordData.breakdown.flatMap((entry: any, index: number) => {
-      const phoneme = entry.phoneme;
+      console.log(entry)
+      const phoneme = entry.phoneme == 'ər' ? 'ɚ' : entry.phoneme;
       // Get only the words from each entry for example words
-      const explanationWords = entry.words.map((w: any) => w.word);
+      const explanationWords = entry.words;
       // UPDATED: Dynamic text based on language and data structure
-      const promptText = targetLanguage === "es" ? `Sonido / ${phoneme} /` : `Sound / ${phoneme} /`;
+      const promptText = `Sound / ${phoneme} /`;
 
       return [
         [
@@ -83,27 +102,27 @@ export const WordPronunciationVideoComposition = () => {
   // UPDATED: Scene contents based on English language resources and timeline positions
   const scenes = [
     [
-      // intro - 01_how_do_you_pronounce_this_word
+      // intro - 01_try_to_pronounce_this_word.wav
       <>
-        <Audio src={staticFile("sounds/good-middle_large-notification.mp3")} volume={0.4} startFrom={videoStore.getFrameForSeconds(0.1)} />
+        <Audio src={staticFile("sounds/good-middle_large-notification.mp3")} volume={0.4} />
 
         <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
         <Wave velocity={3} mode="reveal" />
         {/* UPDATED: English prompt */}
         <TopPrompt
-          text="Turn sound on" 
+          text="Turn sound on"
           icon={<SpeakerOnIcon size={30} />}
         />
       </>
     ],
     [
-      // gap - 1.5s
+      // gap - 3s
       <BlackAbsoluteFill>
         <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
       </BlackAbsoluteFill>
     ],
     [
-      // word pronunciation - 02_it_is_pronounced
+      // word pronunciation - 02_cat.wav
       <>
         <BlackAbsoluteFill>
           <StandardText text={wordIPA} style={{ fontSize: 72, padding: "24px 30px" }} />
@@ -112,7 +131,7 @@ export const WordPronunciationVideoComposition = () => {
       </>
     ],
     [
-      // transition to breakdown - 04_let-s_look_at_each_phoneme
+      // transition to breakdown - 03_let-s_look_at_each_phoneme.wav
       <>
         {/* UPDATED: English text */}
         <StandardText text={"Let's look at each phoneme"} style={{ fontSize: 72, padding: "24px 30px" }} />
@@ -126,13 +145,13 @@ export const WordPronunciationVideoComposition = () => {
         </Sequence>
       </>
     ],
-    ...generatePhonemeScenes(), // Injects 10 scenes (explanation + words for 5 phonemes)
+    ...generatePhonemeScenes(), // Injects 6 scenes (explanation + words for 3 phonemes)
     [
-      // final pronunciation 1 - 15_airbag
+      // final pronunciation 1 - 10_cat.wav
       <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
     ],
     [
-      // final pronunciation 2 - 16_airbag
+      // final pronunciation 2 - 11_cat.wav
       <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
     ],
     [
@@ -151,42 +170,85 @@ export const WordPronunciationVideoComposition = () => {
     ]
   ];
 
+  // const clockvideoStore.framesToAudio(1) + videoStore.getFrameForSeconds(3)
+
+  const shutterDuration = videoStore.getFrameForSeconds(0.2)
+
   return (
     <>
       <IntroNoise />
-      {/* Clock Ticking Sound and Visual - Defined based on specific timestamps */}
-      <Sequence from={videoStore.getFrameForSeconds(1)} durationInFrames={videoStore.framesToAudio(1) + videoStore.getFrameForSeconds(1.5)}>
+
+      {/* <Sequence from={shutterDuration*2} durationInFrames={videoStore.framesToAudio(2) + videoStore.getFrameForSeconds(3) - shutterDuration*2} >
+        <Audio src={staticFile("music/tension-pulse-1.mp3")} volume={0.15} />
+      </Sequence> */}
+      {/* <Audio src={staticFile("music/dark-pop.m4a")} volume={0.1} /> */}
+
+      <Sequence from={videoStore.getFrameForSeconds(1)} durationInFrames={videoStore.getFrameForSeconds(3)}>
+        {/* Note that this has the following logic: we want to start 1 second after the second 0, and we want the scene to last until the 2nd audio (audio[1]). videoStore.framesToAudio does not account for non-audio, so we have to manually add the duration of the sound scene in between (1.5 seconds) */}
+        <Audio src={staticFile("music/tension-pulse-1.mp3")} volume={0.1} />
+
         <Audio src={staticFile("sounds/clock-ticking/double-medium-medium_soft.mp3")} volume={0.4} />
-        <div style={{ position: "absolute", bottom: 500, left: "50%", transform: "translateX(-50%)", zIndex: 3 }}>
-          <TickingClock tickEveryFrames={8} size={280} />
+        <div style={{ position: "absolute", top: 500, left: "50%", transform: "translateX(-50%)", zIndex: 3 }}>
+          <CountdownNumber />
         </div>
+        <div style={{ position: "absolute", bottom: 500, left: "50%", transform: "translateX(-50%)", zIndex: 3 }}>
+          <TickingClock tickEveryFrames={videoStore.getFPS()} size={280} />
+        </div>
+
       </Sequence>
+      <Sequence from={videoStore.framesToAudio(2) + videoStore.getFrameForSeconds(3) - shutterDuration} durationInFrames={videoStore.getFrameForSeconds(1)}>
+        <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={0.8} />
+      </Sequence >
 
-      {timelineClips.map((clip, sceneIndex) => {
-        const src = clip.src;
-        const sceneContent = scenes[sceneIndex] ?? null;
+      {
+        timelineClips.map((clip, sceneIndex) => {
+          const src = clip.src;
+          const sceneContent = scenes[sceneIndex] ?? null;
 
-        // Handle gap clips (just reserve time, no content unless added to `scenes`)
-        if (clip.type === "gap") {
-          return (
-            <Sequence
-              key={clip.id ?? `gap-${clip.startFrame}`}
-              name="gap"
-              from={clip.startFrame}
-              durationInFrames={clip.durationFrames}
-            >
-              {sceneContent}
-            </Sequence>
-          );
-        }
+          // Handle gap clips (just reserve time, no content unless added to `scenes`)
+          if (clip.type === "gap") {
+            return (
+              <Sequence
+                key={clip.id ?? `gap-${clip.startFrame}`}
+                name="gap"
+                from={clip.startFrame}
+                durationInFrames={clip.durationFrames}
+              >
+                {sceneContent}
+              </Sequence>
+            );
+          }
 
-        // Handle missing audio file path gracefully
-        if (!src) {
-          return null;
-        }
+          // Handle missing audio file path gracefully
+          if (!src) {
+            return null;
+          }
 
-        // Handle SFX clips separately, placing them in BlackAbsoluteFill with optional scene content
-        if (clip.type === "sfx") {
+          // Handle SFX clips separately, placing them in BlackAbsoluteFill with optional scene content
+          if (clip.type === "sfx") {
+            return (
+              <Sequence
+                key={clip.id ?? `${src}-${clip.startFrame}`}
+                name={src.split("/").pop()}
+                from={clip.startFrame}
+                durationInFrames={clip.durationFrames}
+              >
+                <BlackAbsoluteFill>
+                  <Audio src={staticFile(src)} volume={clip.volume ?? 1} />
+                  {sceneContent}
+                  {/* OneWordCaption logic might need adaptation for SFX if word timings are unavailable */}
+                </BlackAbsoluteFill>
+              </Sequence>
+            );
+          }
+
+          // Load Audio metadata from store
+          const audio = videoStore.getAudio(src);
+          if (!audio) {
+            return null;
+          }
+
+          // Render standard audio clips with OneWordCaption and custom scene content
           return (
             <Sequence
               key={clip.id ?? `${src}-${clip.startFrame}`}
@@ -197,35 +259,13 @@ export const WordPronunciationVideoComposition = () => {
               <BlackAbsoluteFill>
                 <Audio src={staticFile(src)} volume={clip.volume ?? 1} />
                 {sceneContent}
-                {/* OneWordCaption logic might need adaptation for SFX if word timings are unavailable */}
+                {/* Captions are always rendered when possible based on current video structure */}
+                <OneWordCaption wordTimings={audio.wordTimings} />
               </BlackAbsoluteFill>
             </Sequence>
           );
-        }
-
-        // Load Audio metadata from store
-        const audio = videoStore.getAudio(src);
-        if (!audio) {
-          return null;
-        }
-
-        // Render standard audio clips with OneWordCaption and custom scene content
-        return (
-          <Sequence
-            key={clip.id ?? `${src}-${clip.startFrame}`}
-            name={src.split("/").pop()}
-            from={clip.startFrame}
-            durationInFrames={clip.durationFrames}
-          >
-            <BlackAbsoluteFill>
-              <Audio src={staticFile(src)} volume={clip.volume ?? 1} />
-              {sceneContent}
-              {/* Captions are always rendered when possible based on current video structure */}
-              <OneWordCaption wordTimings={audio.wordTimings} />
-            </BlackAbsoluteFill>
-          </Sequence>
-        );
-      })}
+        })
+      }
     </>
   );
 };
@@ -237,7 +277,7 @@ interface IPAPhonemeSceneProps {
   highlightedCharacter: string; // Phoneme character to highlight in wordIPA
   containerStyle?: CSSProperties; // Styles for containing div
   sound?: boolean; // Whether to play subltle chime sound
-  exampleWords?: string[]; // Array of example words for breakdown scenes
+  exampleWords?: any[]; // Array of example word objects with word and ipa properties
 }
 
 // Sub-component for rendering IPAPhonemeScenes
@@ -268,9 +308,18 @@ const IPAPhonemeScene = ({
             highlightedCharacter={highlightedCharacter}
           />
           {/* Render example words dynamically if available */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "center" }}>
-            {exampleWords.map((exWord) => (
-              <StandardText key={exWord} text={exWord} style={{ fontSize: 48, padding: "10px 20px" }} />
+          <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "center", marginTop: "20px" }}>
+            {exampleWords.map((exWord, i) => (
+              <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+                <StandardText key={exWord.word} text={`${exWord.word}`} style={{ fontSize: 48, padding: "10px 20px" }} />
+                <StandardText key={i} text={`->`} style={{ fontSize: 48, padding: "10px 30px" }} />
+                <StandardTextLetterHighlighted
+                  text={exWord.ipa}
+                  highlightedFontSize={48}
+                  style={{ fontSize: 48, padding: "10px 20px" }}
+                  highlightedCharacter={highlightedCharacter}
+                />
+              </div>
             ))}
           </div>
         </div>
