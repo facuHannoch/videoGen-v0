@@ -51,10 +51,11 @@ export const WordPronunciationVideoComposition = () => {
 
   const word = wordData.word;
   const wordIPA = wordData.ipa;
+  
   // UPDATED: Language code from JSON part-3
   const languageCodePart = contentData.parts.find((part: ContentPart) => part.id === "part-3");
   const targetLanguage = languageCodePart ? languageCodePart.content : "en"; // Use "en" as fallback
-
+  
   // Generate phoneme scenes dynamically from wordData.breakdown
   const generatePhonemeScenes = () => {
     return wordData.breakdown.flatMap((entry: any, index: number) => {
@@ -73,7 +74,7 @@ export const WordPronunciationVideoComposition = () => {
             <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={0.8} />
             <Img
               // Path dynamically constructed: images/phonemes-illustrative-images/[targetLanguage]/diagram-[phoneme].png
-              src={staticFile(`images/phonemes-illustrative-images/${targetLanguage}/diagram-${phoneme}.png`)}
+              src={staticFile(`images/phonemes-illustrative-images/${targetLanguage.toLowerCase()}/diagram-${phoneme}.png`)}
               style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", position: 'absolute', top: 500 }}
             />
             <IPAPhonemeScene
@@ -122,7 +123,7 @@ export const WordPronunciationVideoComposition = () => {
       </BlackAbsoluteFill>
     ],
     [
-      // word pronunciation - 02_cat.wav
+      // word pronunciation - 02_Wednesday.wav
       <>
         <BlackAbsoluteFill>
           <StandardText text={wordIPA} style={{ fontSize: 72, padding: "24px 30px" }} />
@@ -131,7 +132,7 @@ export const WordPronunciationVideoComposition = () => {
       </>
     ],
     [
-      // transition to breakdown - 03_let-s_look_at_each_phoneme.wav
+      // transition to breakdown - 03_veamos_cada_fonema.wav
       <>
         {/* UPDATED: English text */}
         <StandardText text={"Let's look at each phoneme"} style={{ fontSize: 72, padding: "24px 30px" }} />
@@ -145,13 +146,13 @@ export const WordPronunciationVideoComposition = () => {
         </Sequence>
       </>
     ],
-    ...generatePhonemeScenes(), // Injects 6 scenes (explanation + words for 3 phonemes)
+    ...generatePhonemeScenes(), // Injects 10 scenes (explanation + words for 5 phonemes)
     [
-      // final pronunciation 1 - 10_cat.wav
+      // final pronunciation 1 - 18_wednesday.wav
       <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
     ],
     [
-      // final pronunciation 2 - 11_cat.wav
+      // final pronunciation 2 - 19_wednesday.wav
       <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
     ],
     [
@@ -183,9 +184,9 @@ export const WordPronunciationVideoComposition = () => {
       </Sequence> */}
       {/* <Audio src={staticFile("music/dark-pop.m4a")} volume={0.1} /> */}
 
-      <Sequence from={videoStore.getFrameForSeconds(1)} durationInFrames={videoStore.getFrameForSeconds(3)}>
+      <Sequence from={videoStore.getFrameForSeconds(1)} durationInFrames={videoStore.getFrameForSeconds(4)}>
         {/* Note that this has the following logic: we want to start 1 second after the second 0, and we want the scene to last until the 2nd audio (audio[1]). videoStore.framesToAudio does not account for non-audio, so we have to manually add the duration of the sound scene in between (1.5 seconds) */}
-        <Audio src={staticFile("music/tension-pulse-1.mp3")} volume={0.1} />
+        <Audio src={staticFile("music/tension-pulse-1.mp3")} volume={0.2} />
 
         <Audio src={staticFile("sounds/clock-ticking/double-medium-medium_soft.mp3")} volume={0.4} />
         <div style={{ position: "absolute", top: 500, left: "50%", transform: "translateX(-50%)", zIndex: 3 }}>
@@ -310,9 +311,9 @@ const IPAPhonemeScene = ({
           {/* Render example words dynamically if available */}
           <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "center", marginTop: "20px" }}>
             {exampleWords.map((exWord, i) => (
-              <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-                <StandardText key={exWord.word} text={`${exWord.word}`} style={{ fontSize: 48, padding: "10px 20px" }} />
-                <StandardText key={i} text={`->`} style={{ fontSize: 48, padding: "10px 30px" }} />
+              <div style={{ display: "flex", gap: 14, alignItems: "center" }} key={exWord.word}>
+                <StandardText text={`${exWord.word}`} style={{ fontSize: 48, padding: "10px 20px" }} />
+                <StandardText text={`->`} style={{ fontSize: 48, padding: "10px 30px" }} />
                 <StandardTextLetterHighlighted
                   text={exWord.ipa}
                   highlightedFontSize={48}

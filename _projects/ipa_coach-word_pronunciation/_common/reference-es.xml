@@ -3,7 +3,7 @@
   voice="es-MX-JorgeMultilingualNeural"
   output_dir="audioGen-output">
 
-  <!-- IMPORTANT: Read the content file to understand the target language. If the target language is English, everything should be in English. Otherwise, follow this reference file on what should be still in english, and what should be said in the target language. -->
+  <!-- Follow this reference file on what should be still in english, and what should be said in the target language. -->
 
   <speak>
     <voice lang="es-MX">

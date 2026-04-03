@@ -1,5 +1,4 @@
 import type { CSSProperties } from "react";
-import { interpolate } from "remotion";
 
 interface StandardTextLetterHighlightedProps {
     text?: string;
@@ -40,10 +39,25 @@ export const StandardTextLetterHighlighted = ({
 }: StandardTextLetterHighlightedProps) => {
     const normalizedText = (text ?? "").normalize(normalizeForm);
     const characters = splitGraphemes(normalizedText);
-    const highlightedCharacterValue =
+    const highlightedCharacterSequence =
         highlightedCharacter && highlightedCharacter.length > 0
-            ? splitGraphemes(highlightedCharacter.normalize(normalizeForm))[0]
-            : undefined;
+            ? splitGraphemes(highlightedCharacter.normalize(normalizeForm))
+            : [];
+    const highlightedCharacterIndexes = new Set<number>();
+
+    if (highlightedCharacterSequence.length > 0) {
+        for (let i = 0; i <= characters.length - highlightedCharacterSequence.length; i++) {
+            const isMatch = highlightedCharacterSequence.every(
+                (segment, segmentIndex) => characters[i + segmentIndex] === segment
+            );
+
+            if (isMatch) {
+                for (let segmentIndex = 0; segmentIndex < highlightedCharacterSequence.length; segmentIndex++) {
+                    highlightedCharacterIndexes.add(i + segmentIndex);
+                }
+            }
+        }
+    }
 
     // const volume = interpolate(
     //     0,
@@ -73,8 +87,7 @@ export const StandardTextLetterHighlighted = ({
         >
             {characters.map((character, index) => {
                 const isHighlightedByIndex = highlightedIndex === index;
-                const isHighlightedByCharacter =
-                    highlightedCharacterValue !== undefined && character === highlightedCharacterValue;
+                const isHighlightedByCharacter = highlightedCharacterIndexes.has(index);
                 const isHighlighted = isHighlightedByIndex || isHighlightedByCharacter;
 
                 return (
