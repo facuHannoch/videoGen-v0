@@ -8,7 +8,7 @@
   <speak>
     <voice lang="en-US">
       <ssml_text>
-        <prosody rate="+20%">I'll teach you how to pronounce this word</prosody>
+        <prosody rate="+20%">Try to pronounce this word</prosody>
       </ssml_text>
     </voice>
   </speak>

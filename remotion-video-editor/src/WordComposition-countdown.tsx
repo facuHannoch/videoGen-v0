@@ -1,4 +1,4 @@
-import { Img, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { Img, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { Audio } from "@remotion/media";
 import { videoStore } from "./state/videoStore";
 import { StandardText } from "./videoCompositions/text/StandardText";
@@ -9,10 +9,11 @@ import { StandardTextLetterHighlighted } from "./videoCompositions/text/Standard
 import { TopPrompt } from "./videoCompositions/text/TopPrompt";
 import { Wave } from "./videoCompositions/effects/WaveReveal";
 import { WaveCoverFill } from "./videoCompositions/fills/WaveCoverFill";
+import { SpeakerOnIcon } from "./videoCompositions/vectors/SpeakerOnIcon";
+import { TickingClock } from "./videoCompositions/effects/TickingClock";
 import { ScreenSweepShader } from "./videoCompositions/effects/ScreenSweepShader";
 import { CSSProperties } from "react";
 import airbagData from "./content.json"; // Assumes content.json is in the same directory and contains the JSON data
-import { SpeakerOnIcon } from "./videoCompositions/vectors/SpeakerOnIcon";
 
 type ContentPart = {
   id: string;
@@ -21,6 +22,14 @@ type ContentPart = {
 
 type ContentData = {
   parts: ContentPart[];
+};
+
+const CountdownNumber = () => {
+  const frame = useCurrentFrame();
+  const elapsedSeconds = Math.floor(frame / videoStore.getFPS());
+  const remainingSeconds = Math.max(1, 3 - elapsedSeconds);
+
+  return <StandardText text={`${remainingSeconds}`} style={{ fontSize: 104 }} />;
 };
 
 // Composition Component for Word Pronunciation
@@ -42,18 +51,18 @@ export const WordPronunciationVideoComposition = () => {
 
   const word = wordData.word;
   const wordIPA = wordData.ipa;
-
+  
   // UPDATED: Language code from JSON part-3
   const languageCodePart = contentData.parts.find((part: ContentPart) => part.id === "part-3");
   const targetLanguage = languageCodePart ? languageCodePart.content : "en"; // Use "en" as fallback
-
+  
   // Generate phoneme scenes dynamically from wordData.breakdown
   const generatePhonemeScenes = () => {
     return wordData.breakdown.flatMap((entry: any, index: number) => {
       console.log(entry)
       // Standardize flap T for file matching: t̬ -> t_flap. However, based on the prompt diagram-PHONEME_IPA_SYMBOL.png, the IPA symbol is likely used. Let's assume the diagram uses 't' or 't_flap' rather than the IPA with diacritic in the filename. Given typical filenaming conventions, it might be safer to use a more standardized representation for the filename if necessary, but the prompt says to use PHONEME_IPA_SYMBOL. So we use the IPA symbol verbatim.
 
-      const phoneme = entry.phoneme;
+      const phoneme = entry.phoneme; 
 
       // Get only the words from each entry for example words
       const explanationWords = entry.words;
@@ -98,12 +107,13 @@ export const WordPronunciationVideoComposition = () => {
   // UPDATED: Scene contents based on English language resources and timeline positions
   const scenes = [
     [
-      // intro - 01_I'll_teach_you_how_to_pronounce_this_word.wav
+      // intro - 01_try_to_pronounce_this_word.wav
       <>
         <Audio src={staticFile("sounds/good-middle_large-notification.mp3")} volume={0.4} />
 
         <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
         <Wave velocity={3} mode="reveal" />
+        {/* UPDATED: English prompt */}
         <TopPrompt
           text="Turn sound on"
           icon={<SpeakerOnIcon size={30} />}
@@ -111,10 +121,15 @@ export const WordPronunciationVideoComposition = () => {
       </>
     ],
     [
+      // gap - 3s
+      <BlackAbsoluteFill>
+        <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
+      </BlackAbsoluteFill>
+    ],
+    [
       // word pronunciation - 02_Wednesday.wav
       <>
         <BlackAbsoluteFill>
-          <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px", margin: "1rem" }} />
           <StandardText text={wordIPA} style={{ fontSize: 72, padding: "24px 30px" }} />
         </BlackAbsoluteFill>
 
@@ -163,14 +178,6 @@ export const WordPronunciationVideoComposition = () => {
   // const clockvideoStore.framesToAudio(1) + videoStore.getFrameForSeconds(3)
 
   const shutterDuration = videoStore.getFrameForSeconds(0.2)
-  const fadeDuration = videoStore.getFPS()
-  const volume = interpolate(
-    useCurrentFrame(),
-    [0, fadeDuration],
-    [0, 0.3],
-    { extrapolateRight: "clamp" }
-  );
-
 
   return (
     <>
@@ -181,21 +188,22 @@ export const WordPronunciationVideoComposition = () => {
       </Sequence> */}
       {/* <Audio src={staticFile("music/dark-pop.m4a")} volume={0.1} /> */}
 
-      {/* <Sequence from={videoStore.getFrameForSeconds(1)} durationInFrames={videoStore.getFrameForSeconds(3)}>
+      <Sequence from={videoStore.getFrameForSeconds(1)} durationInFrames={videoStore.getFrameForSeconds(4)}>
+        {/* Note that this has the following logic: we want to start 1 second after the second 0, and we want the scene to last until the 2nd audio (audio[1]). videoStore.framesToAudio does not account for non-audio, so we have to manually add the duration of the sound scene in between (1.5 seconds) */}
         <Audio src={staticFile("music/tension-pulse-1.mp3")} volume={0.2} />
-      </Sequence> */}
-      {/* <Sequence from={videoStore.framesToAudio(2) + videoStore.getFrameForSeconds(3) - shutterDuration} durationInFrames={videoStore.getFrameForSeconds(1)}>
-        <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={0.8} />
-      </Sequence > */}
-      <Sequence from={0} durationInFrames={videoStore.framesToAudio(3) - videoStore.getFrameForSeconds(1)}>
-        <Audio
-          src={staticFile("music/tunetank-melodic-type-beat-349530.mp3")}
-          volume={volume}
-        />
+
+        <Audio src={staticFile("sounds/clock-ticking/double-medium-medium_soft.mp3")} volume={0.4} />
+        <div style={{ position: "absolute", top: 500, left: "50%", transform: "translateX(-50%)", zIndex: 3 }}>
+          <CountdownNumber />
+        </div>
+        <div style={{ position: "absolute", bottom: 500, left: "50%", transform: "translateX(-50%)", zIndex: 3 }}>
+          <TickingClock tickEveryFrames={videoStore.getFPS()} size={280} />
+        </div>
+
       </Sequence>
-      <Sequence from={videoStore.framesToAudio(3) - videoStore.getFrameForSeconds(1)} durationInFrames={120}>
+      <Sequence from={videoStore.framesToAudio(2) + videoStore.getFrameForSeconds(3) - shutterDuration} durationInFrames={videoStore.getFrameForSeconds(1)}>
         <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={0.8} />
-      </Sequence>
+      </Sequence >
 
       {
         timelineClips.map((clip, sceneIndex) => {

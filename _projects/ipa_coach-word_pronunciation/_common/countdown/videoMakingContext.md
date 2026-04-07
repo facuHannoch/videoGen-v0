@@ -1,3 +1,4 @@
+Have a gap of 3 second between the 1st and the 2nd audio.
 DO NOT PUT gaps anywhere else. Also, put a sound at the end of the timeline with sound id "mouse-click-double-soft.mp3".
 
 

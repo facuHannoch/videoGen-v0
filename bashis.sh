@@ -12,8 +12,9 @@ pip install -r requirements.txt
 
 category=ipa_coach-word_pronunciation
 
-word="Wednesday"
-ipaTranscription="/ˈwɛnz.deɪ/"
+word="bottle"
+ipaTranscription="/ˈbɑt̬əl/"
+
 
 content=${word// /-}
 lang=en
@@ -38,6 +39,7 @@ promptPath=_projects/$category/_common/prompt.txt
 resourcesGenerationContext=_projects/$category/_common/resourcesGenerationContext.md
 xmlReferencePath=_projects/$category/_common/reference-$lang.xml
 videoEditionContext=_projects/$category/_common/videoMakingContext.md
+# We could add something like $version /_common/$version/...
 
 
 echo " \t ----- $category, $content, $lang ----- "
@@ -47,7 +49,7 @@ echo " \t ----- $category, $content, $lang ----- "
 ######## Step 1
 echo "--- \n Step 1 - Raw content creation \n---"
 
-python3 scriptGen/index.py -o $projectPath/1-raw-content/content.json --template $promptPath --map PHONEME_HERE=$content --map TARGET_LANGUAGE=$lang --map WORD=$content  --map IPA_TRANSCRIPTION="$ipaTranscription"
+# python3 scriptGen/index.py -o $projectPath/1-raw-content/content.json --template $promptPath --map PHONEME_HERE=$content --map TARGET_LANGUAGE=$lang --map WORD=$content  --map IPA_TRANSCRIPTION="$ipaTranscription"
 
 
 
@@ -55,13 +57,13 @@ python3 scriptGen/index.py -o $projectPath/1-raw-content/content.json --template
 ######## Step 2
 echo "\n--- \n Step 2 - Resources creation \n---"
 
-python3 resourcesGen/index.py --input $projectPath/1-raw-content/content.json --assets-dir $projectPath/2-resources/assets/ --output $projectPath/2-resources/generated.resources.json --image-aspect-ratio 1:1 --context $resourcesGenerationContext
+# python3 resourcesGen/index.py --input $projectPath/1-raw-content/content.json --assets-dir $projectPath/2-resources/assets/ --output $projectPath/2-resources/generated.resources.json --image-aspect-ratio 1:1 --context $resourcesGenerationContext
 
 
 ######## Step 3
 echo "\n--- \n Step 3 - Audio Script creationg\n---"
 
-python3 audioScriptGen/index.py --input $projectPath/1-raw-content/content.json --reference $xmlReferencePath --output $projectPath/3-script/script.xml
+# python3 audioScriptGen/index.py --input $projectPath/1-raw-content/content.json --reference $xmlReferencePath --output $projectPath/3-script/script.xml
 
 
 
