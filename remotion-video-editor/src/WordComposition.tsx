@@ -16,12 +16,15 @@ import { SpeakerOnIcon } from "./videoCompositions/vectors/SpeakerOnIcon";
 
 type ContentPart = {
   id: string;
+  title: string;
   content: string;
 };
 
 type ContentData = {
   parts: ContentPart[];
 };
+
+const WEBSITE_URL = "https://ipacoach.com/en/practice/walk"
 
 // Composition Component for Word Pronunciation
 export const WordPronunciationVideoComposition = () => {
@@ -34,25 +37,23 @@ export const WordPronunciationVideoComposition = () => {
 
   // Find the required part from JSON based on content.json structure
   const contentData = airbagData as ContentData;
-  const wordPart = contentData.parts.find((part: ContentPart) => part.id === "part-2");
-  if (!wordPart) {
+  // UPDATED: 'VIDEO CONTENT' title is for part-1, which has the main content
+  const jsonDataPart = contentData.parts.find((part: ContentPart) => part.title === "VIDEO CONTENT");
+  if (!jsonDataPart) {
     return <StandardText text="Word data not found" />
   }
-  const wordData = JSON.parse(wordPart.content);
+  const wordData = JSON.parse(jsonDataPart.content);
 
   const word = wordData.word;
   const wordIPA = wordData.ipa;
 
-  // UPDATED: Language code from JSON part-3
-  const languageCodePart = contentData.parts.find((part: ContentPart) => part.id === "part-3");
+  // UPDATED: Language code from JSON part-2 (titled 'Language')
+  const languageCodePart = contentData.parts.find((part: ContentPart) => part.title === "Language");
   const targetLanguage = languageCodePart ? languageCodePart.content : "en"; // Use "en" as fallback
 
   // Generate phoneme scenes dynamically from wordData.breakdown
   const generatePhonemeScenes = () => {
     return wordData.breakdown.flatMap((entry: any, index: number) => {
-      console.log(entry)
-      // Standardize flap T for file matching: t̬ -> t_flap. However, based on the prompt diagram-PHONEME_IPA_SYMBOL.png, the IPA symbol is likely used. Let's assume the diagram uses 't' or 't_flap' rather than the IPA with diacritic in the filename. Given typical filenaming conventions, it might be safer to use a more standardized representation for the filename if necessary, but the prompt says to use PHONEME_IPA_SYMBOL. So we use the IPA symbol verbatim.
-
       const phoneme = entry.phoneme;
 
       // Get only the words from each entry for example words
@@ -68,7 +69,6 @@ export const WordPronunciationVideoComposition = () => {
             <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={0.8} />
             <Img
               // Path dynamically constructed: images/phonemes-illustrative-images/[targetLanguage]/diagram-[phoneme].png
-              // UPDATED: Standardizing filenames based on typical conventions, potentially replacing diacritics if needed for file systems, but prompt says phoneme IPA symbol. Let's try and use the literal character.
               src={staticFile(`images/phonemes-illustrative-images/${targetLanguage.toLowerCase()}/diagram-${phoneme}.png`)}
               style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", position: 'absolute', top: 500 }}
             />
@@ -98,7 +98,7 @@ export const WordPronunciationVideoComposition = () => {
   // UPDATED: Scene contents based on English language resources and timeline positions
   const scenes = [
     [
-      // intro - 01_I'll_teach_you_how_to_pronounce_this_word.wav
+      // intro - 01_i-ll_teach_you_how_to_pronounce_this_word.wav
       <>
         <Audio src={staticFile("sounds/good-middle_large-notification.mp3")} volume={0.4} />
 
@@ -111,7 +111,7 @@ export const WordPronunciationVideoComposition = () => {
       </>
     ],
     [
-      // word pronunciation - 02_Wednesday.wav
+      // word pronunciation - 02_thought.wav
       <>
         <BlackAbsoluteFill>
           <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px", margin: "1rem" }} />
@@ -121,7 +121,7 @@ export const WordPronunciationVideoComposition = () => {
       </>
     ],
     [
-      // transition to breakdown - 03_veamos_cada_fonema.wav
+      // transition to breakdown - 03_let-s_look_at_each_phoneme.wav
       <>
         {/* UPDATED: English text */}
         <StandardText text={"Let's look at each phoneme"} style={{ fontSize: 72, padding: "24px 30px" }} />
@@ -135,29 +135,55 @@ export const WordPronunciationVideoComposition = () => {
         </Sequence>
       </>
     ],
-    ...generatePhonemeScenes(), // Injects 10 scenes (explanation + words for 5 phonemes)
+    ...generatePhonemeScenes(), // Injects scenes (explanation + words for phonemes)
     [
-      // final pronunciation 1 - 18_wednesday.wav
+      // final pronunciation 1 - 10_thought.wav
       <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
     ],
     [
-      // final pronunciation 2 - 19_wednesday.wav
+      // final sentence - 11_i_thought_about_it_yesterday.wav
+      <div style={{ position: "relative", width: "100%", height: "100%" }}>
+        <BlackAbsoluteFill>
+          <StandardText text={"I thought about it yesterday"} style={{ fontSize: 72, padding: "24px 30px" }} />
+        </BlackAbsoluteFill>
+      </div>
+    ],
+    [
+      // final pronunciation 2 - 12_thought.wav
       <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
+    ],
+    [
+      // Want to practice?
+      <>
+        <StandardText text={"just hearing is not enough..."} style={{ fontSize: 72, padding: "24px 30px" }} />
+      </>
+    ],
+    [
+      // CTA
+      <>
+        {/* <Audio src={staticFile("sounds/good-middle_large-notification.mp3")} volume={0.4} /> */}
+        <StandardText text={"Don't just scroll and forget..."} style={{ fontSize: 56, color: "red", padding: "24px 30px", margin: "12px" }} />
+        <StandardText text={"practice it in less than 60 seconds"} style={{ fontSize: 56, padding: "24px 30px", margin: "24px" }} />
+
+        {/* <Wave velocity={3} mode="reveal" /> */}
+      </>
     ],
     [
       // outro - SFX - mouse-click-double-soft
       <>
+        <BlackAbsoluteFill>
+          <Wave velocity={2} mode="cover" />
+          <Sequence from={Math.ceil(34 / 2) - 4}>
+            <WaveCoverFill>
+              <StandardText text="IPA Coach" style={{ fontSize: 108, padding: "24px 30px", }} />
+            </WaveCoverFill>
+          </Sequence>
+        </BlackAbsoluteFill>
         <Sequence from={-5}>
-          <Audio src={staticFile("sounds/swoosh-not-end.mp3")} />
-        </Sequence>
-        <Wave velocity={2} mode="cover" />
-        <Sequence from={Math.ceil(34 / 2) - 4}>
-          <WaveCoverFill>
-            <StandardText text="IPA Coach" style={{ fontSize: 108, padding: "24px 30px", }} />
-          </WaveCoverFill>
+          <Audio src={staticFile("sounds/swoosh-not-end.mp3")} volume={0.5} />
         </Sequence>
       </>
-    ]
+    ],
   ];
 
   // const clockvideoStore.framesToAudio(1) + videoStore.getFrameForSeconds(3)
@@ -196,6 +222,9 @@ export const WordPronunciationVideoComposition = () => {
       <Sequence from={videoStore.framesToAudio(3) - videoStore.getFrameForSeconds(1)} durationInFrames={120}>
         <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={0.8} />
       </Sequence>
+
+
+      <StandardTextLetterHighlighted text="Gamified english pronunciation learning at ipacoach.com/program" highlightedCharacter="ipacoach.com/program" style={{fontSize: 24, margin: "12px", backgroundColor: "#bfc8d6DF"}} highlightedStyle={{fontSize: 24, color: "#0c336e"}} />
 
       {
         timelineClips.map((clip, sceneIndex) => {

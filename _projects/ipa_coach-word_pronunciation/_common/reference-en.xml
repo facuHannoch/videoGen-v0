@@ -123,8 +123,24 @@
 
   <speak>
     <voice lang="en-US">
-      <prosody rate="slow">bad.</prosody>
+      <prosody rate="slow">SENTENCE THAT USES THE WORD.</prosody>
     </voice>
   </speak>
 
+  <speak>
+    <voice lang="en-US">
+      <prosody rate="slow">bad.</prosody>
+    </voice>
+  </speak>
+  <speak>
+    <voice lang="en-US">
+      <prosody rate="+25%">Wanna practice this word?</prosody>
+    </voice>
+  </speak>
+
+  <speak>
+    <voice lang="en-US">
+      <prosody rate="+18%">Do it now for free by going to the website in the comments.</prosody>
+    </voice>
+  </speak>
 </tts_project>

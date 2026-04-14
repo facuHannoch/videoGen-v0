@@ -10,10 +10,11 @@ For the given word, give me the following:
 
 
 ------
-ONE
+VIDEO CONTENT
+
 The ipa transcription for the word. Use General American English.
 For example, for thought, it is /θɔt/
-Provide the data in the following format
+Provide the data in the following format:
 
 ```
 {
@@ -57,6 +58,12 @@ TARGET_LANGUAGE
 
 just print the target language here
 
+------
+
+SENTENCE
+
+Give me a sentence that uses the word of approximately 5 words.
+
 
 ------
 COPY - VALUE
@@ -70,4 +77,4 @@ Copy to put in the video description. This will be at the bottom, so you can be 
 
 
 --------
-Keep the titles as they are defined here (Like "COPY - VALUE", "COPY - MK").
+Respect the titles defined, and keep them as they are defined here (Like "COPY - VALUE", "COPY - MK").
