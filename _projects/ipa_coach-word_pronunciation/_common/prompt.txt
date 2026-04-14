@@ -10,7 +10,7 @@ For the given word, give me the following:
 
 
 ------
-VIDEO CONTENT
+VIDEO_CONTENT
 
 The ipa transcription for the word. Use General American English.
 For example, for thought, it is /θɔt/
@@ -62,19 +62,21 @@ just print the target language here
 
 SENTENCE
 
-Give me a sentence that uses the word of approximately 5 words.
+Give me a sentence of approximately 5 words that uses the word.
 
 
 ------
-COPY - VALUE
+VIDEO_COPY
 
-Text to put in the description in the video. It should be something that genuinely provides value to the user, not just a bunch of keywords. However, do try to put keywords in a natural way.
+Give me text to put in the description. There are three parts to this text:
 
-------
-COPY - MK
-
-Copy to put in the video description. This will be at the bottom, so you can be more pushy and marketing-ish and use hashtags (up to 5, use relevant ones). Add keywords and words that would help the video get more reach. Be brief.
+1. First sentence- It should be (adapted), "Practice for free at ipacoach.com/LOCALE/practice/WORD". The locale is just the target language but with 2 letters (english -> "en", spanish -> "es", etc.)
+2. Provide some facts or extra information about this word. Don't just give more instructions for the pronunciation as the video already does that.
+3. Copy to put in the description. Add keywords and words that would help the video get more reach. Be brief. Use hashtags (up to 5, use relevant ones). This part should be longer, like a couple of paragraphs. This part is actually for the algorithm, not really the user. However, I want it to feel natural, so make sure this concepts or topics are here, but do so in a natural manner. Include, but don't limit to the following concepts:
+    - this video is about learning this word pronunciation
+    - application that helps you learn english pronunciation
+    - gamified english learning
 
 
 --------
-Respect the titles defined, and keep them as they are defined here (Like "COPY - VALUE", "COPY - MK").
+Respect the titles, and keep them as defined here (Like "VIDEO_CONTENT", "TARGET_LANGUAGE", etc).

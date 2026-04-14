@@ -24,8 +24,6 @@ type ContentData = {
   parts: ContentPart[];
 };
 
-const WEBSITE_URL = "https://ipacoach.com/en/practice/walk"
-
 // Composition Component for Word Pronunciation
 export const WordPronunciationVideoComposition = () => {
   const timelineClips = videoStore.getTimelineClips();
@@ -37,8 +35,8 @@ export const WordPronunciationVideoComposition = () => {
 
   // Find the required part from JSON based on content.json structure
   const contentData = airbagData as ContentData;
-  // UPDATED: 'VIDEO CONTENT' title is for part-1, which has the main content
-  const jsonDataPart = contentData.parts.find((part: ContentPart) => part.title === "VIDEO CONTENT");
+  // UPDATED: Correct JSON data part
+  const jsonDataPart = contentData.parts.find((part: ContentPart) => part.title === "VIDEO_CONTENT");
   if (!jsonDataPart) {
     return <StandardText text="Word data not found" />
   }
@@ -47,9 +45,14 @@ export const WordPronunciationVideoComposition = () => {
   const word = wordData.word;
   const wordIPA = wordData.ipa;
 
-  // UPDATED: Language code from JSON part-2 (titled 'Language')
-  const languageCodePart = contentData.parts.find((part: ContentPart) => part.title === "Language");
-  const targetLanguage = languageCodePart ? languageCodePart.content : "en"; // Use "en" as fallback
+  // UPDATED: Language code from JSON part-2
+  const targetLanguage = contentData.parts.find((part: ContentPart) => part.id === "part-2")?.content ?? "en";
+
+  // UPDATED: Dynamic text based on language and data structure
+  const promptTexts = {
+    en: "Sound / PHONEME /",
+    // ... add translations if needed
+  };
 
   // Generate phoneme scenes dynamically from wordData.breakdown
   const generatePhonemeScenes = () => {
@@ -58,8 +61,10 @@ export const WordPronunciationVideoComposition = () => {
 
       // Get only the words from each entry for example words
       const explanationWords = entry.words;
-      // UPDATED: Dynamic text based on language and data structure
-      const promptText = `Sound / ${phoneme} /`;
+      // Get the correct template text
+      const template = promptTexts[targetLanguage] || promptTexts.en;
+      // Replace the placeholder
+      const promptText = template.replace('PHONEME', phoneme);
 
       return [
         [
@@ -101,11 +106,19 @@ export const WordPronunciationVideoComposition = () => {
       // intro - 01_i-ll_teach_you_how_to_pronounce_this_word.wav
       <>
         <Audio src={staticFile("sounds/good-middle_large-notification.mp3")} volume={0.4} />
-
-        <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
         <Wave velocity={3} mode="reveal" />
+        <Sequence durationInFrames={(Math.ceil(34 / 3) - 4)}>
+          <WaveCoverFill>
+          </WaveCoverFill>
+        </Sequence>
+
+        <StandardText text={"How to pronounce"} style={{ fontSize: 56, fontWeight: "normal", padding: "24px 30px", margin: "56px", fontStyle: "italic" }} />
+
+        <StandardText text={word} style={{ fontSize: 84, fontWeight: 700, padding: "24px 30px" }} />
+
+        <StandardText text={"like a native"} style={{ fontSize: 56, padding: "24px 30px", margin: "56px", fontWeight: "normal", fontStyle: "italic" }} />
         <TopPrompt
-          text="Turn sound on"
+          text="Turn on the sound for the pronunciation"
           icon={<SpeakerOnIcon size={30} />}
         />
       </>
@@ -153,13 +166,13 @@ export const WordPronunciationVideoComposition = () => {
       <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
     ],
     [
-      // Want to practice?
+      // Want to practice? - 13_wanna_practice_this_word.wav
       <>
         <StandardText text={"just hearing is not enough..."} style={{ fontSize: 72, padding: "24px 30px" }} />
       </>
     ],
     [
-      // CTA
+      // CTA - 14_do_it_now_for_free_by_going_to_the_website_in_the_comments.wav
       <>
         {/* <Audio src={staticFile("sounds/good-middle_large-notification.mp3")} volume={0.4} /> */}
         <StandardText text={"Don't just scroll and forget..."} style={{ fontSize: 56, color: "red", padding: "24px 30px", margin: "12px" }} />
@@ -169,7 +182,7 @@ export const WordPronunciationVideoComposition = () => {
       </>
     ],
     [
-      // outro - SFX - mouse-click-double-soft
+      // outro - SFX - mouse-click-double-soft.mp3
       <>
         <BlackAbsoluteFill>
           <Wave velocity={2} mode="cover" />
@@ -224,7 +237,7 @@ export const WordPronunciationVideoComposition = () => {
       </Sequence>
 
 
-      <StandardTextLetterHighlighted text="Gamified english pronunciation learning at ipacoach.com/program" highlightedCharacter="ipacoach.com/program" style={{fontSize: 24, margin: "12px", backgroundColor: "#bfc8d6DF"}} highlightedStyle={{fontSize: 24, color: "#0c336e"}} />
+      <StandardTextLetterHighlighted text="Gamified english pronunciation learning at ipacoach.com/program" highlightedCharacter="ipacoach.com/program" style={{ fontSize: 24, margin: "12px", backgroundColor: "#bfc8d6DF" }} highlightedStyle={{ fontSize: 24, color: "#0c336e" }} />
 
       {
         timelineClips.map((clip, sceneIndex) => {
