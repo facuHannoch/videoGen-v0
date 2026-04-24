@@ -65,6 +65,7 @@ export const WordPronunciationVideoComposition = () => {
       const template = promptTexts[targetLanguage] || promptTexts.en;
       // Replace the placeholder
       const promptText = template.replace('PHONEME', phoneme);
+      const phonemeDiagramURL = `images/phonemes-illustrative-images/${targetLanguage.toLowerCase()}/diagram-${phoneme.replace(/ː/g, "")}.png`
 
       return [
         [
@@ -73,8 +74,7 @@ export const WordPronunciationVideoComposition = () => {
             <TopPrompt text={promptText} />
             <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={0.8} />
             <Img
-              // Path dynamically constructed: images/phonemes-illustrative-images/[targetLanguage]/diagram-[phoneme].png
-              src={staticFile(`images/phonemes-illustrative-images/${targetLanguage.toLowerCase()}/diagram-${phoneme}.png`)}
+              src={staticFile(phonemeDiagramURL)}
               style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", position: 'absolute', top: 500 }}
             />
             <IPAPhonemeScene
@@ -118,13 +118,13 @@ export const WordPronunciationVideoComposition = () => {
 
         <StandardText text={"like a native"} style={{ fontSize: 56, padding: "24px 30px", margin: "56px", fontWeight: "normal", fontStyle: "italic" }} />
         <TopPrompt
-          text="Turn on the sound for the pronunciation"
+          text="Turn on the sound to hear"
           icon={<SpeakerOnIcon size={30} />}
         />
       </>
     ],
     [
-      // word pronunciation - 02_thought.wav
+      // word pronunciation - 02_blue.wav
       <>
         <BlackAbsoluteFill>
           <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px", margin: "1rem" }} />
@@ -150,19 +150,19 @@ export const WordPronunciationVideoComposition = () => {
     ],
     ...generatePhonemeScenes(), // Injects scenes (explanation + words for phonemes)
     [
-      // final pronunciation 1 - 10_thought.wav
+      // final pronunciation 1 - 10_blue.wav
       <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
     ],
     [
-      // final sentence - 11_i_thought_about_it_yesterday.wav
+      // final sentence - 11_the_sky_looks_blue_today.wav
       <div style={{ position: "relative", width: "100%", height: "100%" }}>
         <BlackAbsoluteFill>
-          <StandardText text={"I thought about it yesterday"} style={{ fontSize: 72, padding: "24px 30px" }} />
+          <StandardText text={"The sky looks blue today."} style={{ fontSize: 72, padding: "24px 30px" }} />
         </BlackAbsoluteFill>
       </div>
     ],
     [
-      // final pronunciation 2 - 12_thought.wav
+      // final pronunciation 2 - 12_blue.wav
       <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
     ],
     [

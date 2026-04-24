@@ -1,6 +1,17 @@
-{"id": "f71f977e", "name": "thought", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {
-    "WORD": "thought", "IPA_TRANSCRIPTION": "/wɜrd/"
-}, "step_reached": 5, "completed_at": "2026-04-11T19:04:56.783082+00:00"}
-{"id": "f71f977e", "name": "walk", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {}, "step_reached": 5, "completed_at": "2026-04-11T19:15:24.698044+00:00"}
-{"id": "f71f977e", "name": "thought", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "thought", "IPA_TRANSCRIPTION": "/wɜrd/"}, "step_reached": 5, "completed_at": "2026-04-11T19:26:42.745173+00:00"}
-{"id": "f71f977e", "name": "walk", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {}, "step_reached": 5, "completed_at": "2026-04-11T19:27:41.831974+00:00"}
+{"id": "1", "name": "blue", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "blue", "IPA_TRANSCRIPTION": "/bluː/"}, "completed_at": "2026-04-14T21:01:50.107440+00:00", "step_reached": 5}
+{"id": "2", "name": "food", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "food", "IPA_TRANSCRIPTION": "/fuːd/"}, "completed_at": "2026-04-15T11:32:35.664560+00:00", "step_reached": 5}
+{"id": "3", "name": "room", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "room", "IPA_TRANSCRIPTION": "/ruːm/"}, "completed_at": "2026-04-16T02:08:05.660374+00:00", "step_reached": 5}
+{"id": "4", "name": "shoe", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "shoe", "IPA_TRANSCRIPTION": "/?u?/"}, "completed_at": "2026-04-16T15:03:20.887407+00:00", "step_reached": 5}
+{"id": "5", "name": "soup", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "soup", "IPA_TRANSCRIPTION": "/su?p/"}, "completed_at": "2026-04-16T20:23:22.209048+00:00", "step_reached": 5}
+{"id": "6", "name": "you", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "you", "IPA_TRANSCRIPTION": "/ju?/"}, "completed_at": "2026-04-16T23:31:44.221019+00:00", "step_reached": 5}
+{"id": "7", "name": "moon", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "moon", "IPA_TRANSCRIPTION": "/mu?n/"}, "completed_at": "2026-04-17T01:42:52.604094+00:00", "step_reached": 5}
+{"id": "8", "name": "cat", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "cat", "IPA_TRANSCRIPTION": "/kæt/"}, "completed_at": "2026-04-17T15:24:16.449598+00:00", "step_reached": 5}
+{"id": "9", "name": "we", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "we", "IPA_TRANSCRIPTION": "/wiː/"}, "completed_at": "2026-04-17T15:56:08.648557+00:00", "step_reached": 5}
+{"id": "10", "name": "see", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "see", "IPA_TRANSCRIPTION": "/siː/"}, "completed_at": "2026-04-17T15:59:30.447557+00:00", "step_reached": 5}
+{"id": "11", "name": "need", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "need", "IPA_TRANSCRIPTION": "/niːd/"}, "completed_at": "2026-04-17T16:02:59.428597+00:00", "step_reached": 5}
+{"id": "12", "name": "green", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "green", "IPA_TRANSCRIPTION": "/ɡriːn/"}, "completed_at": "2026-04-18T14:47:55.362981+00:00", "step_reached": 5}
+{"id": "13", "name": "tea", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "tea", "IPA_TRANSCRIPTION": "/tiː/"}, "completed_at": "2026-04-18T14:51:35.489649+00:00", "step_reached": 5}
+{"id": "14", "name": "cheese", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "cheese", "IPA_TRANSCRIPTION": "/tʃiːz/"}, "completed_at": "2026-04-18T14:57:44.732182+00:00", "step_reached": 5}
+{"id": "15", "name": "do", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "do", "IPA_TRANSCRIPTION": "/duː/"}, "completed_at": "2026-04-18T14:59:06.109274+00:00", "step_reached": 5}
+{"id": "16", "name": "in", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "in", "IPA_TRANSCRIPTION": "/ɪn/"}, "completed_at": "2026-04-18T15:08:29.587446+00:00", "step_reached": 5}
+{"id": "17", "name": "put", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "put", "IPA_TRANSCRIPTION": "/pʊt/"}, "completed_at": "2026-04-18T15:11:26.437816+00:00", "step_reached": 5}

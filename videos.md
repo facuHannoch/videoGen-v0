@@ -1,0 +1,352 @@
+- [x] blue
+- [x] food
+- [x] room
+- [x] shoe
+- [x] soup
+- [x] you
+- [x] moon
+- [x] cat
+- [x] we
+- [x] see
+- [x] need
+- [x] green
+- [x] tea
+- [x] cheese
+- [x] do
+- [x] in
+- [x] put
+- [x] and
+- [x] bad
+- [x] apple
+- [x] sat
+- [x] on
+- [x] mat
+- [x] learn
+- [x] to
+- [x] speak
+- [x] like
+- [x] a
+- [x] native
+- [x] this
+- [x] big
+- [x] fish
+- [x] ship
+- [x] sit
+- [x] is
+- [x] excuse
+- [x] me
+- [x] get
+- [ ] the
+- [ ] eat
+- [ ] pen
+- [ ] red
+- [ ] yes
+- [ ] desk
+- [ ] pens
+- [ ] please
+- [ ] did
+- [ ] should
+- [ ] black
+- [ ] had
+- [ ] hat
+- [ ] wait
+- [ ] stop
+- [ ] mom
+- [ ] box
+- [ ] top
+- [ ] not
+- [ ] really
+- [ ] saw
+- [ ] wall
+- [ ] small
+- [ ] all
+- [ ] talk
+- [ ] walk
+- [ ] can
+- [ ] by
+- [ ] never
+- [ ] boy
+- [ ] look
+- [ ] book
+- [ ] good
+- [ ] wood
+- [ ] could
+- [ ] at
+- [ ] shelf
+- [ ] come
+- [ ] son
+- [ ] young
+- [ ] run
+- [ ] fun
+- [ ] money
+- [ ] sunny
+- [ ] sun
+- [ ] takes
+- [ ] away
+- [ ] about
+- [ ] ago
+- [ ] today
+- [ ] banana
+- [ ] sofa
+- [ ] go
+- [ ] heard
+- [ ] lay
+- [ ] an
+- [ ] hour
+- [ ] word
+- [ ] girl
+- [ ] first
+- [ ] nurse
+- [ ] work
+- [ ] girl's
+- [ ] you're
+- [ ] teacher
+- [ ] doctor
+- [ ] mother
+- [ ] father
+- [ ] after
+- [ ] dinner
+- [ ] here
+- [ ] say
+- [ ] name
+- [ ] late
+- [ ] train
+- [ ] explain
+- [ ] station
+- [ ] my
+- [ ] for
+- [ ] why
+- [ ] flight
+- [ ] five
+- [ ] time
+- [ ] tonight
+- [ ] arrives
+- [ ] pilot
+- [ ] ask
+- [ ] toy
+- [ ] noise
+- [ ] point
+- [ ] voice
+- [ ] join
+- [ ] choice
+- [ ] appointment
+- [ ] has
+- [ ] hear
+- [ ] use
+- [ ] your
+- [ ] make
+- [ ] right
+- [ ] now
+- [ ] out
+- [ ] loud
+- [ ] sound
+- [ ] house
+- [ ] around
+- [ ] flower
+- [ ] shower
+- [ ] no
+- [ ] home
+- [ ] road
+- [ ] slow
+- [ ] phone
+- [ ] open
+- [ ] window
+- [ ] way
+- [ ] take
+- [ ] puppy
+- [ ] people
+- [ ] pink
+- [ ] picture
+- [ ] map
+- [ ] cup
+- [ ] Bob
+- [ ] baby
+- [ ] rubber
+- [ ] cab
+- [ ] job
+- [ ] grab
+- [ ] band
+- [ ] two
+- [ ] attack
+- [ ] tent
+- [ ] boat
+- [ ] paint
+- [ ] of
+- [ ] Dad
+- [ ] dog
+- [ ] add
+- [ ] odd
+- [ ] card
+- [ ] water
+- [ ] city
+- [ ] better
+- [ ] writing
+- [ ] later
+- [ ] letter
+- [ ] meeting
+- [ ] party
+- [ ] I’m
+- [ ] cake
+- [ ] cook
+- [ ] back
+- [ ] quick
+- [ ] clock
+- [ ] game
+- [ ] bag
+- [ ] egg
+- [ ] gift
+- [ ] fed
+- [ ] leaf
+- [ ] life
+- [ ] movie
+- [ ] reviews
+- [ ] vary
+- [ ] love
+- [ ] available
+- [ ] I
+- [ ] are
+- [ ] village
+- [ ] think
+- [ ] three
+- [ ] thank
+- [ ] month
+- [ ] mouth
+- [ ] teeth
+- [ ] truth
+- [ ] thousand
+- [ ] things
+- [ ] mouths
+- [ ] times
+- [ ] with
+- [ ] they
+- [ ] their
+- [ ] though
+- [ ] them
+- [ ] together
+- [ ] sink
+- [ ] same
+- [ ] rice
+- [ ] so
+- [ ] science
+- [ ] statistician
+- [ ] but
+- [ ] don't
+- [ ] shows
+- [ ] every
+- [ ] sinks
+- [ ] zoo
+- [ ] zoom
+- [ ] zip
+- [ ] zero
+- [ ] lazy
+- [ ] rise
+- [ ] design
+- [ ] civilization
+- [ ] into
+- [ ] will
+- [ ] show
+- [ ] dish
+- [ ] sugar
+- [ ] machine
+- [ ] nation
+- [ ] official
+- [ ] exhibition
+- [ ] vision
+- [ ] measure
+- [ ] leisure
+- [ ] garage
+- [ ] usual
+- [ ] prestige
+- [ ] pleasure
+- [ ] television
+- [ ] was
+- [ ] it
+- [ ] his
+- [ ] he
+- [ ] who
+- [ ] ahead
+- [ ] anyhow
+- [ ] behave
+- [ ] perhaps
+- [ ] comprehensive
+- [ ] find
+- [ ] list
+- [ ] chip
+- [ ] cheap
+- [ ] chair
+- [ ] watch
+- [ ] nature
+- [ ] kitchen
+- [ ] church
+- [ ] architecture
+- [ ] built
+- [ ] joke
+- [ ] jam
+- [ ] magic
+- [ ] bridge
+- [ ] judge
+- [ ] edge
+- [ ] procedure
+- [ ] digitalization
+- [ ] that
+- [ ] very
+- [ ] near
+- [ ] liked
+- [ ] before
+- [ ] summer
+- [ ] lemon
+- [ ] rhythm
+- [ ] memorandum
+- [ ] new
+- [ ] nine
+- [ ] nice
+- [ ] convince
+- [ ] pronunciation
+- [ ] suns
+- [ ] songs
+- [ ] bank
+- [ ] English
+- [ ] wrong
+- [ ] singer
+- [ ] singing
+- [ ] anxious
+- [ ] extinguishing
+- [ ] flame
+- [ ] help
+- [ ] feel
+- [ ] pull
+- [ ] level
+- [ ] world
+- [ ] collect
+- [ ] elaborate
+- [ ] globalization
+- [ ] reach
+- [ ] some
+- [ ] plan
+- [ ] read
+- [ ] free
+- [ ] robots
+- [ ] car
+- [ ] error
+- [ ] there
+- [ ] prefer
+- [ ] infrastructure
+- [ ] manual
+- [ ] zone
+- [ ] yield
+- [ ] beyond
+- [ ] canyon
+- [ ] view
+- [ ] lawyer
+- [ ] humiliation
+- [ ] from
+- [ ] great
+- [ ] win
+- [ ] wife
+- [ ] twelve
+- [ ] westward
+- [ ] worthy
+- [ ] overwhelming
+- [ ] prize
+- [ ] men
+- [ ] roads

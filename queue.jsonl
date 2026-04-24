@@ -1,1 +1,21 @@
-{"id": "1", "name": "thought", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "thought", "IPA_TRANSCRIPTION": "/θɔt/"}}
+{"id": "18", "name": "and", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "and", "IPA_TRANSCRIPTION": "/ænd/"}}
+{"id":"19","name":"bad","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"bad","IPA_TRANSCRIPTION":"/baed/"}}
+{"id":"20","name":"apple","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"apple","IPA_TRANSCRIPTION":"/aepəl/"}}
+{"id":"21","name":"sat","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"sat","IPA_TRANSCRIPTION":"/sæt/"}}
+{"id":"22","name":"on","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"on","IPA_TRANSCRIPTION":"/ɑn/"}}
+{"id":"23","name":"mat","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"mat","IPA_TRANSCRIPTION":"/mæt/"}}
+{"id":"24","name":"learn","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"learn","IPA_TRANSCRIPTION":"/lɝn/"}}
+{"id":"25","name":"to","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"to","IPA_TRANSCRIPTION":"/tuː/"}}
+{"id":"26","name":"speak","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"speak","IPA_TRANSCRIPTION":"/spiːk/"}}
+{"id":"27","name":"like","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"like","IPA_TRANSCRIPTION":"/laɪk/"}}
+{"id":"28","name":"a","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"a","IPA_TRANSCRIPTION":"/eɪ/"}}
+{"id":"29","name":"native","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"native","IPA_TRANSCRIPTION":"/ˈneɪtɪv/"}}
+{"id":"30","name":"this","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"this","IPA_TRANSCRIPTION":"/ðɪs/"}}
+{"id":"31","name":"big","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"big","IPA_TRANSCRIPTION":"/bɪɡ/"}}
+{"id":"32","name":"fish","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"fish","IPA_TRANSCRIPTION":"/fɪʃ/"}}
+{"id":"33","name":"ship","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"ship","IPA_TRANSCRIPTION":"/ʃɪp/"}}
+{"id":"34","name":"sit","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"sit","IPA_TRANSCRIPTION":"/sɪt/"}}
+{"id":"35","name":"is","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"is","IPA_TRANSCRIPTION":"/ɪz/"}}
+{"id":"36","name":"excuse","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"excuse","IPA_TRANSCRIPTION":"/ɪkˈskjuːz/"}}
+{"id":"37","name":"me","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"me","IPA_TRANSCRIPTION":"/miː/"}}
+{"id":"38","name":"get","category":"ipa_coach-word_pronunciation","lang":"en","fields":{"WORD":"get","IPA_TRANSCRIPTION":"/ɡɛt/"}}

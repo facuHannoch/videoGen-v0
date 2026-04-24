@@ -68,14 +68,18 @@ Give me a sentence of approximately 5 words that uses the word.
 ------
 VIDEO_COPY
 
+```
+
+
 Give me text to put in the description. There are three parts to this text:
 
-1. First sentence- It should be (adapted), "Practice for free at ipacoach.com/LOCALE/practice/WORD". The locale is just the target language but with 2 letters (english -> "en", spanish -> "es", etc.)
+1. First line should be (adapted), "How to pronounce WORD. Free practice at ipacoach.com/LOCALE/practice/WORD.". The locale is just the target language but with 2 letters (english -> "en", spanish -> "es", etc.).
 2. Provide some facts or extra information about this word. Don't just give more instructions for the pronunciation as the video already does that.
 3. Copy to put in the description. Add keywords and words that would help the video get more reach. Be brief. Use hashtags (up to 5, use relevant ones). This part should be longer, like a couple of paragraphs. This part is actually for the algorithm, not really the user. However, I want it to feel natural, so make sure this concepts or topics are here, but do so in a natural manner. Include, but don't limit to the following concepts:
     - this video is about learning this word pronunciation
     - application that helps you learn english pronunciation
     - gamified english learning
+    - Include these sentences (adapted): "WORD pronunciation", "hear WORD pronunciation", "WORD IPA", "how to say WORD", "WORD american pronunciation"
 
 
 --------

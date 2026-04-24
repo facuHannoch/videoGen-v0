@@ -130,6 +130,12 @@ python3 videoEditorWorker/index.py \
 # ??????
 # Open directory ?
 
+# Move file to location
+# Move copy text file to location
+
+
+# Add a sixth step, this step renders the video, saving the output video to a specific directory. It also 
+# Move the server part to a different file. There is already a file for server, but transition was not completed. It also should take relevant resources from the step 2-resources (maybe we should have an attribute like "distributable" or something) and puts them in the same directory as the generated video.
 
 ######################################
 # Submission

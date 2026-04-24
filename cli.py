@@ -315,8 +315,21 @@ def cmd_run(args: argparse.Namespace) -> None:
             print("Queue is empty.")
             return
 
-    for item in items:
+    # Limit items based on mode
+    mode = args.mode or "continuous"
+    if mode == "one-time":
+        items = items[:1]
+
+    for i, item in enumerate(items):
         _run_item(item, steps, forced, single_step=bool(args.step), partial=bool(args.from_step))
+        
+        # Handle pause modes between items
+        if mode == "on-confirmation" and i < len(items) - 1:
+            try:
+                input("\nPress Enter to continue to next item, or Ctrl+C to stop...")
+            except KeyboardInterrupt:
+                print("\nStopped.")
+                break
 
 
 def _run_item(
@@ -416,6 +429,10 @@ def _build_parser(prog: str = "cli.py") -> argparse.ArgumentParser:
     p_run = sub.add_parser("run", help="Run the pipeline for queued items")
     p_run.add_argument("--id", default=None,
                        help="Run a specific item by id (otherwise runs entire queue)")
+    p_run.add_argument("--mode", default="one-time", 
+                       choices=["continuous", "on-confirmation", "one-time"],
+                       help="Queue processing mode: one-time (first item only), on-confirmation (pause between items), continuous (all items)")
+
 
     step_group = p_run.add_mutually_exclusive_group()
     step_group.add_argument("--step", type=int, choices=range(1, 6), metavar="N",
