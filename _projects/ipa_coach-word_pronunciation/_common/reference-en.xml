@@ -12,16 +12,6 @@
       </ssml_text>
     </voice>
   </speak>
-
-  <!-- Keep this commented -->
-  <!-- <speak>
-    <voice lang="en-US">
-      <ssml_text>
-        <prosody rate="+20%">It is pronounced...</prosody>
-      </ssml_text>
-    </voice>
-  </speak> -->
-
   <speak>
     <voice lang="en-US">
       <prosody rate="slow">bad.</prosody>  <!-- /bæd/ -->
@@ -36,20 +26,8 @@
     </voice>
   </speak>
 
-  <!-- b -->
-  <!-- <speak>
-    <voice lang="en-US">
-      <ssml_text>
-        <phoneme alphabet="ipa" ph="b">.</phoneme>
-      </ssml_text>
-    </voice>
-  </speak> -->
-
   <speak>
     <voice lang="en-US">
-      <!-- <ssml_text>
-        <prosody rate="+20%">To pronounce this phoneme,</prosody>
-      </ssml_text> -->
       <ssml_text>
         <prosody rate="+20%">Press both lips together, build up air briefly, then release it with your voice on.</prosody>
       </ssml_text>
@@ -64,14 +42,6 @@
     </voice>
   </speak>
 
-  <!-- æ -->
-  <!-- <speak>
-    <voice lang="en-US">
-      <ssml_text>
-        <phoneme alphabet="ipa" ph="æ">.</phoneme>
-      </ssml_text>
-    </voice>
-  </speak> -->
   <speak>
     <voice lang="en-US">
       <ssml_text>
@@ -89,14 +59,6 @@
     </voice>
   </speak>
 
-  <!-- d -->
-  <!-- <speak>
-    <voice lang="en-US">
-      <ssml_text>
-        <phoneme alphabet="ipa" ph="d">.</phoneme>
-      </ssml_text>
-    </voice>
-  </speak> -->
   <speak>
     <voice lang="en-US">
       <ssml_text>

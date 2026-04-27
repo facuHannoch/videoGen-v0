@@ -7,6 +7,7 @@ public/
 __pycache__
 .venv/
 
+_projects/*/_archive_local
 _projects/*/*/en/1-raw-content/
 _projects/*/*/en/2-resources/
 _projects/*/*/en/3-script/

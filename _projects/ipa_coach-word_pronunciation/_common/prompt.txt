@@ -49,7 +49,8 @@ Provide the data in the following format:
             "explanationToMakeSound": "To pronounce the 't' sound, place the tip of your tongue against your upper teeth and release air."
         }
     ]
-}```
+}
+```
 Note: Do not repeat words. Don't use new lines in the json, just give a long line with the json data.
 When making the explanationToMakeSound, avoid saying things such as "make the xx sound as in cat" or referencing another phoneme. Imagine this as if you were telling someone how to pronounce the sound as how to position the jav, the tongue, lips, mouth, etc. At the same time, be brief and use clear, and easy to understand language.
 
@@ -68,18 +69,33 @@ Give me a sentence of approximately 5 words that uses the word.
 ------
 VIDEO_COPY
 
+Give me text to put in the description. Follow the given template, but adapt it for the corresponding word.
+
+Copy template for the word cheese. You should follow the structure, but the actual content should reflect the actual truth for the given word. Maintain the same list of languages and in the same order, but with the corresponding translations.
+
 ```
+How to pronounce cheese in American English
+
+Practice the pronunciation of cheese at ipacoach.com/en/practice/cheese
+
+Cheese is pronounced /tʃiːz/ in American English.
+[Dialect section ONLY if there's a real difference worth noting. Otherwise omit entirely.]
+
+Equivalent terms in other languages:
+- Spanish: queso
+- Portuguese: queijo
+- Hindi: पनीर
+- Arabic: جبنة
+- Korean: 치즈
+- Japanese: チーズ
+- Indonesian: keju
+- Chinese: 奶酪
+- French: fromage
+- German: Käse
 
 
-Give me text to put in the description. There are three parts to this text:
-
-1. First line should be (adapted), "How to pronounce WORD. Free practice at ipacoach.com/LOCALE/practice/WORD.". The locale is just the target language but with 2 letters (english -> "en", spanish -> "es", etc.).
-2. Provide some facts or extra information about this word. Don't just give more instructions for the pronunciation as the video already does that.
-3. Copy to put in the description. Add keywords and words that would help the video get more reach. Be brief. Use hashtags (up to 5, use relevant ones). This part should be longer, like a couple of paragraphs. This part is actually for the algorithm, not really the user. However, I want it to feel natural, so make sure this concepts or topics are here, but do so in a natural manner. Include, but don't limit to the following concepts:
-    - this video is about learning this word pronunciation
-    - application that helps you learn english pronunciation
-    - gamified english learning
-    - Include these sentences (adapted): "WORD pronunciation", "hear WORD pronunciation", "WORD IPA", "how to say WORD", "WORD american pronunciation"
+How to pronounce cheese. This video explains how to say cheese in American English with the IPA transcription and an example. Cheese pronunciation, how to say cheese, cheese pronunciation American English. Learning English pronunciation.
+```
 
 
 --------
