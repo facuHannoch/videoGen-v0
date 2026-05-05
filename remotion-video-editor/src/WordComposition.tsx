@@ -40,6 +40,7 @@ export const WordPronunciationVideoComposition = () => {
   if (!jsonDataPart) {
     return <StandardText text="Word data not found" />
   }
+  const sentence = contentData.parts.find((part: ContentPart) => part.title === "SENTENCE")?.content;
   const wordData = JSON.parse(jsonDataPart.content);
 
   const word = wordData.word;
@@ -65,6 +66,7 @@ export const WordPronunciationVideoComposition = () => {
       const template = promptTexts[targetLanguage] || promptTexts.en;
       // Replace the placeholder
       const promptText = template.replace('PHONEME', phoneme);
+      // TARGET LANGUAGE SHOULD BE LOWERCASE
       const phonemeDiagramURL = `images/phonemes-illustrative-images/${targetLanguage.toLowerCase()}/diagram-${phoneme.replace(/ː/g, "")}.png`
 
       return [
@@ -124,7 +126,7 @@ export const WordPronunciationVideoComposition = () => {
       </>
     ],
     [
-      // word pronunciation - 02_blue.wav
+      // word pronunciation - 02_hat.wav (updated from 02_blue.wav in previous content)
       <>
         <BlackAbsoluteFill>
           <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px", margin: "1rem" }} />
@@ -139,30 +141,33 @@ export const WordPronunciationVideoComposition = () => {
         {/* UPDATED: English text */}
         <StandardText text={"Let's look at each phoneme"} style={{ fontSize: 72, padding: "24px 30px" }} />
         <Audio src={staticFile("sounds/mouse-click-double-hard.mp3")} volume={0.5} />
-        <Sequence from={timelineClips[3].durationFrames - videoStore.getFrameForSeconds(0.5)} >
-          <ScreenSweepShader />
-          <Audio src={staticFile("sounds/swoosh-not-end.mp3")} />
-          <Sequence from={videoStore.getFrameForSeconds(0.3)}>
-            <WaveCoverFill></WaveCoverFill>
+        {/* Ensure correct indexing for transition sequence */}
+        {timelineClips[3] && timelineClips[3].type !== 'gap' && (
+          <Sequence from={timelineClips[3].durationFrames - videoStore.getFrameForSeconds(0.5)} >
+            <ScreenSweepShader />
+            <Audio src={staticFile("sounds/swoosh-not-end.mp3")} />
+            <Sequence from={videoStore.getFrameForSeconds(0.3)}>
+              <WaveCoverFill></WaveCoverFill>
+            </Sequence>
           </Sequence>
-        </Sequence>
+        )}
       </>
     ],
-    ...generatePhonemeScenes(), // Injects scenes (explanation + words for phonemes)
+    ...generatePhonemeScenes(), // Injects scenes (explanation + words for phonemes: h, æ, t)
     [
-      // final pronunciation 1 - 10_blue.wav
+      // final pronunciation 1 - 10_hat.wav (updated from 10_blue.wav)
       <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
     ],
     [
-      // final sentence - 11_the_sky_looks_blue_today.wav
+      // final sentence - 11_he_wore_a_red_hat.wav (updated from 11_the_sky_looks_blue_today.wav)
       <div style={{ position: "relative", width: "100%", height: "100%" }}>
         <BlackAbsoluteFill>
-          <StandardText text={"The sky looks blue today."} style={{ fontSize: 72, padding: "24px 30px" }} />
+          <StandardText text={sentence} style={{ fontSize: 72, padding: "24px 30px" }} />
         </BlackAbsoluteFill>
       </div>
     ],
     [
-      // final pronunciation 2 - 12_blue.wav
+      // final pronunciation 2 - 12_hat.wav (updated from 12_blue.wav)
       <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
     ],
     [

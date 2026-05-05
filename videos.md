@@ -6,6 +6,8 @@
 - [x] you
 - [x] moon
 - [x] cat
+- [x] the
+- [x] eat
 - [x] we
 - [x] see
 - [x] need
@@ -36,27 +38,25 @@
 - [x] excuse
 - [x] me
 - [x] get
-- [ ] the
-- [ ] eat
-- [ ] pen
-- [ ] red
-- [ ] yes
-- [ ] desk
-- [ ] pens
-- [ ] please
-- [ ] did
-- [ ] should
-- [ ] black
-- [ ] had
-- [ ] hat
-- [ ] wait
-- [ ] stop
-- [ ] mom
-- [ ] box
-- [ ] top
-- [ ] not
+- [x] pen
+- [x] red
+- [x] yes
+- [x] desk
+- [x] pens
+- [x] please
+- [x] did
+- [x] should
+- [x] black
+- [x] had
+- [x] hat
+- [x] wait
+- [x] stop
+- [x] mom
+- [x] box
+- [x] top
+- [x] not
 - [ ] really
-- [ ] saw
+- [x] saw
 - [ ] wall
 - [ ] small
 - [ ] all

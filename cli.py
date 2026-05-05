@@ -80,7 +80,8 @@ def _sentinel(step: int, pp: Path) -> Path:
         2: pp / "2-resources" / "generated.resources.json",
         3: pp / "3-script" / "script.xml",
         4: pp / "4-audios" / "audio.info.json",
-        5: pp / "5-videos" / "timeline.json",
+        5: pp / "5-videos" / "video.mp4",
+        6: pp / "6-artifact" / "video.mp4",
     }
     return sentinels[step]
 
@@ -211,28 +212,75 @@ def _sync_editor_assets(pp: Path) -> None:
 def run_step5(item: dict, pp: Path) -> bool:
     common = common_path(item)
     context = common / "videoMakingContext.md"
+    timeline_cache = pp / "5-videos" / "timeline.json"
 
     _sync_editor_assets(pp)
 
-    cmd = [
-        sys.executable, str(VG_ROOT / "videoEditorWorker" / "index.py"),
-        "--audio-info", str(pp / "4-audios" / "audio.info.json"),
-        "--timeline-output", str(VIDEO_EDITOR_ASSETS / "timeline.json"),
-        "--composition", str(VG_ROOT / "remotion-video-editor" / "src" / "WordComposition.tsx"),
-        "--content-json", str(pp / "1-raw-content" / "content.json"),
-        "--resources-json", str(pp / "2-resources" / "generated.resources.json"),
-        "--script-xml", str(pp / "3-script" / "script.xml"),
-        "--additional-comments", "Don't change the position of the music and sounds",
-    ]
-    if context.exists():
-        cmd += ["--context", str(context)]
-    if not _run(cmd):
-        return False
+    # AI worker: only re-run if timeline hasn't been generated yet
+    if not timeline_cache.exists():
+        cmd = [
+            sys.executable, str(VG_ROOT / "videoEditorWorker" / "index.py"),
+            "--audio-info", str(pp / "4-audios" / "audio.info.json"),
+            "--timeline-output", str(VIDEO_EDITOR_ASSETS / "timeline.json"),
+            "--composition", str(VG_ROOT / "remotion-video-editor" / "src" / "WordComposition.tsx"),
+            "--content-json", str(pp / "1-raw-content" / "content.json"),
+            "--resources-json", str(pp / "2-resources" / "generated.resources.json"),
+            "--script-xml", str(pp / "3-script" / "script.xml"),
+            "--additional-comments", "Don't change the position of the music and sounds",
+        ]
+        if context.exists():
+            cmd += ["--context", str(context)]
+        if not _run(cmd):
+            return False
+        shutil.copy2(VIDEO_EDITOR_ASSETS / "timeline.json", timeline_cache)
+    else:
+        print("    (AI worker already done, restoring timeline)")
+        shutil.copy2(timeline_cache, VIDEO_EDITOR_ASSETS / "timeline.json")
 
-    # Copy timeline.json into the project dir as the step-5 sentinel
-    timeline_src = VIDEO_EDITOR_ASSETS / "timeline.json"
-    if timeline_src.exists():
-        shutil.copy2(timeline_src, pp / "5-videos" / "timeline.json")
+    # Render
+    video_out = pp / "5-videos" / "video.mp4"
+    remotion_bin = VG_ROOT / "remotion-video-editor" / "node_modules" / ".bin" / "remotionb"
+    render_cmd = [str(remotion_bin), "render", "src/index.ts", "video", str(video_out)]
+    return _run(render_cmd, cwd=VG_ROOT / "remotion-video-editor")
+
+
+def run_step6(_item: dict, pp: Path) -> bool:
+    artifact_dir = pp / "6-artifact"
+    artifact_dir.mkdir(exist_ok=True)
+
+    # Video
+    shutil.copy2(pp / "5-videos" / "video.mp4", artifact_dir / "video.mp4")
+
+    # Audio manifest (useful for subtitles / captions later)
+    audio_info = pp / "4-audios" / "audio.info.json"
+    if audio_info.exists():
+        shutil.copy2(audio_info, artifact_dir / "audio.info.json")
+
+    # Raw content (description / metadata source)
+    content_json = pp / "1-raw-content" / "content.json"
+    if content_json.exists():
+        shutil.copy2(content_json, artifact_dir / "content.json")
+
+    # Everything generated under 2-resources/assets/ (text files, captions, etc.)
+    assets_src = pp / "2-resources" / "assets"
+    if assets_src.exists():
+        assets_dst = artifact_dir / "assets"
+        if assets_dst.exists():
+            shutil.rmtree(assets_dst)
+        # shutil.copytree(assets_src, assets_dst)
+        shutil.copytree(assets_src, assets_dst)
+        # Move all files from assets/ into artifact root
+        for asset_file in assets_dst.iterdir():
+            if asset_file.is_file():
+                shutil.move(str(asset_file), str(artifact_dir / asset_file.name))
+
+    # Images
+    images_src = pp / "2-resources" / "images"
+    if images_src.exists():
+        images_dst = artifact_dir / "images"
+        if images_dst.exists():
+            shutil.rmtree(images_dst)
+        shutil.copytree(images_src, images_dst)
 
     return True
 
@@ -243,6 +291,7 @@ STEPS: dict[int, Callable] = {
     3: run_step3,
     4: run_step4,
     5: run_step5,
+    6: run_step6,
 }
 
 STEP_NAMES: dict[int, str] = {
@@ -250,14 +299,27 @@ STEP_NAMES: dict[int, str] = {
     2: "Resources      (resourcesGen)",
     3: "Audio script   (audioScriptGen)",
     4: "Audio          (audioGen)",
-    5: "Video          (videoEditorWorker)",
+    5: "Video          (AI + render)",
+    6: "Artifact       (collect)",
+}
+
+NUM_STEPS = len(STEPS)
+
+# Files shown per step in the server UI (relative to project path)
+STEP_FILES: dict[int, list[str]] = {
+    1: ["1-raw-content/content.json"],
+    2: ["2-resources/generated.resources.json"],
+    3: ["3-script/script.xml"],
+    4: ["4-audios/audio.info.json"],
+    5: ["5-videos/timeline.json", "5-videos/video.mp4"],
+    6: ["6-artifact/video.mp4", "6-artifact/content.json", "6-artifact/audio.info.json"],
 }
 
 
-def _run(cmd: list[Any]) -> bool:
+def _run(cmd: list[Any], cwd: Path = VG_ROOT) -> bool:
     display = " ".join(str(c) for c in cmd)
     print(f"    $ {display}")
-    result = subprocess.run(cmd, cwd=VG_ROOT)
+    result = subprocess.run(cmd, cwd=cwd)
     return result.returncode == 0
 
 
@@ -289,9 +351,9 @@ def cmd_run(args: argparse.Namespace) -> None:
     if args.step:
         steps = [args.step]
     elif args.from_step:
-        steps = list(range(args.from_step, 6))
+        steps = list(range(args.from_step, NUM_STEPS + 1))
     else:
-        steps = list(range(1, 6))
+        steps = list(range(1, NUM_STEPS + 1))
 
     # Resolve forced steps
     if args.force:
@@ -340,7 +402,7 @@ def _run_item(
     partial: bool,
 ) -> None:
     pp = project_path(item)
-    for d in ["1-raw-content", "2-resources", "3-script", "4-audios", "5-videos"]:
+    for d in ["1-raw-content", "2-resources", "3-script", "4-audios", "5-videos", "6-artifact"]:
         (pp / d).mkdir(parents=True, exist_ok=True)
 
     print(f"\n{'─' * 52}")
@@ -371,11 +433,11 @@ def _run_item(
             update_in_queue(item["id"], {"step_reached": last_ok})
             return
 
-    # If a full run completed all 5 steps, graduate to done.jsonl
+    # If a full run completed all steps, graduate to done.jsonl
     is_full_run = not single_step and not partial
-    if is_full_run and last_ok == 5:
+    if is_full_run and last_ok == NUM_STEPS:
         item["completed_at"] = datetime.now(timezone.utc).isoformat()
-        item["step_reached"] = 5
+        item["step_reached"] = NUM_STEPS
         remove_from_queue(item["id"])
         append_jsonl(DONE_FILE, item)
         print(f"\n  Graduated to done.jsonl")
@@ -394,8 +456,8 @@ def cmd_status(args: argparse.Namespace) -> None:
     for item in queue:
         pp = project_path(item)
         reached = steps_reached(pp)
-        bar = "".join("█" if i <= reached else "░" for i in range(1, 6))
-        print(f"  [{item['id']}]  {item['name']:<20} {item['lang']}  {bar} {reached}/5")
+        bar = "".join("█" if i <= reached else "░" for i in range(1, NUM_STEPS + 1))
+        print(f"  [{item['id']}]  {item['name']:<20} {item['lang']}  {bar} {reached}/{NUM_STEPS}")
 
     print(f"\nDone   ({len(done)} item{'s' if len(done) != 1 else ''})")
     print("─" * 52)
@@ -406,6 +468,33 @@ def cmd_status(args: argparse.Namespace) -> None:
         print(f"  [{item['id']}]  {item['name']:<20} {item['lang']}  completed {date}")
 
     print()
+
+
+def cmd_deliver(args: argparse.Namespace) -> None:
+    all_items = read_jsonl(QUEUE_FILE) + read_jsonl(DONE_FILE)
+    matches = [i for i in all_items if i["id"] == args.id]
+    if not matches:
+        print(f"Error: no item with id '{args.id}'", file=sys.stderr)
+        sys.exit(1)
+    item = matches[0]
+    pp = project_path(item)
+    artifact_dir = pp / "6-artifact"
+
+    if not artifact_dir.exists():
+        print("Error: artifact directory missing — run step 6 first", file=sys.stderr)
+        sys.exit(1)
+
+    if args.via == "tailscale":
+        dest = args.to
+        cmd = ["scp", "-r", str(artifact_dir) + "/", dest]
+        print(f"  Sending via Tailscale/scp → {dest}")
+        if not _run(cmd):
+            sys.exit(1)
+    else:
+        print(f"Error: unknown transport '{args.via}'. Supported: tailscale", file=sys.stderr)
+        sys.exit(1)
+
+    print("  Delivered.")
 
 
 # ── Argument parsing ───────────────────────────────────────────────────────────
@@ -435,15 +524,15 @@ def _build_parser(prog: str = "cli.py") -> argparse.ArgumentParser:
 
 
     step_group = p_run.add_mutually_exclusive_group()
-    step_group.add_argument("--step", type=int, choices=range(1, 6), metavar="N",
-                            help="Run only step N (1–5)")
-    step_group.add_argument("--from-step", type=int, choices=range(1, 6), metavar="N",
-                            dest="from_step", help="Run from step N through 5")
+    step_group.add_argument("--step", type=int, choices=range(1, NUM_STEPS + 1), metavar="N",
+                            help=f"Run only step N (1–{NUM_STEPS})")
+    step_group.add_argument("--from-step", type=int, choices=range(1, NUM_STEPS + 1), metavar="N",
+                            dest="from_step", help=f"Run from step N through {NUM_STEPS}")
 
     force_group = p_run.add_mutually_exclusive_group()
     force_group.add_argument("--force", action="store_true",
                              help="Force re-run all steps in scope")
-    force_group.add_argument("--force-step", type=int, choices=range(1, 6), metavar="N",
+    force_group.add_argument("--force-step", type=int, choices=range(1, NUM_STEPS + 1), metavar="N",
                              dest="force_step",
                              help="Force re-run only step N (others still respect idempotency)")
 
@@ -452,6 +541,19 @@ def _build_parser(prog: str = "cli.py") -> argparse.ArgumentParser:
 
     # repl
     sub.add_parser("repl", help="Start interactive shell")
+
+    # deliver
+    p_deliver = sub.add_parser("deliver", help="Send artifact to a destination")
+    p_deliver.add_argument("--id", required=True, help="Item id to deliver")
+    p_deliver.add_argument("--via", required=True, choices=["tailscale"],
+                           help="Transport to use (tailscale)")
+    p_deliver.add_argument("--to", required=True, metavar="DEST",
+                           help="Destination (e.g. my-mac:/Videos/ for tailscale)")
+
+    # server
+    p_server = sub.add_parser("server", help="Start the web UI")
+    p_server.add_argument("--port", type=int, default=8000, help="Port to listen on (default: 8000)")
+    p_server.add_argument("--id", default=None, help="Show only a specific item by id")
 
     return parser
 
@@ -528,11 +630,16 @@ def cmd_repl(_args: argparse.Namespace) -> None:
 def main() -> None:
     load_dotenv(VG_ROOT / ".env")
     args = parse_args()
+    if args.command == "server":
+        from server import cmd_server
+        cmd_server(args)
+        return
     {
         "add": cmd_add,
         "run": cmd_run,
         "status": cmd_status,
         "repl": cmd_repl,
+        "deliver": cmd_deliver,
     }[args.command](args)
 
 

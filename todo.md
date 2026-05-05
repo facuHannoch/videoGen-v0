@@ -1,19 +1,13 @@
 
 ## Video 
 
+Have a text about weak and strong forms (for example, the word `and` is pronounced as `ænd` in isolation, but as `ən` in the weak form )
 
 Incite users to comment a word they would like used
 
 Instead of "Try this word for free" at the end, show a screen recording, maybe animated with the practice word screen, and tell something like "practice this word for free now by going to the link in the comments"
 
 ---
-
-Currently when running run it just goes on until the queue is emtpy. Make it so that it has three modes:
-- continuous: this behaviour
-- on-confirmation: does one, and then expects input, maybe like [y] or 
-[Enter]
-- one-time: runs it for the first item in queue and exits (or moves on until is time to exit)
-* Decide on better names for arguments
 
 - Add render video step, output to `_projects/PROJECT`
 
@@ -24,3 +18,8 @@ Currently when running run it just goes on until the queue is emtpy. Make it so 
 
 
 States: +"uploaded"
+
+
+
+Per-project Remotion feasibility — yes, feasible. The approach would be: copy remotion-video-editor/ into 5-videos/editor/ per project, then render from there. The expensive part (node_modules) can be a symlink to the shared install to avoid gigabytes of duplication. It would isolate the workspace entirely and make async rendering safe. Not complex to implement when the time comes.
+

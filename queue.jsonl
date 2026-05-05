@@ -1,11 +1,2 @@
-{"id": "28", "name": "a", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "a", "IPA_TRANSCRIPTION": "/eɪ/"}}
-{"id": "29", "name": "native", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "native", "IPA_TRANSCRIPTION": "/ˈneɪtɪv/"}}
-{"id": "30", "name": "this", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "this", "IPA_TRANSCRIPTION": "/ðɪs/"}}
-{"id": "31", "name": "big", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "big", "IPA_TRANSCRIPTION": "/bɪɡ/"}}
-{"id": "32", "name": "fish", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "fish", "IPA_TRANSCRIPTION": "/fɪʃ/"}}
-{"id": "33", "name": "ship", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "ship", "IPA_TRANSCRIPTION": "/ʃɪp/"}}
-{"id": "34", "name": "sit", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "sit", "IPA_TRANSCRIPTION": "/sɪt/"}}
-{"id": "35", "name": "is", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "is", "IPA_TRANSCRIPTION": "/ɪz/"}}
-{"id": "36", "name": "excuse", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "excuse", "IPA_TRANSCRIPTION": "/ɪkˈskjuːz/"}}
-{"id": "37", "name": "me", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "me", "IPA_TRANSCRIPTION": "/miː/"}}
-{"id": "38", "name": "get", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "get", "IPA_TRANSCRIPTION": "/ɡɛt/"}}
+{"id": "6", "name": "not", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "not", "IPA_TRANSCRIPTION": "/nɑt/"}, "step_reached": 4}
+{"id": "7", "name": "really", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "really", "IPA_TRANSCRIPTION": "/ˈriːəli/"}, "step_reached": 4}
