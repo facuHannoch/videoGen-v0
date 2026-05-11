@@ -13,6 +13,8 @@ import { ScreenSweepShader } from "./videoCompositions/effects/ScreenSweepShader
 import { CSSProperties } from "react";
 import airbagData from "./content.json"; // Assumes content.json is in the same directory and contains the JSON data
 import { SpeakerOnIcon } from "./videoCompositions/vectors/SpeakerOnIcon";
+import { ScreenView } from "./videoCompositions/ScreenView";
+import screenKeyframesData from "./screen-keyframes.json";
 
 type ContentPart = {
   id: string;
@@ -160,10 +162,19 @@ export const WordPronunciationV2VideoComposition = () => {
       </Series> */}
 
       <Sequence durationInFrames={videoStore.getFrameForSeconds(5)}>
+
         <OffthreadVideo
           src={staticFile("scenes/scene-1.mp4")}
           style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 1 }}
         />
+        <ScreenView screenId="main" keyframes={screenKeyframesData.screens.main}>
+          {/* <TopPrompt text="Sound /m/" /> */}
+          <BlackAbsoluteFill>
+            <StandardText text="Sound /m/" style={{ fontSize: 240, padding: "10px 20px", position: "absolute", top: 100 }} />
+
+          </BlackAbsoluteFill>
+        </ScreenView>
+
       </Sequence>
       <Sequence from={videoStore.getFrameForSeconds(4.8)} durationInFrames={videoStore.getFrameForSeconds(3)}>
         <OffthreadVideo

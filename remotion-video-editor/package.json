@@ -25,7 +25,7 @@
   },
   "scripts": {
     "generate-manifest": "node scripts/generate-audios-manifest.mjs",
-    "dev": "remotionb studio",
+    "dev": "trap 'kill 0' EXIT; node tools/keyframe-server.mjs & remotionb studio",
     "build": "remotionb bundle",
     "upgrade": "remotionb upgrade",
     "lint": "eslint src && tsc"
