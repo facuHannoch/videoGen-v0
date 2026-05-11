@@ -16,6 +16,7 @@ import { SpeakerOnIcon } from "./videoCompositions/vectors/SpeakerOnIcon";
 import { ScreenView } from "./videoCompositions/ScreenView";
 import screenKeyframesData from "./screen-keyframes.json";
 import { ScreenEditorHUD } from "./videoCompositions/ScreenEditorHUD";
+import { ScreenFill } from "./videoCompositions/fills/ScreenFill";
 
 type ContentPart = {
   id: string;
@@ -93,6 +94,12 @@ export const WordPronunciationV2VideoComposition = () => {
           </>
         ],
         [
+
+        ],
+        [
+
+        ],
+        [
           // phoneme words - dynamic scene index logic can be complex without pre-calculation
           <IPAPhonemeScene
             key={`phoneme-words-${phoneme}-${index}`}
@@ -102,7 +109,10 @@ export const WordPronunciationV2VideoComposition = () => {
             exampleWords={explanationWords} // Passing the words array
           />
         ]
-      ];
+      ].map((sceneContent, i) => <ScreenView screenId="staticCenteredScreen"
+        keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+        {sceneContent}
+      </ScreenView>);
     });
   };
 
@@ -110,24 +120,129 @@ export const WordPronunciationV2VideoComposition = () => {
   const scenes = [
     [ // opening line
       <>
-        <TopPrompt text="how to pronounce mom" />
       </>
     ],
     [ // gap
       <>
-        <TopPrompt text="how to pronounce mom" />
       </>
     ],
     [ // robot: try it
-    ],
-    [ // gap -> zoom
-    ],
-    [ // gap -> glitch effect + countdown
 
     ],
-    [ // gap
+    [ // glitch effect + countdown
+      <>
+        <TopPrompt text="Sound /m/" />
+        <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+          {/* <BlackAbsoluteFill>
+            <StandardText text={word} style={{ fontSize: 240, padding: "10px 20px", }} />
+            <StandardText text={wordIPA} style={{ fontSize: 240, padding: "10px 20px", }} />
+          </BlackAbsoluteFill> */}
+          <BlackAbsoluteFill>
+            <StandardText text="Let's look at each phoneme" style={{ fontSize: 240, padding: "10px 20px", }} />
+          </BlackAbsoluteFill>
+
+        </ScreenView>
+      </>
+    ],
+    [ // glitch effect + countdown
+      <>
+        <TopPrompt text="Sound /m/" />
+        <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+          {/* <TopPrompt text="Sound /m/" /> */}
+          <ScreenFill>
+            <StandardText text="Let's look at each phoneme" style={{ fontSize: 240, padding: "10px 20px", }} />
+          </ScreenFill>
+        </ScreenView>
+      </>
+    ],
+    ...generatePhonemeScenes(),
+    [ // Say the full word
+      <>
+        <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+          <BlackAbsoluteFill>
+            <StandardText text="Say the full word" style={{ fontSize: 240, padding: "10px 20px", }} />
+          </BlackAbsoluteFill>
+        </ScreenView>
+      </>
     ],
     [ // gap
+      <>
+        <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+          <BlackAbsoluteFill>
+            <StandardText text={word} style={{ fontSize: 240, padding: "10px 20px", }} />
+            <StandardText text={wordIPA} style={{ fontSize: 240, padding: "10px 20px", }} />
+          </BlackAbsoluteFill>
+        </ScreenView>
+      </>
+    ],
+    [ // Ava: [word]
+      <>
+        <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+          <BlackAbsoluteFill>
+            <StandardText text={word} style={{ fontSize: 240, padding: "10px 20px", }} />
+            <StandardText text={wordIPA} style={{ fontSize: 240, padding: "10px 20px", }} />
+          </BlackAbsoluteFill>
+        </ScreenView>
+      </>
+    ],
+    [ // Say the sentence
+      <>
+        <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+          <BlackAbsoluteFill>
+            <StandardText text={sentence} style={{ fontSize: 240, padding: "10px 20px", }} />
+          </BlackAbsoluteFill>
+        </ScreenView>
+      </>
+    ],
+    [ // gap
+      <>
+        <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+          <BlackAbsoluteFill>
+            <StandardText text={sentence} style={{ fontSize: 240, padding: "10px 20px", }} />
+          </BlackAbsoluteFill>
+        </ScreenView>
+      </>
+    ],
+    [ // Ava: [word]
+      <>
+        <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+          <BlackAbsoluteFill>
+            <StandardText text={sentence} style={{ fontSize: 240, padding: "10px 20px", }} />
+          </BlackAbsoluteFill>
+        </ScreenView>
+      </>
+    ],
+    [ // gap
+      <>
+        {/* <Sequence durationInFrames={videoStore.getAudioDurationFrames("audios/17_i_am_not_ready_yet.wav")! - videoStore.getFrameForSeconds(0.4)}>
+          <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+            <BlackAbsoluteFill>
+              <StandardText text="{turn off}" style={{ fontSize: 240, padding: "10px 20px", }} />
+            </BlackAbsoluteFill>
+          </ScreenView>
+        </Sequence> */}
+      </>
+    ],
+    [ // robot: now do it for real
+      <>
+        <TopPrompt text={`ipacoach.com/en/practice/${word}`} />
+        {/* <ScreenView screenId="staticCTAScreen" keyframes={screenKeyframesData.screens.staticCTAScreen}>
+          <BlackAbsoluteFill>
+            <StandardText text="for free" style={{ fontSize: 240, padding: "10px 20px", }} />
+            <StandardText text="RECORDING" style={{ fontSize: 240, padding: "10px 20px", }} />
+          </BlackAbsoluteFill>
+        </ScreenView> */}
+      </>
+    ],
+    [ // robot: practice
+      <>
+        {/* <ScreenView screenId="staticCTAScreen" keyframes={screenKeyframesData.screens.staticCTAScreen}>
+          <BlackAbsoluteFill>
+            <StandardText text="practice now for free" style={{ fontSize: 240, padding: "10px 20px", }} />
+            <StandardText text="RECORDING" style={{ fontSize: 240, padding: "10px 20px", }} />
+          </BlackAbsoluteFill>
+        </ScreenView> */}
+      </>
     ],
 
   ];
@@ -141,6 +256,11 @@ export const WordPronunciationV2VideoComposition = () => {
     [0, 0.3],
     { extrapolateRight: "clamp" }
   );
+
+  const scene1Duration = videoStore.getFrameForSeconds(5)
+  const scene2Duration = videoStore.getFrameForSeconds(3)
+  const staticScreenStart = scene1Duration + scene2Duration - videoStore.getFrameForSeconds(0.2)
+  const staticScreenDuration = videoStore.getTotalDurationFrames() - staticScreenStart - videoStore.getFrameForSeconds(4.8)
 
 
   return (
@@ -163,8 +283,8 @@ export const WordPronunciationV2VideoComposition = () => {
       </Series> */}
 
       <ScreenEditorHUD />
-      <Sequence durationInFrames={videoStore.getFrameForSeconds(5)}>
 
+      <Sequence durationInFrames={scene1Duration}>
         <OffthreadVideo
           src={staticFile("scenes/scene-1.mp4")}
           style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 1 }}
@@ -172,23 +292,49 @@ export const WordPronunciationV2VideoComposition = () => {
         <ScreenView screenId="main1" keyframes={screenKeyframesData.screens.main1}>
           {/* <TopPrompt text="Sound /m/" /> */}
           <BlackAbsoluteFill>
-            <StandardText text="Sound /m/" style={{ fontSize: 240, padding: "10px 20px", position: "absolute", top: 100 }} />
+            <StandardText text={word} style={{ fontSize: 240, padding: "10px 20px", }} />
           </BlackAbsoluteFill>
         </ScreenView>
 
       </Sequence>
-      <Sequence from={videoStore.getFrameForSeconds(4.8)} durationInFrames={videoStore.getFrameForSeconds(3)}>
+
+      <Sequence from={scene1Duration - videoStore.getFrameForSeconds(0.2)} durationInFrames={scene2Duration}>
         <OffthreadVideo
           src={staticFile("scenes/scene-2.mp4")}
           style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 1 }}
         />
         <ScreenView screenId="main2" keyframes={screenKeyframesData.screens.main2}>
-          {/* <TopPrompt text="Sound /m/" /> */}
+          <BlackAbsoluteFill>
+            <StandardText text={word} style={{ fontSize: 240, padding: "10px 20px", }} />
+          </BlackAbsoluteFill>
+          <Audio src={staticFile("audios/02_first-_try_it.wav")} volume={volume} />
+        </ScreenView>
+      </Sequence>
+
+      <Sequence from={staticScreenStart - videoStore.getFrameForSeconds(0.2)} durationInFrames={staticScreenDuration + videoStore.getFrameForSeconds(0.4)}>
+        <Img src={staticFile("images/snapshot3.png")} style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 1 }} />
+        {/* <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
           <BlackAbsoluteFill>
             <StandardText text="Sound /m/" style={{ fontSize: 240, padding: "10px 20px", position: "absolute", top: 100 }} />
           </BlackAbsoluteFill>
+        </ScreenView> */}
+      </Sequence>
+
+
+      <Sequence from={videoStore.getTotalDurationFrames() - videoStore.getFrameForSeconds(4.8)} durationInFrames={videoStore.getFrameForSeconds(4.8)}>
+        <OffthreadVideo
+          src={staticFile("scenes/scene-3.mp4")}
+          style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 1 }}
+        />
+        <ScreenView screenId="main3" keyframes={screenKeyframesData.screens.main3}>
+          {/* <TopPrompt text="Sound /m/" /> */}
+          <OffthreadVideo
+            src={staticFile("videos/word-page-demonstrastion-5s.mp4")}
+            style={{ position: "absolute", width: "120%", height: "100%", objectFit: "fill", opacity: 1 }}
+          />
         </ScreenView>
       </Sequence>
+
 
       {
         timelineClips.map((clip, sceneIndex) => {
