@@ -1,4 +1,4 @@
-import { Img, interpolate, OffthreadVideo, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { Img, interpolate, OffthreadVideo, Sequence, Series, staticFile, useCurrentFrame } from "remotion";
 import { Audio } from "@remotion/media";
 import { videoStore } from "./state/videoStore";
 import { StandardText } from "./videoCompositions/text/StandardText";
@@ -7,9 +7,12 @@ import { OneWordCaption } from "./videoCompositions/text/subtitles/OneWordCaptio
 import { IntroNoise } from "./videoCompositions/fills/IntroNoise";
 import { StandardTextLetterHighlighted } from "./videoCompositions/text/StandardTextLetterHighlighted";
 import { TopPrompt } from "./videoCompositions/text/TopPrompt";
+import { Wave } from "./videoCompositions/effects/WaveReveal";
+import { WaveCoverFill } from "./videoCompositions/fills/WaveCoverFill";
 import { ScreenSweepShader } from "./videoCompositions/effects/ScreenSweepShader";
 import { CSSProperties } from "react";
 import airbagData from "./content.json"; // Assumes content.json is in the same directory and contains the JSON data
+import { SpeakerOnIcon } from "./videoCompositions/vectors/SpeakerOnIcon";
 
 type ContentPart = {
   id: string;
@@ -22,7 +25,7 @@ type ContentData = {
 };
 
 // Composition Component for Word Pronunciation
-export const WordPronunciationVideoComposition = () => {
+export const WordPronunciationV2VideoComposition = () => {
   const timelineClips = videoStore.getTimelineClips();
 
   // Guard against empty timelineClips
@@ -32,6 +35,7 @@ export const WordPronunciationVideoComposition = () => {
 
   // Find the required part from JSON based on content.json structure
   const contentData = airbagData as ContentData;
+  // UPDATED: Correct JSON data part - points to "wall" now, based on content.json
   const jsonDataPart = contentData.parts.find((part: ContentPart) => part.title === "VIDEO_CONTENT");
   if (!jsonDataPart) {
     return <StandardText text="Word data not found" />
@@ -62,6 +66,7 @@ export const WordPronunciationVideoComposition = () => {
       const template = promptTexts[targetLanguage] || promptTexts.en;
       // Replace the placeholder
       const promptText = template.replace('PHONEME', phoneme);
+      // TARGET LANGUAGE SHOULD BE LOWERCASE
       // Correct character replacements for IPA symbols for image files if needed.
       const phonemeDiagramURL = `images/phonemes-illustrative-images/${targetLanguage.toLowerCase()}/diagram-${phoneme.replace(/ː/g, "").replace(/ə/g, "schwa")}.png`
 
@@ -85,14 +90,6 @@ export const WordPronunciationVideoComposition = () => {
           </>
         ],
         [
-          // try it prompt
-          <StandardText text={"Try it yourself!"} style={{ fontSize: 72, padding: "24px 30px" }} />
-        ],
-        [
-          // pause - gap
-          null
-        ],
-        [
           // phoneme words - dynamic scene index logic can be complex without pre-calculation
           <IPAPhonemeScene
             key={`phoneme-words-${phoneme}-${index}`}
@@ -108,78 +105,31 @@ export const WordPronunciationVideoComposition = () => {
 
   // Scene contents based on English language resources and timeline positions
   const scenes = [
-    [
-      // intro - 01_can_you_pronounce_mom_correctly.wav
-      <OffthreadVideo
-        src={staticFile("scenes/scene-1.mp4")}
-        style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 0.6 }}
-      />
-    ],
-    [
-      // try it - 02_first-_try_it.wav
-      <StandardText text={"First, try it yourself!"} style={{ fontSize: 72, padding: "24px 30px" }} />
-    ],
-    [
-      // pause - gap
-      null
-    ],
-    [
-      // word pronunciation - 03_mom.wav
+    [ // opening line
       <>
-        <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px", margin: "1rem" }} />
-        <StandardText text={wordIPA} style={{ fontSize: 72, padding: "24px 30px" }} />
+        <TopPrompt text="how to pronounce mom" />
       </>
     ],
-    [
-      // transition to breakdown - 04_let-s_look_at_each_phoneme.wav
+    [ // gap
       <>
-        <StandardText text={"Let's look at each phoneme"} style={{ fontSize: 72, padding: "24px 30px" }} />
-        <Audio src={staticFile("sounds/mouse-click-double-hard.mp3")} volume={0.5} />
-        <Sequence from={0} >
-          <ScreenSweepShader />
-          <Audio src={staticFile("sounds/swoosh-not-end.mp3")} />
-        </Sequence>
+        <TopPrompt text="how to pronounce mom" />
       </>
     ],
-    ...generatePhonemeScenes(), // Injects scenes for phonemes
-    [
-      // phonemes native - 14_now_say_the_full_word.wav
-      <StandardText text={"Now say the full word."} style={{ fontSize: 72, padding: "24px 30px" }} />
+    [ // robot: try it
     ],
-    [
-      // try it pause - gap
-      null
+    [ // gap -> zoom
     ],
-    [
-      // final pronunciation 1 - 15_mom.wav
-      <StandardText text={word} style={{ fontSize: 72, padding: "24px 30px" }} />
+    [ // gap -> glitch effect + countdown
+
     ],
-    [
-      // now within sentence - 16_now_say_it_within_a_sentence.wav
-      <StandardText text={"Now say it within a sentence:"} style={{ fontSize: 72, padding: "24px 30px" }} />
+    [ // gap
     ],
-    [
-      // sentence pause - gap
-      null
+    [ // gap
     ],
-    [
-      // final sentence - 17_my_mom_is_at_home.wav
-      <StandardText text={sentence} style={{ fontSize: 72, padding: "24px 30px" }} />
-    ],
-    [
-      // Wanna practice? - 18_now_do_it_for_real.wav
-      <>
-        <StandardText text={"Now do it for real!"} style={{ fontSize: 72, padding: "24px 30px" }} />
-      </>
-    ],
-    [
-      // CTA - 19_practice_mom_with_instant_feedback_-_completely_free.wav
-      <>
-        <StandardText text={"Practice this word now!"} style={{ fontSize: 56, padding: "24px 30px", margin: "12px" }} />
-        <StandardText text={"Click the link in the description"} style={{ fontSize: 56, padding: "24px 30px", margin: "24px" }} />
-      </>
-    ],
+
   ];
+
+  // const clockvideoStore.framesToAudio(1) + videoStore.getFrameForSeconds(3)
 
   const fadeDuration = videoStore.getFPS()
   const volume = interpolate(
@@ -192,40 +142,76 @@ export const WordPronunciationVideoComposition = () => {
 
   return (
     <>
-      <IntroNoise />
 
-      <Sequence from={0} durationInFrames={timelineClips.length > 0 ? timelineClips[timelineClips.length - 1].startFrame + timelineClips[timelineClips.length - 1].durationFrames : 0}>
-        <Audio
-          src={staticFile("music/tunetank-melodic-type-beat-349530.mp3")}
-          volume={volume}
+      {/* <Series>
+        <Series.Sequence durationInFrames={videoStore.getFrameForSeconds(5)}>
+          <OffthreadVideo
+            src={staticFile("scenes/scene-1.mp4")}
+            style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 1 }}
+          />
+
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={videoStore.getFrameForSeconds(5)}>
+          <OffthreadVideo
+            src={staticFile("scenes/scene-2.mp4")}
+            style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 1 }}
+          />
+        </Series.Sequence>
+      </Series> */}
+
+      <Sequence durationInFrames={videoStore.getFrameForSeconds(5)}>
+        <OffthreadVideo
+          src={staticFile("scenes/scene-1.mp4")}
+          style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 1 }}
         />
       </Sequence>
-
-      <StandardTextLetterHighlighted text={`Gamified learning at ipacoach.com/en/practice/${word}`} highlightedCharacter={`ipacoach.com/en/practice/${word}`} style={{ fontSize: 24, margin: "12px", backgroundColor: "#bfc8d6DF" }} highlightedStyle={{ fontSize: 24, color: "#0c336e" }} />
+      <Sequence from={videoStore.getFrameForSeconds(4.8)} durationInFrames={videoStore.getFrameForSeconds(3)}>
+        <OffthreadVideo
+          src={staticFile("scenes/scene-2.mp4")}
+          style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 1 }}
+        />
+      </Sequence>
 
       {
         timelineClips.map((clip, sceneIndex) => {
           const src = clip.src;
           const sceneContent = scenes[sceneIndex] ?? null;
 
+          // Handle gap clips (just reserve time, no content unless added to `scenes`)
           if (clip.type === "gap") {
             return (
               <Sequence
-                key={`gap-${clip.startFrame}`}
+                key={clip.id ?? `gap-${clip.startFrame}`}
                 name="gap"
                 from={clip.startFrame}
                 durationInFrames={clip.durationFrames}
               >
-                <BlackAbsoluteFill>
-                  {sceneContent}
-                </BlackAbsoluteFill>
+                {sceneContent}
               </Sequence>
             );
           }
 
           // Handle missing audio file path gracefully
-          if (!src) {
-            return null;
+          // if (!src) {
+          //   return null;
+          // }
+
+          // Handle SFX clips separately, placing them in BlackAbsoluteFill with optional scene content
+          if (clip.type === "sfx") {
+            return (
+              <Sequence
+                key={clip.id ?? `${src}-${clip.startFrame}`}
+                name={src.split("/").pop()}
+                from={clip.startFrame}
+                durationInFrames={clip.durationFrames}
+              >
+                <BlackAbsoluteFill>
+                  <Audio src={staticFile(src)} volume={clip.volume ?? 1} />
+                  {sceneContent}
+                  {/* OneWordCaption logic might need adaptation for SFX if word timings are unavailable */}
+                </BlackAbsoluteFill>
+              </Sequence>
+            );
           }
 
           // Load Audio metadata from store
@@ -237,7 +223,7 @@ export const WordPronunciationVideoComposition = () => {
           // Render standard audio clips with OneWordCaption and custom scene content
           return (
             <Sequence
-              key={`${src}-${clip.startFrame}`}
+              key={clip.id ?? `${src}-${clip.startFrame}`}
               name={src.split("/").pop()}
               from={clip.startFrame}
               durationInFrames={clip.durationFrames}

@@ -85,7 +85,7 @@ export const OneWordCaption = ({ wordTimings }: OneWordCaptionProps) => {
                 bottom: 300,
                 width: "100%",
                 textAlign: "center",
-                color: "#F0F0F0",
+                color: "#221f1f",
                 fontSize: 72,
                 fontWeight: "bold",
                 textTransform: "none",

@@ -3,106 +3,186 @@
   voice="en-US-AVA:DragonHDLatestNeural"
   output_dir="audioGen-output">
 
-  <!-- IMPORTANT: Read the content file to understand the target language. If the target language is English, everything should be in English. Otherwise, follow this reference file on what should be still in english, and what should be said in the target language. -->
+  <!-- IMPORTANT: Read the content file to understand the target language. If the target language is
+  English, everything should be in English. Otherwise, follow this reference file on what should be
+  still in english, and what should be said in the target language. -->
 
+  <!-- Each audio element inherits the project language and voice, and these will be used if they
+  are not specified -->
+  <!-- ## HOOK -->
   <speak>
-    <voice lang="en-US">
+    <voice name="en-US-Andrew:DragonHDLatestNeural">
       <ssml_text>
-        <prosody rate="+20%">I'll teach you how to pronounce this word</prosody>
-      </ssml_text>
-    </voice>
-  </speak>
-  <speak>
-    <voice lang="en-US">
-      <prosody rate="slow">bad.</prosody>  <!-- /bæd/ -->
-    </voice>
-  </speak>
-
-  <speak>
-    <voice lang="en-US">
-      <ssml_text>
-        <prosody rate="+20%">Let's look at each phoneme</prosody>
+        <prosody rate="+15%">Can you pronounce mom correctly?</prosody>
       </ssml_text>
     </voice>
   </speak>
 
+  <!-- 0.5s delay then "mom" appears on screen. 3-second glitch pause. -->
+
   <speak>
-    <voice lang="en-US">
+    <voice name="en-US-Andrew:DragonHDLatestNeural">
       <ssml_text>
-        <prosody rate="+20%">Press both lips together, build up air briefly, then release it with your voice on.</prosody>
+        <prosody rate="+15%">First, try it!</prosody>
       </ssml_text>
     </voice>
   </speak>
 
+  <!-- 3-second glitch pause on screen only -->
+
   <speak>
-    <voice lang="en-US">
+    <voice name="en-US-Ava:DragonHDLatestNeural">
       <ssml_text>
-        <prosody rate="slow">ball, bat, back</prosody>
+        <prosody rate="slow">mom.</prosody>
       </ssml_text>
     </voice>
   </speak>
 
   <speak>
-    <voice lang="en-US">
+    <voice name="en-US-Andrew:DragonHDLatestNeural">
       <ssml_text>
-        <prosody rate="+20%">Open your mouth wide, keep your lips relaxed, and push your tongue
-          forward and down.</prosody>
+        <prosody rate="+15%">Let's look at each phoneme.</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <!-- ## PHONEMES EXPLANATION -->
+
+  <!-- Phoneme 1: /m/ -->
+  <speak>
+    <voice name="en-US-Ava:DragonHDLatestNeural">
+      <ssml_text>
+        <prosody rate="+10%">Close your lips together, let air flow through your nose, and use your
+          voice.</prosody>
       </ssml_text>
     </voice>
   </speak>
 
   <speak>
-    <voice lang="en-US">
+    <voice name="en-US-Andrew:DragonHDLatestNeural">
       <ssml_text>
-        <prosody rate="slow">cat, bad, apple</prosody>
+        <prosody rate="+15%">Try it!</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <!-- 2-second glitch pause on screen only -->
+
+  <speak>
+    <voice name="en-US-Ava:DragonHDLatestNeural">
+      <ssml_text>
+        <prosody rate="slow">man, milk, home.</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <!-- Phoneme 2: /ɑ/ -->
+  <speak>
+    <voice name="en-US-Ava:DragonHDLatestNeural">
+      <ssml_text>
+        <prosody rate="+10%">Open your mouth wide, keep your tongue low and relaxed, and do not
+          round your lips.</prosody>
       </ssml_text>
     </voice>
   </speak>
 
   <speak>
-    <voice lang="en-US">
+    <voice name="en-US-Andrew:DragonHDLatestNeural">
       <ssml_text>
-        <prosody rate="+20%">Place the tip of your tongue on the ridge just behind your upper teeth, then release while using your voice.</prosody>
+        <prosody rate="+15%">Now try it yourself!</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <!-- 2-second glitch pause on screen only -->
+
+  <speak>
+    <voice name="en-US-Ava:DragonHDLatestNeural">
+      <ssml_text>
+        <prosody rate="slow">father, hot, box.</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <!-- Phoneme 3: /m/ -->
+  <speak>
+    <voice name="en-US-Ava:DragonHDLatestNeural">
+      <ssml_text>
+        <prosody rate="+10%">Press your lips together again, same nasal sound as the first.</prosody>
       </ssml_text>
     </voice>
   </speak>
 
   <speak>
-    <voice lang="en-US">
+    <voice name="en-US-Andrew:DragonHDLatestNeural">
       <ssml_text>
-        <prosody rate="slow">dog, day, red</prosody>
+        <prosody rate="+15%">Say it!</prosody>
       </ssml_text>
     </voice>
   </speak>
-  
-  <!-- Note: ADD AS MANY SETS OF EXPLANATION->PHONEMES ARE NECESSARY TO COVER THE ENTIRE WORD. So if there are 5 phonemes, add more xml tags. -->
-  
+
+  <!-- 2-second glitch pause on screen only -->
+
   <speak>
-    <voice lang="en-US">
-      <prosody rate="slow">bad.</prosody>
+    <voice name="en-US-Ava:DragonHDLatestNeural">
+      <ssml_text>
+        <prosody rate="slow">mouse, summer, mom.</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <!-- ## PUTTING IT TOGETHER -->
+  <speak>
+    <voice name="en-US-Andrew:DragonHDLatestNeural">
+      <ssml_text>
+        <prosody rate="+15%">Now say the full word.</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <!-- 2-second glitch pause on screen only -->
+
+  <speak>
+    <voice name="en-US-Ava:DragonHDLatestNeural">
+      <ssml_text>
+        <prosody rate="slow">mom.</prosody>
+      </ssml_text>
     </voice>
   </speak>
 
   <speak>
-    <voice lang="en-US">
-      <prosody rate="slow">SENTENCE THAT USES THE WORD.</prosody>
+    <voice name="en-US-Andrew:DragonHDLatestNeural">
+      <ssml_text>
+        <prosody rate="+15%">Now say it within a sentence:</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <!-- 3-second glitch pause on screen only -->
+
+  <speak>
+    <voice name="en-US-Ava:DragonHDLatestNeural">
+      <ssml_text>
+        <prosody rate="slow">My mom is at home.</prosody>
+      </ssml_text>
+    </voice>
+  </speak>
+
+  <!-- ## CTA — camera zooms out, robot back in frame, screen shows ipacoach.com/mom -->
+  <speak>
+    <voice name="en-US-Andrew:DragonHDLatestNeural">
+      <ssml_text>
+        <prosody rate="+15%">Now do it for real!</prosody>
+      </ssml_text>
     </voice>
   </speak>
 
   <speak>
-    <voice lang="en-US">
-      <prosody rate="slow">bad.</prosody>
-    </voice>
-  </speak>
-  <speak>
-    <voice lang="en-US">
-      <prosody rate="+25%">Wanna practice this word?</prosody>
+    <voice name="en-US-Andrew:DragonHDLatestNeural">
+      <ssml_text>
+        <prosody rate="+10%">Practice mom with instant feedback — completely free.</prosody>
+      </ssml_text>
     </voice>
   </speak>
 
-  <speak>
-    <voice lang="en-US">
-      <prosody rate="+18%">Do it now for free by going to the website in the comments.</prosody>
-    </voice>
-  </speak>
 </tts_project>

@@ -1,3 +1,5 @@
+- [x] only promote to done.jsonl if it completed all the steps
+- [ ] allowing to pass commands to specific steps. Like generating the audio unified (this could affect steps that follow so should be reviewed carefully)
 
 ## Video 
 
