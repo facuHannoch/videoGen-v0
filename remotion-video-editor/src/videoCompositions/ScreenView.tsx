@@ -27,6 +27,14 @@ function roundCorners(c: Corners): Corners {
   return { tl: r(c.tl), tr: r(c.tr), br: r(c.br), bl: r(c.bl) };
 }
 
+function naturalDimensions(keyframes: ScreenKeyframe[]): { w: number; h: number } | null {
+  if (!keyframes.length) return null;
+  const { tl, tr, br, bl } = keyframes[0].corners;
+  const w = ((tr.x - tl.x) + (br.x - bl.x)) / 2;
+  const h = ((bl.y - tl.y) + (br.y - tr.y)) / 2;
+  return { w: Math.round(w), h: Math.round(h) };
+}
+
 export const ScreenView: React.FC<ScreenViewProps> = ({
   screenId,
   keyframes,
@@ -41,8 +49,9 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
   const { isRendering } = getRemotionEnvironment();
   const { activeScreenId, activeKfFrame, handlesVisible } = useScreenEditorState();
 
-  const contentWidth = contentWidthProp ?? videoWidth;
-  const contentHeight = contentHeightProp ?? videoHeight;
+  const natural = naturalDimensions(keyframes);
+  const contentWidth = contentWidthProp ?? natural?.w ?? videoWidth;
+  const contentHeight = contentHeightProp ?? natural?.h ?? videoHeight;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [devCorners, setDevCorners] = useState<Corners | null>(null);

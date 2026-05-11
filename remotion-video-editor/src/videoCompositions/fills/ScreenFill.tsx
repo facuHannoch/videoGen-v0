@@ -9,7 +9,7 @@ interface ScreenFillProps {
 
 export const ScreenFill = ({
   children,
-  background = "#fff",
+  background = "#DCDCDC",
   justify = "center",
   align = "center",
 }: ScreenFillProps) => {

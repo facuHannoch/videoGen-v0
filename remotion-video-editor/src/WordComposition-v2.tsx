@@ -78,26 +78,33 @@ export const WordPronunciationV2VideoComposition = () => {
         [
           // phoneme explanation - dynamic sound/image loading
           <>
-            <TopPrompt text={promptText} />
+            {/* <TopPrompt text={promptText} /> */}
             <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={0.8} />
-            <Img
-              src={staticFile(phonemeDiagramURL)}
-              style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", position: 'absolute', top: 500 }}
-            />
-            <IPAPhonemeScene
+            <ScreenFill>
+              <Img
+                src={staticFile(phonemeDiagramURL)}
+                style={{ maxWidth: "95%", maxHeight: "95%", objectFit: "contain", position: 'absolute' }}
+              />
+            </ScreenFill>
+
+            {/* <IPAPhonemeScene
               key={`phoneme-explanation-${phoneme}-${index}`}
               wordIPA={wordIPA}
               highlightedCharacter={phoneme}
               containerStyle={{ position: 'absolute', top: 280 }}
               sound={false} // No sound for explanation scene in breakdown structure based on previous example
-            />
+            /> */}
           </>
         ],
-        [
-
+        [ // try it
+          <ScreenFill>
+            <StandardText text="Try it!" style={{ fontSize: 72, padding: "24px 30px" }} />
+          </ScreenFill>
         ],
         [
-
+          <ScreenFill>
+            <StandardText text="CLOCK EFFECT" style={{ fontSize: 72, padding: "24px 30px" }} />
+          </ScreenFill>
         ],
         [
           // phoneme words - dynamic scene index logic can be complex without pre-calculation
@@ -131,15 +138,12 @@ export const WordPronunciationV2VideoComposition = () => {
     ],
     [ // glitch effect + countdown
       <>
-        <TopPrompt text="Sound /m/" />
+        {/* <TopPrompt text="Sound /m/" /> */}
         <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
-          {/* <BlackAbsoluteFill>
-            <StandardText text={word} style={{ fontSize: 240, padding: "10px 20px", }} />
-            <StandardText text={wordIPA} style={{ fontSize: 240, padding: "10px 20px", }} />
-          </BlackAbsoluteFill> */}
-          <BlackAbsoluteFill>
-            <StandardText text="Let's look at each phoneme" style={{ fontSize: 240, padding: "10px 20px", }} />
-          </BlackAbsoluteFill>
+          <ScreenFill>
+            <StandardText text={word} style={{ fontSize: 96, padding: "10px 20px", margin: "10px 20px" }} />
+            <StandardText text={wordIPA} style={{ fontSize: 96, padding: "10px 20px", margin: "10px 20px" }} />
+          </ScreenFill>
 
         </ScreenView>
       </>
@@ -150,7 +154,7 @@ export const WordPronunciationV2VideoComposition = () => {
         <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
           {/* <TopPrompt text="Sound /m/" /> */}
           <ScreenFill>
-            <StandardText text="Let's look at each phoneme" style={{ fontSize: 240, padding: "10px 20px", }} />
+            <StandardText text="Let's look at each phoneme" style={{ fontSize: 96, padding: "10px 20px", }} />
           </ScreenFill>
         </ScreenView>
       </>
@@ -159,38 +163,38 @@ export const WordPronunciationV2VideoComposition = () => {
     [ // Say the full word
       <>
         <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
-          <BlackAbsoluteFill>
+          <ScreenFill>
             <StandardText text="Say the full word" style={{ fontSize: 240, padding: "10px 20px", }} />
-          </BlackAbsoluteFill>
+          </ScreenFill>
         </ScreenView>
       </>
     ],
     [ // gap
       <>
         <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
-          <BlackAbsoluteFill>
+          <ScreenFill>
             <StandardText text={word} style={{ fontSize: 240, padding: "10px 20px", }} />
             <StandardText text={wordIPA} style={{ fontSize: 240, padding: "10px 20px", }} />
-          </BlackAbsoluteFill>
+          </ScreenFill>
         </ScreenView>
       </>
     ],
     [ // Ava: [word]
       <>
         <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
-          <BlackAbsoluteFill>
+          <ScreenFill>
             <StandardText text={word} style={{ fontSize: 240, padding: "10px 20px", }} />
             <StandardText text={wordIPA} style={{ fontSize: 240, padding: "10px 20px", }} />
-          </BlackAbsoluteFill>
+          </ScreenFill>
         </ScreenView>
       </>
     ],
     [ // Say the sentence
       <>
         <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
-          <BlackAbsoluteFill>
+          <ScreenFill>
             <StandardText text={sentence} style={{ fontSize: 240, padding: "10px 20px", }} />
-          </BlackAbsoluteFill>
+          </ScreenFill>
         </ScreenView>
       </>
     ],
@@ -206,9 +210,9 @@ export const WordPronunciationV2VideoComposition = () => {
     [ // Ava: [word]
       <>
         <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
-          <BlackAbsoluteFill>
+          <ScreenFill>
             <StandardText text={sentence} style={{ fontSize: 240, padding: "10px 20px", }} />
-          </BlackAbsoluteFill>
+          </ScreenFill>
         </ScreenView>
       </>
     ],
@@ -216,9 +220,9 @@ export const WordPronunciationV2VideoComposition = () => {
       <>
         {/* <Sequence durationInFrames={videoStore.getAudioDurationFrames("audios/17_i_am_not_ready_yet.wav")! - videoStore.getFrameForSeconds(0.4)}>
           <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
-            <BlackAbsoluteFill>
+            <ScreenFill>
               <StandardText text="{turn off}" style={{ fontSize: 240, padding: "10px 20px", }} />
-            </BlackAbsoluteFill>
+            </ScreenFill>
           </ScreenView>
         </Sequence> */}
       </>
@@ -227,20 +231,20 @@ export const WordPronunciationV2VideoComposition = () => {
       <>
         <TopPrompt text={`ipacoach.com/en/practice/${word}`} />
         {/* <ScreenView screenId="staticCTAScreen" keyframes={screenKeyframesData.screens.staticCTAScreen}>
-          <BlackAbsoluteFill>
+          <ScreenFill>
             <StandardText text="for free" style={{ fontSize: 240, padding: "10px 20px", }} />
             <StandardText text="RECORDING" style={{ fontSize: 240, padding: "10px 20px", }} />
-          </BlackAbsoluteFill>
+          </ScreenFill>
         </ScreenView> */}
       </>
     ],
     [ // robot: practice
       <>
         {/* <ScreenView screenId="staticCTAScreen" keyframes={screenKeyframesData.screens.staticCTAScreen}>
-          <BlackAbsoluteFill>
+          <ScreenFill>
             <StandardText text="practice now for free" style={{ fontSize: 240, padding: "10px 20px", }} />
             <StandardText text="RECORDING" style={{ fontSize: 240, padding: "10px 20px", }} />
-          </BlackAbsoluteFill>
+          </ScreenFill>
         </ScreenView> */}
       </>
     ],
@@ -291,9 +295,9 @@ export const WordPronunciationV2VideoComposition = () => {
         />
         <ScreenView screenId="main1" keyframes={screenKeyframesData.screens.main1}>
           {/* <TopPrompt text="Sound /m/" /> */}
-          <BlackAbsoluteFill>
-            <StandardText text={word} style={{ fontSize: 240, padding: "10px 20px", }} />
-          </BlackAbsoluteFill>
+          <ScreenFill>
+            <StandardText text={word} style={{ fontSize: 124, padding: "10px 20px", }} />
+          </ScreenFill>
         </ScreenView>
 
       </Sequence>
@@ -304,9 +308,9 @@ export const WordPronunciationV2VideoComposition = () => {
           style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 1 }}
         />
         <ScreenView screenId="main2" keyframes={screenKeyframesData.screens.main2}>
-          <BlackAbsoluteFill>
+          <ScreenFill>
             <StandardText text={word} style={{ fontSize: 240, padding: "10px 20px", }} />
-          </BlackAbsoluteFill>
+          </ScreenFill>
           <Audio src={staticFile("audios/02_first-_try_it.wav")} volume={volume} />
         </ScreenView>
       </Sequence>
@@ -427,7 +431,7 @@ const IPAPhonemeScene = ({
 }: IPAPhonemeSceneProps) => {
   return (
     <>
-      <div style={containerStyle}>
+      <ScreenFill>
         {/* Play chime if sound prop is true */}
         {sound &&
           <Sequence durationInFrames={videoStore.getFrameForSeconds(0.5)}>
@@ -459,7 +463,7 @@ const IPAPhonemeScene = ({
             ))}
           </div>
         </div>
-      </div>
+      </ScreenFill>
     </>
   );
 };
