@@ -1,40 +1,25 @@
-import { useCallback, useRef, useState } from "react";
-import { getRemotionEnvironment, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { getRemotionEnvironment, Internals, useCurrentFrame, useVideoConfig } from "remotion";
 import { computeMatrix3d, Corners, Point } from "../utils/computeMatrix3d";
+import { getActiveKfFrame, interpolateCorners, setActiveKfFrame, useScreenEditorState } from "../utils/screenEditorState";
 
 export type { Corners, Point };
 
 export interface ScreenKeyframe {
   frame: number;
+  absoluteFrame?: number; // absolute position in video timeline, used for seeking
   corners: Corners;
 }
 
 interface ScreenViewProps {
-  // Identifies which screen's keyframes to update when dragging.
-  // Must match a key in screen-keyframes.json > screens.
   screenId: string;
   keyframes: ScreenKeyframe[];
-  // Natural dimensions of the content canvas children render into.
-  // Defaults to the full video dimensions if omitted.
   contentWidth?: number;
   contentHeight?: number;
   children?: React.ReactNode;
 }
 
-type SaveStatus = "saving" | "saved" | "error" | null;
-
 const KEYFRAME_SERVER = "http://localhost:3001";
-
-function interpolateCorners(frame: number, keyframes: ScreenKeyframe[]): Corners {
-  const frames = keyframes.map((k) => k.frame);
-  const opts = { extrapolateLeft: "clamp" as const, extrapolateRight: "clamp" as const };
-  return {
-    tl: { x: interpolate(frame, frames, keyframes.map((k) => k.corners.tl.x), opts), y: interpolate(frame, frames, keyframes.map((k) => k.corners.tl.y), opts) },
-    tr: { x: interpolate(frame, frames, keyframes.map((k) => k.corners.tr.x), opts), y: interpolate(frame, frames, keyframes.map((k) => k.corners.tr.y), opts) },
-    br: { x: interpolate(frame, frames, keyframes.map((k) => k.corners.br.x), opts), y: interpolate(frame, frames, keyframes.map((k) => k.corners.br.y), opts) },
-    bl: { x: interpolate(frame, frames, keyframes.map((k) => k.corners.bl.x), opts), y: interpolate(frame, frames, keyframes.map((k) => k.corners.bl.y), opts) },
-  };
-}
 
 function roundCorners(c: Corners): Corners {
   const r = (p: Point): Point => ({ x: Math.round(p.x), y: Math.round(p.y) });
@@ -49,8 +34,11 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
   children,
 }) => {
   const frame = useCurrentFrame();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const absoluteFrame = (Internals as any).Timeline.useAbsoluteTimelinePosition() as number;
   const { width: videoWidth, height: videoHeight } = useVideoConfig();
   const { isRendering } = getRemotionEnvironment();
+  const { activeScreenId, activeKfFrame } = useScreenEditorState();
 
   const contentWidth = contentWidthProp ?? videoWidth;
   const contentHeight = contentHeightProp ?? videoHeight;
@@ -62,10 +50,28 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
     startScreen: Point;
     startCorner: Point;
   } | null>(null);
-  const [saveStatus, setSaveStatus] = useState<SaveStatus>(null);
+  const [saveStatus, setSaveStatus] = useState<"saving" | "saved" | "error" | null>(null);
+
+  const devCornersRef = useRef(devCorners);
+  devCornersRef.current = devCorners;
+  const frameRef = useRef(frame);
+  frameRef.current = frame;
+  const absoluteFrameRef = useRef(absoluteFrame);
+  absoluteFrameRef.current = absoluteFrame;
+
+  // Reset drag state when keyframes hot-reload or active screen changes
+  useEffect(() => {
+    setDevCorners(null);
+  }, [keyframes, activeScreenId]);
+
+  const showHandles = !isRendering;
+  const isActive = showHandles && screenId === activeScreenId;
 
   const baseCorners = interpolateCorners(frame, keyframes);
-  const corners = devCorners ?? baseCorners;
+  const activeKfCorners = isActive && activeKfFrame !== null
+    ? keyframes.find((k) => k.frame === activeKfFrame)?.corners ?? null
+    : null;
+  const corners = devCorners ?? activeKfCorners ?? baseCorners;
   const matrix = computeMatrix3d(contentWidth, contentHeight, corners);
 
   const getScale = useCallback(() => {
@@ -88,46 +94,42 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
       const dx = (e.clientX - dragging.startScreen.x) / scale;
       const dy = (e.clientY - dragging.startScreen.y) / scale;
       setDevCorners((prev) => ({
-        ...(prev ?? baseCorners),
+        ...(prev ?? corners),
         [dragging.corner]: { x: dragging.startCorner.x + dx, y: dragging.startCorner.y + dy },
       }));
     },
-    [dragging, getScale, baseCorners]
+    [dragging, getScale, corners]
   );
 
   const handlePointerUp = useCallback(async () => {
     setDragging(null);
-    if (!devCorners) return;
+    const current = devCornersRef.current;
+    if (!current) return;
 
-    const rounded = roundCorners(devCorners);
+    const akfFrame = getActiveKfFrame();
+    const targetFrame = akfFrame ?? frameRef.current;
+    // absoluteFrame: offset absolute frame by the difference between current relative and absolute
+    const frameOffset = absoluteFrameRef.current - frameRef.current;
+    const targetAbsoluteFrame = targetFrame + frameOffset;
+
     setSaveStatus("saving");
-
     try {
       const res = await fetch(`${KEYFRAME_SERVER}/keyframe`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ screenId, frame, corners: rounded }),
+        body: JSON.stringify({ screenId, frame: targetFrame, absoluteFrame: targetAbsoluteFrame, corners: roundCorners(current) }),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setSaveStatus("saved");
-      // Remotion hot-reloads the JSON; clear devCorners so new keyframe values take over
       setTimeout(() => {
-        setDevCorners(null);
         setSaveStatus(null);
+        setActiveKfFrame(targetFrame);
       }, 700);
     } catch (e) {
-      console.error("[ScreenView] keyframe save failed:", e);
+      console.error("[ScreenView] save failed:", e);
       setSaveStatus("error");
     }
-  }, [devCorners, screenId, frame]);
-
-  const showHandles = !isRendering;
-
-  const statusLabel: Record<NonNullable<SaveStatus>, string> = {
-    saving: "Saving...",
-    saved: "Saved",
-    error: "Save failed — is the keyframe server running?",
-  };
+  }, [screenId]);
 
   return (
     <div
@@ -151,7 +153,7 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
         {children}
       </div>
 
-      {/* Dev corner handles */}
+      {/* Corner handles */}
       {showHandles &&
         (["tl", "tr", "br", "bl"] as const).map((corner) => (
           <div
@@ -161,43 +163,53 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
               position: "absolute",
               left: corners[corner].x,
               top: corners[corner].y,
-              width: 56,
-              height: 56,
-              marginLeft: -28,
-              marginTop: -28,
+              width: 80,
+              height: 80,
+              marginLeft: -40,
+              marginTop: -40,
               borderRadius: "50%",
-              background: "#00ff88",
-              border: "4px solid white",
+              border: "4px solid rgba(0,255,136,0.5)",
+              background: "rgba(0,255,136,0.08)",
               cursor: dragging?.corner === corner ? "grabbing" : "grab",
-              boxShadow: "0 4px 16px rgba(0,0,0,0.6)",
               zIndex: 9999,
               touchAction: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
-          />
+          >
+            {/* Inner hollow ring — marks the exact point */}
+            <div
+              style={{
+                width: 36,
+                height: 36,
+                borderRadius: "50%",
+                border: "4px solid #00ff88",
+                background: "transparent",
+                pointerEvents: "none",
+              }}
+            />
+          </div>
         ))}
 
-      {/* Dev HUD */}
-      {showHandles && (
+      {/* Small save toast near top-left of the screen area */}
+      {showHandles && saveStatus && (
         <div
           style={{
             position: "absolute",
-            bottom: 40,
-            left: 40,
-            background: "rgba(0,0,0,0.88)",
-            color: "#00ff88",
+            top: Math.min(corners.tl.y, corners.tr.y) - 60,
+            left: (corners.tl.x + corners.tr.x) / 2 - 80,
+            background: saveStatus === "error" ? "rgba(255,50,50,0.9)" : "rgba(0,0,0,0.85)",
+            color: saveStatus === "error" ? "#fff" : "#00ff88",
             fontFamily: "monospace",
-            fontSize: 26,
-            lineHeight: 1.6,
-            padding: "24px 30px",
-            borderRadius: 12,
-            whiteSpace: "pre",
+            fontSize: 22,
+            padding: "8px 20px",
+            borderRadius: 8,
             zIndex: 9999,
             pointerEvents: "none",
           }}
         >
-          {`frame ${frame} | ${screenId}\n`}
-          {JSON.stringify(roundCorners(corners), null, 2)}
-          {saveStatus && `\n\n${statusLabel[saveStatus]}`}
+          {saveStatus === "saving" ? "Saving..." : saveStatus === "saved" ? "Saved" : "Save failed"}
         </div>
       )}
     </div>

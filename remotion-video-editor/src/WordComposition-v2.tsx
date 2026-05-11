@@ -15,6 +15,7 @@ import airbagData from "./content.json"; // Assumes content.json is in the same 
 import { SpeakerOnIcon } from "./videoCompositions/vectors/SpeakerOnIcon";
 import { ScreenView } from "./videoCompositions/ScreenView";
 import screenKeyframesData from "./screen-keyframes.json";
+import { ScreenEditorHUD } from "./videoCompositions/ScreenEditorHUD";
 
 type ContentPart = {
   id: string;
@@ -161,17 +162,17 @@ export const WordPronunciationV2VideoComposition = () => {
         </Series.Sequence>
       </Series> */}
 
+      <ScreenEditorHUD />
       <Sequence durationInFrames={videoStore.getFrameForSeconds(5)}>
 
         <OffthreadVideo
           src={staticFile("scenes/scene-1.mp4")}
           style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 1 }}
         />
-        <ScreenView screenId="main" keyframes={screenKeyframesData.screens.main}>
+        <ScreenView screenId="main1" keyframes={screenKeyframesData.screens.main1}>
           {/* <TopPrompt text="Sound /m/" /> */}
           <BlackAbsoluteFill>
             <StandardText text="Sound /m/" style={{ fontSize: 240, padding: "10px 20px", position: "absolute", top: 100 }} />
-
           </BlackAbsoluteFill>
         </ScreenView>
 
@@ -181,6 +182,12 @@ export const WordPronunciationV2VideoComposition = () => {
           src={staticFile("scenes/scene-2.mp4")}
           style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 1 }}
         />
+        <ScreenView screenId="main2" keyframes={screenKeyframesData.screens.main2}>
+          {/* <TopPrompt text="Sound /m/" /> */}
+          <BlackAbsoluteFill>
+            <StandardText text="Sound /m/" style={{ fontSize: 240, padding: "10px 20px", position: "absolute", top: 100 }} />
+          </BlackAbsoluteFill>
+        </ScreenView>
       </Sequence>
 
       {

@@ -18,27 +18,53 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  if (req.method === "POST" && req.url === "/delete-keyframe") {
+    let body = "";
+    req.on("data", (chunk) => (body += chunk));
+    req.on("end", () => {
+      try {
+        const { screenId, frame } = JSON.parse(body);
+        const data = JSON.parse(fs.readFileSync(KEYFRAMES_FILE, "utf8"));
+
+        if (data.screens[screenId]) {
+          data.screens[screenId] = data.screens[screenId].filter((k) => k.frame !== frame);
+          fs.writeFileSync(KEYFRAMES_FILE, JSON.stringify(data, null, 2));
+          console.log(`[keyframe] deleted screenId="${screenId}" frame=${frame}`);
+        }
+
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ ok: true }));
+      } catch (e) {
+        console.error("[keyframe] delete error:", e.message);
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: e.message }));
+      }
+    });
+    return;
+  }
+
   if (req.method === "POST" && req.url === "/keyframe") {
     let body = "";
     req.on("data", (chunk) => (body += chunk));
     req.on("end", () => {
       try {
-        const { screenId, frame, corners } = JSON.parse(body);
+        const { screenId, frame, absoluteFrame, corners } = JSON.parse(body);
         const data = JSON.parse(fs.readFileSync(KEYFRAMES_FILE, "utf8"));
 
         if (!data.screens[screenId]) data.screens[screenId] = [];
         const kfs = data.screens[screenId];
         const idx = kfs.findIndex((k) => k.frame === frame);
+        const entry = { frame, ...(absoluteFrame !== undefined ? { absoluteFrame } : {}), corners };
 
         if (idx >= 0) {
-          kfs[idx].corners = corners;
+          kfs[idx] = entry;
         } else {
-          kfs.push({ frame, corners });
+          kfs.push(entry);
           kfs.sort((a, b) => a.frame - b.frame);
         }
 
         fs.writeFileSync(KEYFRAMES_FILE, JSON.stringify(data, null, 2));
-        console.log(`[keyframe] saved screenId="${screenId}" frame=${frame}`);
+        console.log(`[keyframe] saved screenId="${screenId}" frame=${frame} absoluteFrame=${absoluteFrame ?? "n/a"}`);
 
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ ok: true }));
