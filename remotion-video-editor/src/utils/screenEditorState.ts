@@ -20,6 +20,7 @@ function getInitialScreenId(): string | null {
 
 let _activeScreenId: string | null = getInitialScreenId();
 let _activeKfFrame: number | null = null;
+let _handlesVisible = true;
 const _listeners = new Set<() => void>();
 
 function notify() {
@@ -43,6 +44,7 @@ export function setActiveKfFrame(frame: number | null) {
 
 export function getActiveScreenId() { return _activeScreenId; }
 export function getActiveKfFrame() { return _activeKfFrame; }
+export function setHandlesVisible(v: boolean) { _handlesVisible = v; notify(); }
 
 // ── React hook ────────────────────────────────────────────────────────────────
 
@@ -53,7 +55,7 @@ export function useScreenEditorState() {
     _listeners.add(trigger);
     return () => { _listeners.delete(trigger); };
   }, []);
-  return { activeScreenId: _activeScreenId, activeKfFrame: _activeKfFrame };
+  return { activeScreenId: _activeScreenId, activeKfFrame: _activeKfFrame, handlesVisible: _handlesVisible };
 }
 
 // ── Shared interpolation utility ──────────────────────────────────────────────

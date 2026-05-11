@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { getRemotionEnvironment, Internals, useCurrentFrame, useVideoConfig } from "remotion";
 import { computeMatrix3d, Corners, Point } from "../utils/computeMatrix3d";
 import { getActiveKfFrame, interpolateCorners, useScreenEditorState } from "../utils/screenEditorState";
+import screenKeyframesData from "../screen-keyframes.json";
 
 export type { Corners, Point };
 
@@ -38,7 +39,7 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
   const absoluteFrame = (Internals as any).Timeline.useAbsoluteTimelinePosition() as number;
   const { width: videoWidth, height: videoHeight } = useVideoConfig();
   const { isRendering } = getRemotionEnvironment();
-  const { activeScreenId, activeKfFrame } = useScreenEditorState();
+  const { activeScreenId, activeKfFrame, handlesVisible } = useScreenEditorState();
 
   const contentWidth = contentWidthProp ?? videoWidth;
   const contentHeight = contentHeightProp ?? videoHeight;
@@ -64,7 +65,7 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
     setDevCorners(null);
   }, [keyframes, activeScreenId]);
 
-  const showHandles = !isRendering;
+  const showHandles = !isRendering && handlesVisible;
   const isActive = showHandles && screenId === activeScreenId;
 
   const baseCorners = interpolateCorners(frame, keyframes);
@@ -73,6 +74,7 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
     : null;
   const corners = devCorners ?? activeKfCorners ?? baseCorners;
   const matrix = computeMatrix3d(contentWidth, contentHeight, corners);
+  const roundedCorners = (screenKeyframesData as { screenMeta?: Record<string, { roundedCorners?: number }> }).screenMeta?.[screenId]?.roundedCorners ?? 0;
 
   const getScale = useCallback(() => {
     if (!containerRef.current) return 1;
@@ -144,7 +146,8 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
           transformOrigin: "0 0",
           transform: matrix,
           overflow: "hidden",
-          outline: showHandles ? "3px dashed rgba(0,255,136,0.5)" : undefined,
+          borderRadius: roundedCorners,
+          boxShadow: showHandles ? "inset 0 0 0 3px rgba(0,255,136,0.5)" : undefined,
         }}
       >
         {children}

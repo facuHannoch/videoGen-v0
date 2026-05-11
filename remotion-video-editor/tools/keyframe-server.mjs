@@ -77,6 +77,28 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  if (req.method === "POST" && req.url === "/screen-meta") {
+    let body = "";
+    req.on("data", (chunk) => (body += chunk));
+    req.on("end", () => {
+      try {
+        const { screenId, ...meta } = JSON.parse(body);
+        const data = JSON.parse(fs.readFileSync(KEYFRAMES_FILE, "utf8"));
+        if (!data.screenMeta) data.screenMeta = {};
+        data.screenMeta[screenId] = { ...(data.screenMeta[screenId] ?? {}), ...meta };
+        fs.writeFileSync(KEYFRAMES_FILE, JSON.stringify(data, null, 2));
+        console.log(`[keyframe] screen-meta screenId="${screenId}"`, meta);
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ ok: true }));
+      } catch (e) {
+        console.error("[keyframe] screen-meta error:", e.message);
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: e.message }));
+      }
+    });
+    return;
+  }
+
   res.writeHead(404);
   res.end();
 });
