@@ -6,9 +6,19 @@ import screenKeyframesData from "../screen-keyframes.json";
 
 // ── Module-level singleton state ──────────────────────────────────────────────
 
-// Initialize to first available screen so handles show immediately on load
 const _screens = (screenKeyframesData as { screens: Record<string, unknown[]> }).screens;
-let _activeScreenId: string | null = Object.keys(_screens)[0] ?? null;
+const _STORAGE_KEY = "screenEditor_activeScreenId";
+
+function getInitialScreenId(): string | null {
+  // Persist across HMR cycles (module re-evaluates when JSON changes)
+  if (typeof localStorage !== "undefined") {
+    const stored = localStorage.getItem(_STORAGE_KEY);
+    if (stored && _screens[stored]) return stored;
+  }
+  return Object.keys(_screens)[0] ?? null;
+}
+
+let _activeScreenId: string | null = getInitialScreenId();
 let _activeKfFrame: number | null = null;
 const _listeners = new Set<() => void>();
 
@@ -18,7 +28,11 @@ function notify() {
 
 export function setActiveScreenId(id: string | null) {
   _activeScreenId = id;
-  _activeKfFrame = null; // reset active KF when switching screens
+  _activeKfFrame = null;
+  if (typeof localStorage !== "undefined") {
+    if (id) localStorage.setItem(_STORAGE_KEY, id);
+    else localStorage.removeItem(_STORAGE_KEY);
+  }
   notify();
 }
 

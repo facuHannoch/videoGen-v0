@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getRemotionEnvironment, Internals, useCurrentFrame, useVideoConfig } from "remotion";
 import { computeMatrix3d, Corners, Point } from "../utils/computeMatrix3d";
-import { getActiveKfFrame, interpolateCorners, setActiveKfFrame, useScreenEditorState } from "../utils/screenEditorState";
+import { getActiveKfFrame, interpolateCorners, useScreenEditorState } from "../utils/screenEditorState";
 
 export type { Corners, Point };
 
@@ -121,10 +121,7 @@ export const ScreenView: React.FC<ScreenViewProps> = ({
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setSaveStatus("saved");
-      setTimeout(() => {
-        setSaveStatus(null);
-        setActiveKfFrame(targetFrame);
-      }, 700);
+      setTimeout(() => setSaveStatus(null), 700);
     } catch (e) {
       console.error("[ScreenView] save failed:", e);
       setSaveStatus("error");
