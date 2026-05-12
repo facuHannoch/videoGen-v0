@@ -4,7 +4,7 @@ import re
 from typing import List, Optional, Protocol, Union
 import xml.etree.ElementTree as ET
 
-DEFAULT_FILENAME_MAX_LENGTH = 100
+DEFAULT_FILENAME_MAX_LENGTH = 20
 FILE_EXTENSION = ".wav"
 DEFAULT_SPEAK_VERSION = "1.0"
 SSML_NAMESPACE = "http://www.w3.org/2001/10/synthesis"

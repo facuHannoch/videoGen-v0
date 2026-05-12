@@ -57,3 +57,6 @@
 {"id": "8", "name": "saw", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "saw", "IPA_TRANSCRIPTION": "/sɔ/"}, "completed_at": "2026-05-05T12:48:48.765728+00:00", "step_reached": 6}
 {"id": "9", "name": "wall", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "wall", "IPA_TRANSCRIPTION": "/wɔl/"}, "completed_at": "2026-05-05T12:50:54.252654+00:00", "step_reached": 6}
 {"id": "3", "name": "mom", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "mom", "IPA_TRANSCRIPTION": "/mɑm/"}, "completed_at": "2026-05-10T20:32:49.836071+00:00", "step_reached": 6}
+{"id": "3", "name": "mom", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "mom", "IPA_TRANSCRIPTION": "/mɑm/"}, "completed_at": "2026-05-12T12:44:25.995361+00:00", "step_reached": 6}
+{"id": "3", "name": "mom", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "mom", "IPA_TRANSCRIPTION": "/mɑm/"}, "completed_at": "2026-05-12T14:33:04.016677+00:00", "step_reached": 6}
+{"id": "6", "name": "not", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "not", "IPA_TRANSCRIPTION": "/nɑt/"}, "step_reached": 6, "completed_at": "2026-05-12T14:51:33.652488+00:00"}

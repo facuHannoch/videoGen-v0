@@ -87,12 +87,12 @@ def resolve_provider(provider_arg: str) -> str:
 
 
 def resolve_models(google_model_arg: Optional[str], openai_model_arg: Optional[str]) -> Dict[str, str]:
-	google_model = google_model_arg or os.getenv("GOOGLE_AI_MODEL") or "gemini-3.1-flash-image-preview"
+	google_model = google_model_arg or os.getenv("GOOGLE_AI_MODEL") or "gemini-3-flash-preview"
 	openai_model = (
 		openai_model_arg
 		or os.getenv("OPENAI_MODEL")
 		or os.getenv("OPEN_AI_MODEL")
-		or "gpt-4.1-mini"
+		or "gpt-5.4-mini"
 	)
 	return {"google": google_model, "openai": openai_model}
 
@@ -208,6 +208,7 @@ def extract_json(text: str) -> Dict[str, Any]:
 	raise ValueError("Model did not return valid JSON")
 
 
+
 def extract_typescript_code(text: str) -> str:
 	cleaned = text.strip()
 	fence_match = re.search(r"```(?:tsx|ts|typescript|javascript|jsx)?\s*([\s\S]*?)\s*```", cleaned, flags=re.IGNORECASE)
@@ -215,7 +216,7 @@ def extract_typescript_code(text: str) -> str:
 		cleaned = fence_match.group(1).strip()
 
 	if not re.search(r"export\s+(const|function|default)", cleaned):
-		raise ValueError("AI output does not look like a TypeScript/TSX file (no export found)")
+		print(ValueError("AI output does not look like a TypeScript/TSX file (no export found)"))
 	return cleaned
 
 

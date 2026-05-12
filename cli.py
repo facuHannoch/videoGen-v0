@@ -216,8 +216,13 @@ def run_step5(item: dict, pp: Path) -> bool:
 
     _sync_editor_assets(pp)
 
-    # AI worker: only re-run if timeline hasn't been generated yet
-    if not timeline_cache.exists():
+    # AI worker: re-run if cache missing or audio.info.json is newer than the cached timeline
+    audio_info = pp / "4-audios" / "audio.info.json"
+    cache_stale = (
+        not timeline_cache.exists()
+        or (audio_info.exists() and audio_info.stat().st_mtime > timeline_cache.stat().st_mtime)
+    )
+    if cache_stale:
         cmd = [
             sys.executable, str(VG_ROOT / "videoEditorWorker" / "index.py"),
             "--audio-info", str(pp / "4-audios" / "audio.info.json"),
@@ -226,7 +231,7 @@ def run_step5(item: dict, pp: Path) -> bool:
             "--content-json", str(pp / "1-raw-content" / "content.json"),
             "--resources-json", str(pp / "2-resources" / "generated.resources.json"),
             "--script-xml", str(pp / "3-script" / "script.xml"),
-            "--additional-comments", "Don't change the position of the music and sounds",
+            "--additional-comments", "USE THE SAME AUDIO NAMES, DO NOT CHANGE THEM EVEN SLIGHTLY. IF THERE ARE INSTRUCTIONS GIVEN IN <context> FOLLOW THEM.",
         ]
         if context.exists():
             cmd += ["--context", str(context)]

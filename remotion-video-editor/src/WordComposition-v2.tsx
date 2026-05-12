@@ -262,7 +262,7 @@ export const WordPronunciationV2VideoComposition = () => {
     ],
     [ // gap
       <>
-        <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+        <ScreenView screenId="staticCenteredScreenToMain3" keyframes={screenKeyframesData.screens.staticCenteredScreenToMain3}>
           <ScreenFill>
             <StandardText text="Want to practice?" style={{ fontSize: 96, padding: "10px 20px", }} />
           </ScreenFill>
@@ -364,7 +364,8 @@ export const WordPronunciationV2VideoComposition = () => {
               {/* <StandardText text="CLOCK EFFECT" style={{ fontSize: 124, padding: "10px 20px", }} /> */}
             </ScreenFill>
           </GlitchEffect>
-          <Audio src={staticFile("audios/02_first-_try_it.wav")} volume={volume} />
+          {/* TODO: Load this dinamically */}
+          {/* <Audio src={staticFile("audios/02_first-_try_it.wav")} volume={volume} /> */}
         </ScreenView>
       </Sequence>
 
