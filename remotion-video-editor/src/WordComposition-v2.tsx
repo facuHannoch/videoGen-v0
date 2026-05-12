@@ -17,6 +17,8 @@ import { ScreenView } from "./videoCompositions/ScreenView";
 import screenKeyframesData from "./screen-keyframes.json";
 import { ScreenEditorHUD } from "./videoCompositions/ScreenEditorHUD";
 import { ScreenFill } from "./videoCompositions/fills/ScreenFill";
+import { TickingClock } from "./videoCompositions/effects/TickingClock";
+import { GlitchEffect } from "./videoCompositions/effects/GlitchEffect";
 
 type ContentPart = {
   id: string;
@@ -80,12 +82,15 @@ export const WordPronunciationV2VideoComposition = () => {
           <>
             {/* <TopPrompt text={promptText} /> */}
             <Audio src={staticFile("sounds/shutter-sound-medium.m4a")} volume={0.8} />
-            <ScreenFill>
-              <Img
-                src={staticFile(phonemeDiagramURL)}
-                style={{ maxWidth: "95%", maxHeight: "95%", objectFit: "contain", position: 'absolute' }}
-              />
-            </ScreenFill>
+            <ScreenView screenId="staticCenteredScreen"
+              keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+              <ScreenFill>
+                <Img
+                  src={staticFile(phonemeDiagramURL)}
+                  style={{ maxWidth: "95%", maxHeight: "95%", objectFit: "contain", position: 'absolute' }}
+                />
+              </ScreenFill>
+            </ScreenView>
 
             {/* <IPAPhonemeScene
               key={`phoneme-explanation-${phoneme}-${index}`}
@@ -97,31 +102,54 @@ export const WordPronunciationV2VideoComposition = () => {
           </>
         ],
         [ // try it
-          <ScreenFill>
-            <StandardText text="Try it!" style={{ fontSize: 72, padding: "24px 30px" }} />
-          </ScreenFill>
+          <>
+            <ScreenView screenId="staticCenteredScreen"
+              keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+              <ScreenFill>
+                <StandardText text="Try it!" style={{ fontSize: 72, padding: "24px 30px" }} />
+              </ScreenFill>
+            </ScreenView>
+          </>
+        ],
+        [<>
+          <ScreenView screenId="staticCenteredScreen"
+            keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+            <GlitchEffect intensity={0.2}>
+              <ScreenFill>
+                <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "center", marginTop: "20px" }}>
+                  {explanationWords.map((exWord: any, i: number) => (
+                    <div style={{ display: "flex", gap: 14, alignItems: "center" }} key={`${exWord.word}-${i}`}>
+                      <StandardText text={`${exWord.word}`} style={{ fontSize: 96, padding: "10px 20px" }} />
+                    </div>
+                  ))}
+                </div>
+
+                {/* <StandardText text="CLOCK EFFECT" style={{ fontSize: 72, padding: "24px 30px" }} /> */}
+              </ScreenFill>
+            </GlitchEffect>
+          </ScreenView>
+
+          <ClockComponent />
+        </>
         ],
         [
-          <ScreenFill>
-            <StandardText text="CLOCK EFFECT" style={{ fontSize: 72, padding: "24px 30px" }} />
-          </ScreenFill>
-        ],
-        [
-          // phoneme words - dynamic scene index logic can be complex without pre-calculation
-          <IPAPhonemeScene
-            key={`phoneme-words-${phoneme}-${index}`}
-            word={word} // Main word shown with breakdown
-            wordIPA={wordIPA} // IPA transcription
-            highlightedCharacter={phoneme} // Character to highlight
-            exampleWords={explanationWords} // Passing the words array
-          />
+          <ScreenView screenId="staticCenteredScreen"
+            keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+            {/* // phoneme words - dynamic scene index logic can be complex without pre-calculation */}
+            <IPAPhonemeScene
+              key={`phoneme-words-${phoneme}-${index}`}
+              word={word} // Main word shown with breakdown
+              wordIPA={wordIPA} // IPA transcription
+              highlightedCharacter={phoneme} // Character to highlight
+              exampleWords={explanationWords} // Passing the words array
+            />
+          </ScreenView>
         ]
-      ].map((sceneContent, i) => <ScreenView screenId="staticCenteredScreen"
-        keyframes={screenKeyframesData.screens.staticCenteredScreen}>
-        {sceneContent}
-      </ScreenView>);
+      ]
     });
   };
+
+
 
   // Scene contents based on English language resources and timeline positions
   const scenes = [
@@ -133,10 +161,18 @@ export const WordPronunciationV2VideoComposition = () => {
       <>
       </>
     ],
-    [ // robot: try it
+    [ // robot: try it + glitch effect & countdown
+      <BlackAbsoluteFill>
+        <div style={{ position: "absolute", top: 200, left: "50%", transform: "translateX(-50%)", zIndex: 3 }}>
+          <CountdownNumber />
+        </div>
+        <div style={{ position: "absolute", bottom: 400, left: "50%", transform: "translateX(-50%)", zIndex: 3 }}>
+          <TickingClock tickEveryFrames={videoStore.getFPS()} size={280} />
+        </div>
+      </BlackAbsoluteFill>
 
     ],
-    [ // glitch effect + countdown
+    [ // Ava: not
       <>
         {/* <TopPrompt text="Sound /m/" /> */}
         <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
@@ -144,18 +180,17 @@ export const WordPronunciationV2VideoComposition = () => {
             <StandardText text={word} style={{ fontSize: 96, padding: "10px 20px", margin: "10px 20px" }} />
             <StandardText text={wordIPA} style={{ fontSize: 96, padding: "10px 20px", margin: "10px 20px" }} />
           </ScreenFill>
-
         </ScreenView>
       </>
     ],
     [ // glitch effect + countdown
       <>
-        <TopPrompt text="Sound /m/" />
         <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
-          {/* <TopPrompt text="Sound /m/" /> */}
+          {/* <GlitchEffect> */}
           <ScreenFill>
             <StandardText text="Let's look at each phoneme" style={{ fontSize: 96, padding: "10px 20px", }} />
           </ScreenFill>
+          {/* </GlitchEffect> */}
         </ScreenView>
       </>
     ],
@@ -164,27 +199,31 @@ export const WordPronunciationV2VideoComposition = () => {
       <>
         <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
           <ScreenFill>
-            <StandardText text="Say the full word" style={{ fontSize: 240, padding: "10px 20px", }} />
+            <StandardText text="Say the full word" style={{ fontSize: 96, padding: "10px 20px", }} />
           </ScreenFill>
         </ScreenView>
       </>
     ],
-    [ // gap
+    [ // gap for word
       <>
         <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
-          <ScreenFill>
-            <StandardText text={word} style={{ fontSize: 240, padding: "10px 20px", }} />
-            <StandardText text={wordIPA} style={{ fontSize: 240, padding: "10px 20px", }} />
-          </ScreenFill>
+          <GlitchEffect>
+            {/* <StandardText text="CLOCK EFFECT" style={{ fontSize: 96, padding: "10px 20px", }} /> */}
+            <ScreenFill>
+              <StandardText text={word} style={{ fontSize: 96, padding: "10px 20px", margin: "10px 20px" }} />
+              <StandardText text={wordIPA} style={{ fontSize: 96, padding: "10px 20px", margin: "10px 20px" }} />
+            </ScreenFill>
+          </GlitchEffect>
         </ScreenView>
+        <ClockComponent />
       </>
     ],
     [ // Ava: [word]
       <>
         <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
           <ScreenFill>
-            <StandardText text={word} style={{ fontSize: 240, padding: "10px 20px", }} />
-            <StandardText text={wordIPA} style={{ fontSize: 240, padding: "10px 20px", }} />
+            <StandardText text={word} style={{ fontSize: 96, padding: "10px 20px", margin: "10px 20px" }} />
+            <StandardText text={wordIPA} style={{ fontSize: 96, padding: "10px 20px", margin: "10px 20px" }} />
           </ScreenFill>
         </ScreenView>
       </>
@@ -193,31 +232,41 @@ export const WordPronunciationV2VideoComposition = () => {
       <>
         <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
           <ScreenFill>
-            <StandardText text={sentence} style={{ fontSize: 240, padding: "10px 20px", }} />
+            <StandardText text={sentence} style={{ fontSize: 96, padding: "10px 20px", }} />
           </ScreenFill>
         </ScreenView>
       </>
     ],
-    [ // gap
+    [ // gap for sentence
       <>
         <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
-          <BlackAbsoluteFill>
-            <StandardText text={sentence} style={{ fontSize: 240, padding: "10px 20px", }} />
-          </BlackAbsoluteFill>
+          <GlitchEffect>
+            <ScreenFill>
+              <StandardText text={sentence} style={{ fontSize: 96, padding: "10px 20px" }} />
+              {/* <StandardText text="CLOCK EFFECT" style={{ fontSize: 96, padding: "10px 20px", }} /> */}
+            </ScreenFill>
+          </GlitchEffect>
         </ScreenView>
+        <ClockComponent />
+
       </>
     ],
-    [ // Ava: [word]
+    [ // Ava: [sentence]
       <>
         <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
           <ScreenFill>
-            <StandardText text={sentence} style={{ fontSize: 240, padding: "10px 20px", }} />
+            <StandardText text={sentence} style={{ fontSize: 96, padding: "10px 20px", }} />
           </ScreenFill>
         </ScreenView>
       </>
     ],
     [ // gap
       <>
+        <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
+          <ScreenFill>
+            <StandardText text="Want to practice?" style={{ fontSize: 96, padding: "10px 20px", }} />
+          </ScreenFill>
+        </ScreenView>
         {/* <Sequence durationInFrames={videoStore.getAudioDurationFrames("audios/17_i_am_not_ready_yet.wav")! - videoStore.getFrameForSeconds(0.4)}>
           <ScreenView screenId="staticCenteredScreen" keyframes={screenKeyframesData.screens.staticCenteredScreen}>
             <ScreenFill>
@@ -240,6 +289,7 @@ export const WordPronunciationV2VideoComposition = () => {
     ],
     [ // robot: practice
       <>
+        <TopPrompt text={`ipacoach.com/en/practice/${word}`} />
         {/* <ScreenView screenId="staticCTAScreen" keyframes={screenKeyframesData.screens.staticCTAScreen}>
           <ScreenFill>
             <StandardText text="practice now for free" style={{ fontSize: 240, padding: "10px 20px", }} />
@@ -296,7 +346,7 @@ export const WordPronunciationV2VideoComposition = () => {
         <ScreenView screenId="main1" keyframes={screenKeyframesData.screens.main1}>
           {/* <TopPrompt text="Sound /m/" /> */}
           <ScreenFill>
-            <StandardText text={word} style={{ fontSize: 124, padding: "10px 20px", }} />
+            <StandardText text={word} style={{ fontSize: 120, padding: "10px 20px", }} />
           </ScreenFill>
         </ScreenView>
 
@@ -308,9 +358,12 @@ export const WordPronunciationV2VideoComposition = () => {
           style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 1 }}
         />
         <ScreenView screenId="main2" keyframes={screenKeyframesData.screens.main2}>
-          <ScreenFill>
-            <StandardText text={word} style={{ fontSize: 240, padding: "10px 20px", }} />
-          </ScreenFill>
+          <GlitchEffect>
+            <ScreenFill>
+              <StandardText text={word} style={{ fontSize: 124, padding: "10px 20px", }} />
+              {/* <StandardText text="CLOCK EFFECT" style={{ fontSize: 124, padding: "10px 20px", }} /> */}
+            </ScreenFill>
+          </GlitchEffect>
           <Audio src={staticFile("audios/02_first-_try_it.wav")} volume={volume} />
         </ScreenView>
       </Sequence>
@@ -467,3 +520,25 @@ const IPAPhonemeScene = ({
     </>
   );
 };
+
+
+const CountdownNumber = () => {
+  const frame = useCurrentFrame();
+  const elapsedSeconds = Math.floor(frame / videoStore.getFPS());
+  const remainingSeconds = Math.max(1, 3 - elapsedSeconds);
+
+  return <StandardText text={`${remainingSeconds}`} style={{ fontSize: 104 }} />;
+};
+
+
+const ClockComponent = () => <>
+  <BlackAbsoluteFill>
+    <Audio src={staticFile("sounds/clock-ticking/down-soft.mp3")} volume={0.8} />
+    <div style={{ position: "absolute", top: 200, left: "50%", transform: "translateX(-50%)", zIndex: 3 }}>
+      <CountdownNumber />
+    </div>
+    <div style={{ position: "absolute", bottom: 400, left: "50%", transform: "translateX(-50%)", zIndex: 3 }}>
+      <TickingClock tickEveryFrames={videoStore.getFPS()} size={280} />
+    </div>
+  </BlackAbsoluteFill>
+</>
