@@ -1,48 +1,50 @@
 We are making this video
 
 
-The first 4 elements of the timeline are these
+The first 4 elements of the timeline are these. Change the audioId to the corresponding one, but keep the structure as it is.
 
 ```
-    {
-      "type": "audio",
-      "audioId": "01_can_you_pronounce_mom_correctly.wav"
-    },
-    {
-      "type": "gap",
-      "durationSeconds": 3
-    },
-    {
-      "type": "sfx",
-      "soundId": "clock-ticking/down-soft.mp3",
-      "durationSeconds": 3,
-      "id": "clock_ticking"
-    },
-    {
-      "type": "audio",
-      "audioId": "03_mom.wav"
-    },
+  {
+    "type": "audio",
+    "audioId": "01_can_you_pronounce_mom_correctly.wav"
+  },
+  {
+    "type": "gap",
+    "durationSeconds": 3
+  },
+  {
+    "type": "sfx",
+    "soundId": "clock-ticking/down-soft.mp3",
+    "durationSeconds": 3,
+    "id": "clock_ticking"
+  },
+  {
+    "type": "audio",
+    "audioId": "03_mom.wav"
+  },
+  ...
 ```
 
+Then, it continues as expected (use the provided files to understand).
 
 Also, after the sentence is said, there is a 1 second gap, before the next section (CTA). Like this:
 
 ```
-    {
-      "type": "audio",
-      "audioId": "17_my_.wav"
-    },
-    {
-      "type": "gap",
-      "durationSeconds": 1
-    },
-    {
-      "type": "audio",
-      "audioId": "18_now.wav"
-    },
+  ...
+  {
+    "type": "audio",
+    "audioId": "17_my_.wav"
+  },
+  {
+    "type": "gap",
+    "durationSeconds": 1
+  },
+  {
+    "type": "audio",
+    "audioId": "18_now.wav"
+  },
 ```
 
-DO NOT CHANGE THEM
 
 
 ---

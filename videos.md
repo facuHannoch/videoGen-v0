@@ -55,18 +55,18 @@
 - [x] box
 - [x] top
 - [x] not
-- [ ] really
+- [x] really
 - [x] saw
-- [ ] wall
-- [ ] small
-- [ ] all
-- [ ] talk
-- [ ] walk
-- [ ] can
-- [ ] by
-- [ ] never
-- [ ] boy
-- [ ] look
+- [x] wall
+- [x] small
+- [x] all
+- [x] talk
+- [x] walk
+- [x] can
+- [x] by
+- [x] never
+- [x] boy
+- [x] look
 - [ ] book
 - [ ] good
 - [ ] wood
