@@ -1,6 +1,4 @@
-{"id": "8", "name": "wall", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "wall", "IPA_TRANSCRIPTION": "/wɔːl/"}, "step_reached": 6}
-{"id": "9", "name": "small", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "small", "IPA_TRANSCRIPTION": "/smɔːl/"}, "step_reached": 0}
-{"id": "10", "name": "all", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "all", "IPA_TRANSCRIPTION": "/ɔːl/"}, "step_reached": 0}
+{"id": "10", "name": "all", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "all", "IPA_TRANSCRIPTION": "/ɔːl/"}, "step_reached": 4}
 {"id": "11", "name": "talk", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "talk", "IPA_TRANSCRIPTION": "/tɔːk/"}, "step_reached": 0}
 {"id": "12", "name": "walk", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "walk", "IPA_TRANSCRIPTION": "/wɔːk/"}, "step_reached": 0}
 {"id": "13", "name": "can", "category": "ipa_coach-word_pronunciation", "lang": "en", "fields": {"WORD": "can", "IPA_TRANSCRIPTION": "/kæn/"}, "step_reached": 0}

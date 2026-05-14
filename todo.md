@@ -1,6 +1,23 @@
 - [x] only promote to done.jsonl if it completed all the steps
 - [ ] allowing to pass commands to specific steps. Like generating the audio unified (this could affect steps that follow so should be reviewed carefully)
 
+# #6 std-v2
+
+## 0.2
+
+- [ ] Make it shorter and more dynamic
+    - [ ] Make b-rolls shorter
+    - [ ] Add more scenes
+- [ ] Add Text that accompanies what the robot says, like "learn how to pronounce", "try it", etc.
+- [ ] Add things behind the main scene, like there is something happening, maybe it could be like different robots teaching, or just things moving or other robots moving things
+- [ ] Add a second thing, like
+    - Static photo of a person
+    - Minecraft gameplay
+    - Subway surfers gameplay
+    - 
+
+# Things
+
 ## Video 
 
 Have a text about weak and strong forms (for example, the word `and` is pronounced as `ænd` in isolation, but as `ən` in the weak form )
